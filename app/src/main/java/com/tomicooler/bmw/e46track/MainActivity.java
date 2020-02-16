@@ -51,11 +51,19 @@ public class MainActivity extends AppCompatActivity {
             mService = binder.getService();
             mBound = true;
 
-            final TextView tv = findViewById(R.id.hello);
+            final TextView latitude = findViewById(R.id.latitude);
+            final TextView longitude = findViewById(R.id.longitude);
+            final TextView altitude = findViewById(R.id.altitude);
+            final TextView speed = findViewById(R.id.speed);
+            final TextView bearing = findViewById(R.id.bearing);
             mService.getModel().getCurrentLocation().observeForever(new Observer<Location>() {
                 @Override
                 public void onChanged(Location location) {
-                    tv.setText(String.format(Locale.getDefault(), "%f %f", location.getLatitude(), location.getLongitude()));
+                    latitude.setText(String.format(Locale.getDefault(), "%f", location.getLatitude()));
+                    longitude.setText(String.format(Locale.getDefault(), "%f", location.getLongitude()));
+                    altitude.setText(String.format(Locale.getDefault(), "%f", location.getAltitude()));
+                    speed.setText(String.format(Locale.getDefault(), "%f", location.getSpeed() * 3.6));
+                    bearing.setText(String.format(Locale.getDefault(), "%f", location.getBearing()));
                 }
             });
         }
@@ -125,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fab.setImageResource(Utils.requestingLocationUpdates(getApplicationContext()) ? R.drawable.ic_launcher_foreground : R.drawable.ic_launcher_background);
+        fab.setImageResource(Utils.requestingLocationUpdates(getApplicationContext()) ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play);
     }
 
     @Override
