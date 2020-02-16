@@ -7,4 +7,12 @@
     <string name="ok">OK</string>
     <string name="location_updated">Location Updated: %1$s</string>
     <string name="notification_content">E46Track is running!</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="connection">Connection</string>
+
+    <!-- Connection Preferences -->
+    <string name="address">Address</string>
+    <string name="port">Port</string>
 </resources>
