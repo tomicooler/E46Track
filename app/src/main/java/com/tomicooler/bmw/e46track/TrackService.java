@@ -25,6 +25,17 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.tomicooler.bmw.e46track.ds2.Message;
+import com.tomicooler.bmw.e46track.extractors.MessageHandler;
+import com.tomicooler.bmw.e46track.extractors.Oil;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class TrackService extends Service {
     private static final String TAG = TrackService.class.getSimpleName();
@@ -42,6 +53,8 @@ public class TrackService extends Service {
     private final IBinder mBinder = new LocalBinder();
     private Handler mServiceHandler;
     private TrackModel model;
+
+    private Future connectionFuture;
 
     public TrackService() {
     }
@@ -117,6 +130,13 @@ public class TrackService extends Service {
     @Override
     public void onDestroy() {
         mServiceHandler.removeCallbacksAndMessages(null);
+        Utils.setRequestingLocationUpdates(this, false);
+    }
+
+    public static List<MessageHandler> messageHandlers(final MessageHandler handler) {
+        List<MessageHandler> handlers = new ArrayList<>();
+        handlers.add(handler);
+        return handlers;
     }
 
     public void requestLocationUpdates() {
@@ -125,9 +145,19 @@ public class TrackService extends Service {
         startService(new Intent(getApplicationContext(), TrackService.class));
         try {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+            List<Requester> requesters = new ArrayList<>();
+
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b03")), messageHandlers(new Oil(model))));
+
+            Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters);
+            connectionFuture = executorService.submit(connection);
         } catch (SecurityException unlikely) {
             Utils.setRequestingLocationUpdates(this, false);
             Log.e(TAG, "Lost location permission. Could not request updates. " + unlikely);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
         }
     }
 
@@ -135,6 +165,9 @@ public class TrackService extends Service {
         Log.i(TAG, "Removing location updates");
         try {
             mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+            if (connectionFuture != null) {
+                connectionFuture.cancel(true);
+            }
             Utils.setRequestingLocationUpdates(this, false);
             stopSelf();
         } catch (SecurityException unlikely) {

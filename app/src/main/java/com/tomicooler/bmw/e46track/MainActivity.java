@@ -66,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
                     bearing.setText(String.format(Locale.getDefault(), "%f", location.getBearing()));
                 }
             });
+
+            final TextView oilTemp = findViewById(R.id.oilTemp);
+            mService.getModel().getCurrentOilTemp().observeForever(new Observer<Double>() {
+                @Override
+                public void onChanged(Double oil) {
+                    oilTemp.setText(String.format(Locale.getDefault(), "%f", oil));
+                }
+            });
         }
 
         @Override
@@ -117,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
