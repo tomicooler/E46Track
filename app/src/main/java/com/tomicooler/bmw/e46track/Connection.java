@@ -23,11 +23,13 @@ public class Connection implements Runnable {
     private final List<Requester> requesters;
     private final byte[] extraFramingHeader;
     private final byte[] extraFramingFooter;
+    private final TrackModel model;
 
-    Connection(final InetAddress address, final int port, final List<Requester> requesters) {
+    Connection(final InetAddress address, final int port, final List<Requester> requesters, final TrackModel model) {
         this.address = address;
         this.port = port;
         this.requesters = requesters;
+        this.model = model;
         this.extraFramingHeader = Utils.hexStringToByteArray("000212c02100003c0005");
         this.extraFramingFooter = Utils.hexStringToByteArray("7a");
     }
@@ -71,9 +73,11 @@ public class Connection implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG, "Socket error", e);
+            model.getCurrentError().postValue(e.getMessage());
         } catch (InvalidChecksum invalidChecksum) {
             invalidChecksum.printStackTrace();
             Log.e(TAG, "Invalid checksum");
+            model.getCurrentError().postValue("Invalid checksum");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

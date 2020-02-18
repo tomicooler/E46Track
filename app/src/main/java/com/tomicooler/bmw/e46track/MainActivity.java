@@ -107,6 +107,18 @@ public class MainActivity extends AppCompatActivity {
                     steeringAgle.setText(String.format(Locale.getDefault(), "%f", value));
                 }
             });
+
+            final TextView error = findViewById(R.id.error);
+            mService.getModel().getCurrentError().observeForever(new Observer<String>() {
+                @Override
+                public void onChanged(String value) {
+                    error.setText(value);
+                    if (mService != null && !value.isEmpty()) {
+                        mService.stopTracking();
+                        setFabIcon();
+                    }
+                }
+            });
         }
 
         @Override

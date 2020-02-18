@@ -148,6 +148,7 @@ public class TrackService extends Service {
         Log.i(TAG, "Requesting location updates");
         startService(new Intent(getApplicationContext(), TrackService.class));
         mIsTracking = true;
+        model.getCurrentError().postValue("");
         try {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -162,7 +163,7 @@ public class TrackService extends Service {
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("57")[0], Utils.hexStringToByteArray("1b01")), messageHandlers(new SteeringAngle(model))));
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("57")[0], Utils.hexStringToByteArray("00")), null));
 
-            Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters);
+            Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters, model);
             connectionFuture = executorService.submit(connection);
         } catch (SecurityException unlikely) {
             mIsTracking = false;
