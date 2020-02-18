@@ -26,6 +26,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.tomicooler.bmw.e46track.ds2.Message;
+import com.tomicooler.bmw.e46track.extractors.ClutchBrake;
 import com.tomicooler.bmw.e46track.extractors.MessageHandler;
 import com.tomicooler.bmw.e46track.extractors.Oil;
 
@@ -152,6 +153,7 @@ public class TrackService extends Service {
             List<Requester> requesters = new ArrayList<>();
 
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b03")), messageHandlers(new Oil(model))));
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b04")), messageHandlers(new ClutchBrake(model))));
 
             Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters);
             connectionFuture = executorService.submit(connection);

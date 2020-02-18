@@ -75,6 +75,22 @@ public class MainActivity extends AppCompatActivity {
                     oilTemp.setText(String.format(Locale.getDefault(), "%f", oil));
                 }
             });
+
+            final TextView clutch = findViewById(R.id.clutch);
+            mService.getModel().getCurrentClutch().observeForever(new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean on) {
+                    clutch.setText(on ? "1" : "0");
+                }
+            });
+
+            final TextView brake = findViewById(R.id.brake);
+            mService.getModel().getCurrentBrake().observeForever(new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean on) {
+                    brake.setText(on ? "1" : "0");
+                }
+            });
         }
 
         @Override
