@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             TrackService.LocalBinder binder = (TrackService.LocalBinder) service;
             mService = binder.getService();
             mBound = true;
+            setFabIcon();
 
             final TextView latitude = findViewById(R.id.latitude);
             final TextView longitude = findViewById(R.id.longitude);
@@ -101,11 +102,11 @@ public class MainActivity extends AppCompatActivity {
                 if (!checkPermissions()) {
                     requestPermissions();
                 } else {
-                    if (Utils.requestingLocationUpdates(getApplicationContext())) {
-                        mService.removeLocationUpdates();
+                    if (mService.isTracking()) {
+                        mService.stopTracking();
                         Snackbar.make(view, "Stopped...", Snackbar.LENGTH_LONG).show();
                     } else {
-                        mService.requestLocationUpdates();
+                        mService.starTracking();
                         Snackbar.make(view, "Started...", Snackbar.LENGTH_LONG).show();
                     }
                     setFabIcon();
@@ -143,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fab.setImageResource(Utils.requestingLocationUpdates(getApplicationContext()) ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setFabIcon() {
-        fab.setImageResource(Utils.requestingLocationUpdates(getApplicationContext()) ? R.drawable.ic_launcher_foreground : R.drawable.ic_launcher_background);
+        fab.setImageResource(mService != null && mService.isTracking() ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play);
     }
 
     private boolean checkPermissions() {
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
             if (grantResults.length <= 0) {
                 Log.i(TAG, "User interaction was cancelled.");
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mService.requestLocationUpdates();
+                mService.starTracking();
             } else {
                 // Permission denied.
                 Snackbar.make(

@@ -56,7 +56,10 @@ public class TrackService extends Service {
 
     private Future connectionFuture;
 
+    private boolean mIsTracking;
+
     public TrackService() {
+        mIsTracking = false;
     }
 
     @Override
@@ -120,7 +123,7 @@ public class TrackService extends Service {
     public boolean onUnbind(Intent intent) {
         Log.i(TAG, "Last client unbound from service");
 
-        if (!mChangingConfiguration && Utils.requestingLocationUpdates(this)) {
+        if (!mChangingConfiguration && isTracking()) {
             Log.i(TAG, "Starting foreground service");
             startForeground(NOTIFICATION_ID, getNotification());
         }
@@ -130,7 +133,6 @@ public class TrackService extends Service {
     @Override
     public void onDestroy() {
         mServiceHandler.removeCallbacksAndMessages(null);
-        Utils.setRequestingLocationUpdates(this, false);
     }
 
     public static List<MessageHandler> messageHandlers(final MessageHandler handler) {
@@ -139,10 +141,10 @@ public class TrackService extends Service {
         return handlers;
     }
 
-    public void requestLocationUpdates() {
+    public void starTracking() {
         Log.i(TAG, "Requesting location updates");
-        Utils.setRequestingLocationUpdates(this, true);
         startService(new Intent(getApplicationContext(), TrackService.class));
+        mIsTracking = true;
         try {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -154,24 +156,24 @@ public class TrackService extends Service {
             Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters);
             connectionFuture = executorService.submit(connection);
         } catch (SecurityException unlikely) {
-            Utils.setRequestingLocationUpdates(this, false);
+            mIsTracking = false;
             Log.e(TAG, "Lost location permission. Could not request updates. " + unlikely);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
     }
 
-    public void removeLocationUpdates() {
+    public void stopTracking() {
         Log.i(TAG, "Removing location updates");
         try {
             mFusedLocationClient.removeLocationUpdates(mLocationCallback);
             if (connectionFuture != null) {
                 connectionFuture.cancel(true);
             }
-            Utils.setRequestingLocationUpdates(this, false);
+            mIsTracking = false;
             stopSelf();
         } catch (SecurityException unlikely) {
-            Utils.setRequestingLocationUpdates(this, true);
+            mIsTracking = true;
             Log.e(TAG, "Lost location permission. Could not remove updates. " + unlikely);
         }
     }
@@ -220,6 +222,10 @@ public class TrackService extends Service {
         mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
         mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    public boolean isTracking() {
+        return mIsTracking;
     }
 
     class LocalBinder extends Binder {
