@@ -28,6 +28,13 @@ class Extractor {
         this.converter = converter;
     }
 
+    Extractor(int bytepos, int length) {
+        this.bytepos = bytepos;
+        this.length = length;
+        this.msb = false;
+        this.converter = null;
+    }
+
     double extract(final Message message) {
         if (message.getData().length <= (bytepos + length)) {
             return -1.0;
@@ -54,7 +61,7 @@ class Extractor {
                 break;
         }
 
-        return converter.convert(number);
+        return converter == null ? number : converter.convert(number);
     }
 
 }

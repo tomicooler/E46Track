@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             TrackService.LocalBinder binder = (TrackService.LocalBinder) service;
             mService = binder.getService();
             mBound = true;
+            setFabIcon();
 
             final TextView latitude = findViewById(R.id.latitude);
             final TextView longitude = findViewById(R.id.longitude);
@@ -72,6 +73,50 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(Double oil) {
                     oilTemp.setText(String.format(Locale.getDefault(), "%f", oil));
+                }
+            });
+
+            final TextView clutch = findViewById(R.id.clutch);
+            mService.getModel().getCurrentClutch().observeForever(new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean on) {
+                    clutch.setText(on ? "1" : "0");
+                }
+            });
+
+            final TextView brake = findViewById(R.id.brake);
+            mService.getModel().getCurrentBrake().observeForever(new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean on) {
+                    brake.setText(on ? "1" : "0");
+                }
+            });
+
+            final TextView throttle = findViewById(R.id.throttle);
+            mService.getModel().getCurrentThrottle().observeForever(new Observer<Double>() {
+                @Override
+                public void onChanged(Double value) {
+                    throttle.setText(String.format(Locale.getDefault(), "%f", value));
+                }
+            });
+
+            final TextView steeringAgle = findViewById(R.id.steeringAngle);
+            mService.getModel().getCurrentSteeringAngle().observeForever(new Observer<Double>() {
+                @Override
+                public void onChanged(Double value) {
+                    steeringAgle.setText(String.format(Locale.getDefault(), "%f", value));
+                }
+            });
+
+            final TextView error = findViewById(R.id.error);
+            mService.getModel().getCurrentError().observeForever(new Observer<String>() {
+                @Override
+                public void onChanged(String value) {
+                    error.setText(value);
+                    if (mService != null && !value.isEmpty()) {
+                        mService.stopTracking();
+                        setFabIcon();
+                    }
                 }
             });
         }
@@ -101,11 +146,11 @@ public class MainActivity extends AppCompatActivity {
                 if (!checkPermissions()) {
                     requestPermissions();
                 } else {
-                    if (Utils.requestingLocationUpdates(getApplicationContext())) {
-                        mService.removeLocationUpdates();
+                    if (mService.isTracking()) {
+                        mService.stopTracking();
                         Snackbar.make(view, "Stopped...", Snackbar.LENGTH_LONG).show();
                     } else {
-                        mService.requestLocationUpdates();
+                        mService.starTracking();
                         Snackbar.make(view, "Started...", Snackbar.LENGTH_LONG).show();
                     }
                     setFabIcon();
@@ -143,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fab.setImageResource(Utils.requestingLocationUpdates(getApplicationContext()) ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play);
     }
 
     @Override
@@ -161,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setFabIcon() {
-        fab.setImageResource(Utils.requestingLocationUpdates(getApplicationContext()) ? R.drawable.ic_launcher_foreground : R.drawable.ic_launcher_background);
+        fab.setImageResource(mService != null && mService.isTracking() ? android.R.drawable.ic_media_pause : android.R.drawable.ic_media_play);
     }
 
     private boolean checkPermissions() {
@@ -204,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
             if (grantResults.length <= 0) {
                 Log.i(TAG, "User interaction was cancelled.");
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mService.requestLocationUpdates();
+                mService.starTracking();
             } else {
                 // Permission denied.
                 Snackbar.make(
