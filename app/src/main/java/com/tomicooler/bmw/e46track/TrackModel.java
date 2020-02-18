@@ -11,6 +11,7 @@ public class TrackModel extends ViewModel {
     private MutableLiveData<Double> oilTemp;
     private MutableLiveData<Boolean> clutch;
     private MutableLiveData<Boolean> brake;
+    private MutableLiveData<Double> throttle;
 
     MutableLiveData<Location> getCurrentLocation() {
         if (location == null) {
@@ -38,5 +39,12 @@ public class TrackModel extends ViewModel {
             brake = new MutableLiveData<>();
         }
         return brake;
+    }
+
+    public MutableLiveData<Double> getCurrentThrottle() {
+        if (throttle == null) {
+            throttle = new MutableLiveData<>();
+        }
+        return throttle;
     }
 }

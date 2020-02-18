@@ -178,4 +178,23 @@
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="2dp"
+        android:text="Throttle"
+        app:layout_constraintStart_toEndOf="@+id/brake"
+        app:layout_constraintTop_toTopOf="@+id/brake" />
+
+    <TextView
+        android:id="@+id/throttle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:text="0.0"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView10" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

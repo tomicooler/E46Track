@@ -91,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
                     brake.setText(on ? "1" : "0");
                 }
             });
+
+            final TextView throttle = findViewById(R.id.throttle);
+            mService.getModel().getCurrentThrottle().observeForever(new Observer<Double>() {
+                @Override
+                public void onChanged(Double value) {
+                    throttle.setText(String.format(Locale.getDefault(), "%f", value));
+                }
+            });
         }
 
         @Override
