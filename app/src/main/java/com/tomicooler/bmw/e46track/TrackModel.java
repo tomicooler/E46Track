@@ -12,6 +12,7 @@ public class TrackModel extends ViewModel {
     private MutableLiveData<Boolean> clutch;
     private MutableLiveData<Boolean> brake;
     private MutableLiveData<Double> throttle;
+    private MutableLiveData<Double> steeringAngle;
 
     MutableLiveData<Location> getCurrentLocation() {
         if (location == null) {
@@ -46,5 +47,12 @@ public class TrackModel extends ViewModel {
             throttle = new MutableLiveData<>();
         }
         return throttle;
+    }
+
+    public MutableLiveData<Double> getCurrentSteeringAngle() {
+        if (steeringAngle == null) {
+            steeringAngle = new MutableLiveData<>();
+        }
+        return steeringAngle;
     }
 }

@@ -99,6 +99,14 @@ public class MainActivity extends AppCompatActivity {
                     throttle.setText(String.format(Locale.getDefault(), "%f", value));
                 }
             });
+
+            final TextView steeringAgle = findViewById(R.id.steeringAngle);
+            mService.getModel().getCurrentSteeringAngle().observeForever(new Observer<Double>() {
+                @Override
+                public void onChanged(Double value) {
+                    steeringAgle.setText(String.format(Locale.getDefault(), "%f", value));
+                }
+            });
         }
 
         @Override

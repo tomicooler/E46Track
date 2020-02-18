@@ -29,6 +29,7 @@ import com.tomicooler.bmw.e46track.ds2.Message;
 import com.tomicooler.bmw.e46track.extractors.ClutchBrake;
 import com.tomicooler.bmw.e46track.extractors.MessageHandler;
 import com.tomicooler.bmw.e46track.extractors.Oil;
+import com.tomicooler.bmw.e46track.extractors.SteeringAngle;
 import com.tomicooler.bmw.e46track.extractors.Throttle;
 
 import java.net.InetAddress;
@@ -156,6 +157,10 @@ public class TrackService extends Service {
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b03")), messageHandlers(new Oil(model))));
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b04")), messageHandlers(new ClutchBrake(model))));
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b92")), messageHandlers(new Throttle(model))));
+
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("57")[0], Utils.hexStringToByteArray("00")), null));
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("57")[0], Utils.hexStringToByteArray("1b01")), messageHandlers(new SteeringAngle(model))));
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("57")[0], Utils.hexStringToByteArray("00")), null));
 
             Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters);
             connectionFuture = executorService.submit(connection);

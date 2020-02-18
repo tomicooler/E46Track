@@ -16,6 +16,10 @@ class Requester {
     }
 
     void process(final Message message) {
+        if (handlers == null) {
+            return;
+        }
+
         for (MessageHandler handler : handlers) {
             handler.process(message);
         }
