@@ -32,6 +32,7 @@ import com.tomicooler.bmw.e46track.extractors.Oil;
 import com.tomicooler.bmw.e46track.extractors.SteeringAngle;
 import com.tomicooler.bmw.e46track.extractors.Throttle;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -169,6 +170,8 @@ public class TrackService extends Service {
             mIsTracking = false;
             Log.e(TAG, "Lost location permission. Could not request updates. " + unlikely);
         } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

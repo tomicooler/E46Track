@@ -21,8 +21,6 @@ public class Connection implements Runnable {
     private final InetAddress address;
     private final int port;
     private final List<Requester> requesters;
-    private final byte[] extraFramingHeader;
-    private final byte[] extraFramingFooter;
     private final TrackModel model;
 
     Connection(final InetAddress address, final int port, final List<Requester> requesters, final TrackModel model) {
@@ -30,8 +28,6 @@ public class Connection implements Runnable {
         this.port = port;
         this.requesters = requesters;
         this.model = model;
-        this.extraFramingHeader = Utils.hexStringToByteArray("000212c02100003c0005");
-        this.extraFramingFooter = Utils.hexStringToByteArray("7a");
     }
 
     @Override
@@ -41,18 +37,20 @@ public class Connection implements Runnable {
             OutputStream out = socket.getOutputStream();
             InputStream in = socket.getInputStream();
 
+            byte[] buffer = new byte[255];
+            ByteArrayOutputStream inBuffer = new ByteArrayOutputStream();
             while (socket.isConnected()) {
 
                 for (Requester requester : requesters) {
-                    out.write(extraFramingHeader);
-                    out.write(requester.getRequestMessage());
-                    out.write(extraFramingFooter);
+                    out.write(requester.getRequestMessageFramed());
+                    out.flush();
 
                     boolean messageReceived = false;
-                    ByteArrayOutputStream inBuffer = new ByteArrayOutputStream();
                     while (!messageReceived) {
-                        byte[] buffer = new byte[255];
                         int size = in.read(buffer);
+                        if (size == -1) {
+                            break;
+                        }
                         inBuffer.write(buffer, inBuffer.size(), size);
                         try {
                             Message message = Parser.parse(inBuffer.toByteArray());
