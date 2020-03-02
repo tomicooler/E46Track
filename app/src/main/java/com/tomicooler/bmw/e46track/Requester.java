@@ -16,7 +16,7 @@ class Requester {
     Requester(final Message message, final List<MessageHandler> handlers) throws IOException {
         requestMessage = message.serialize();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        stream.write(Utils.hexStringToByteArray("000212c02100003c0005"));
+        stream.write(Utils.hexStringToByteArray("000212c02100003c0005")); // TODO: this works only for the Oil command...
         stream.write(requestMessage);
         stream.write(Utils.hexStringToByteArray("7a"));
         requestMessageFramed = stream.toByteArray();
