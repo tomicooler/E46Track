@@ -13,12 +13,12 @@ class Requester {
     private final byte[] requestMessageFramed;
     private List<MessageHandler> handlers;
 
-    Requester(final Message message, final List<MessageHandler> handlers) throws IOException {
+    Requester(final Message message, final byte[] framingHeader, final byte[] framingFooter, final List<MessageHandler> handlers) throws IOException {
         requestMessage = message.serialize();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        stream.write(Utils.hexStringToByteArray("000212c02100003c0005")); // TODO: this works only for the Oil command...
+        stream.write(framingHeader);
         stream.write(requestMessage);
-        stream.write(Utils.hexStringToByteArray("7a"));
+        stream.write(framingFooter);
         requestMessageFramed = stream.toByteArray();
 
         this.handlers = handlers;
