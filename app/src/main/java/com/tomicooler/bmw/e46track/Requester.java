@@ -16,9 +16,15 @@ class Requester {
     Requester(final Message message, final List<MessageHandler> handlers) throws IOException {
         requestMessage = message.serialize();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        stream.write(Utils.hexStringToByteArray("000212c02100003c0005")); // TODO: this works only for the Oil command...
+        stream.write(Utils.hexStringToByteArray("000212c02100003c00"));
+        stream.write((byte)requestMessage.length);
         stream.write(requestMessage);
-        stream.write(Utils.hexStringToByteArray("7a"));
+        byte[] bytes = stream.toByteArray();
+        byte checksum = 0;
+        for (byte b : bytes) {
+            checksum += b;
+        }
+        stream.write(checksum);
         requestMessageFramed = stream.toByteArray();
 
         this.handlers = handlers;
