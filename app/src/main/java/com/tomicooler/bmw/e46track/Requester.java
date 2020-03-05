@@ -13,12 +13,18 @@ class Requester {
     private final byte[] requestMessageFramed;
     private List<MessageHandler> handlers;
 
-    Requester(final Message message, final byte[] framingHeader, final byte[] framingFooter, final List<MessageHandler> handlers) throws IOException {
+    Requester(final Message message, final List<MessageHandler> handlers) throws IOException {
         requestMessage = message.serialize();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        stream.write(framingHeader);
+        stream.write(Utils.hexStringToByteArray("000212c02100003c00"));
+        stream.write((byte)requestMessage.length);
         stream.write(requestMessage);
-        stream.write(framingFooter);
+        byte[] bytes = stream.toByteArray();
+        byte checksum = 0;
+        for (byte b : bytes) {
+            checksum += b;
+        }
+        stream.write(checksum);
         requestMessageFramed = stream.toByteArray();
 
         this.handlers = handlers;

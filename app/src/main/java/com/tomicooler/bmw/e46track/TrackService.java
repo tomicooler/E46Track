@@ -156,23 +156,14 @@ public class TrackService extends Service {
 
             List<Requester> requesters = new ArrayList<>();
 
-            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b03")),
-                    Utils.hexStringToByteArray("000212c02100003c0005"),
-                    Utils.hexStringToByteArray("7a"),
-                    messageHandlers(new Oil(model))));
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b03")), messageHandlers(new Oil(model))));
 
             //requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b04")), messageHandlers(new ClutchBrake(model)))); // TODO: not working for M3, was buggy for 30i as well
             //requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b92")), messageHandlers(new Throttle(model)))); // TODO not working for M3
 
-            Requester wrapSteering = new Requester(new Message(Utils.hexStringToByteArray("57")[0], Utils.hexStringToByteArray("00")),
-                    Utils.hexStringToByteArray("000212c02100003c0004"),
-                    Utils.hexStringToByteArray("e3"),
-                    null);
+            Requester wrapSteering = new Requester(new Message(Utils.hexStringToByteArray("57")[0], Utils.hexStringToByteArray("00")),null);
             requesters.add(wrapSteering);
-            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("57")[0], Utils.hexStringToByteArray("1b01")),
-                    Utils.hexStringToByteArray("000212c02100003c0005"),
-                    Utils.hexStringToByteArray("f6"),
-                    messageHandlers(new SteeringAngle(model))));
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("57")[0], Utils.hexStringToByteArray("1b01")), messageHandlers(new SteeringAngle(model))));
             requesters.add(wrapSteering);
 
             Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters, model);
