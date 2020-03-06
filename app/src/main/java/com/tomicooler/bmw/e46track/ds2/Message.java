@@ -1,30 +1,28 @@
 package com.tomicooler.bmw.e46track.ds2;
 
+import com.tomicooler.bmw.e46track.Utils;
+
 public class Message {
-    private final byte ecu;
+    private final byte[] ecu;
     private final byte length;
     private final byte[] data;
     private byte checksum;
 
-    public Message(byte ecu, byte []data) {
+    public Message(byte []ecu, byte []data) {
         this.ecu = ecu;
-        this.length = (byte) (3 + data.length);
         this.data = data;
-        this.checksum = ecu;
+        this.length = ecu.length == 1 ? (byte) (ecu.length + 1 + data.length + 1) : (byte) data.length;
+        this.checksum = 0;
+        for (Byte b : ecu) {
+            this.checksum ^= b;
+        }
         this.checksum ^= length;
         for (Byte b : data) {
             this.checksum ^= b;
         }
     }
 
-    Message(byte ecu, byte length, byte []data, byte checksum) {
-        this.ecu = ecu;
-        this.length = length;
-        this.data = data;
-        this.checksum = checksum;
-    }
-
-    public byte getEcu() {
+    public byte[] getEcu() {
         return ecu;
     }
 
@@ -33,11 +31,11 @@ public class Message {
     }
 
     public byte[] serialize() {
-        byte []bytes = new byte[length];
-        bytes[0] = ecu;
-        bytes[1] = length;
-        System.arraycopy (data, 0, bytes, 2, data.length);
-        bytes[length - 1] = checksum;
+        byte []bytes = new byte[ecu.length + 1 + data.length + 1];
+        System.arraycopy (ecu, 0, bytes, 0, ecu.length);
+        bytes[ecu.length] = length;
+        System.arraycopy (data, 0, bytes, ecu.length + 1, data.length);
+        bytes[bytes.length - 1] = checksum;
         return bytes;
     }
 }

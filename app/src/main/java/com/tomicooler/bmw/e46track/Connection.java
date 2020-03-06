@@ -40,6 +40,7 @@ public class Connection implements Runnable {
             OutputStream out = socket.getOutputStream();
             InputStream in = socket.getInputStream();
 
+            final Parser parser = new Parser();
             while (socket.isConnected()) {
 
                 for (Requester requester : requesters) {
@@ -60,7 +61,7 @@ public class Connection implements Runnable {
                         inBuffer.write(buffer, inBuffer.size(), size);
                         try {
                             System.out.println(String.format("try parsing '%s'", Utils.bytesToHex(inBuffer.toByteArray())));
-                            Message message = Parser.parse(inBuffer.toByteArray());
+                            Message message = parser.parse(inBuffer.toByteArray());
                             requester.process(message);
                             inBuffer.reset();;
                             messageReceived = true;
