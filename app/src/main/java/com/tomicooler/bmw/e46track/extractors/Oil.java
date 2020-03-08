@@ -9,7 +9,7 @@ public class Oil implements MessageHandler {
     private final TrackModel model;
 
     public Oil(TrackModel model) {
-        extractor = new Extractor(12, 1, false, new Converter(0.75, -48.373));
+        extractor = new Extractor(12, 1, false, new Converter(0.796098, -48.0137));
         this.model = model;
     }
 
