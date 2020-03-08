@@ -26,11 +26,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.tomicooler.bmw.e46track.ds2.Message;
-import com.tomicooler.bmw.e46track.extractors.ClutchBrake;
+import com.tomicooler.bmw.e46track.extractors.Brake;
 import com.tomicooler.bmw.e46track.extractors.MessageHandler;
 import com.tomicooler.bmw.e46track.extractors.Oil;
 import com.tomicooler.bmw.e46track.extractors.SteeringAngle;
-import com.tomicooler.bmw.e46track.extractors.Throttle;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -162,6 +161,7 @@ public class TrackService extends Service {
             //requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12")[0], Utils.hexStringToByteArray("0b92")), messageHandlers(new Throttle(model)))); // TODO not working for M3
 
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2201f5")), messageHandlers(new SteeringAngle(model))));
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2106")), messageHandlers(new Brake(model))));
 
             Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters, model);
             connectionFuture = executorService.submit(connection);

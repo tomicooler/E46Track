@@ -12,7 +12,7 @@ public class TrackModel extends ViewModel {
     private MutableLiveData<Location> location;
     private MutableLiveData<Double> oilTemp;
     private MutableLiveData<Boolean> clutch;
-    private MutableLiveData<Boolean> brake;
+    private MutableLiveData<Double> brake;
     private MutableLiveData<Double> throttle;
     private MutableLiveData<Double> steeringAngle;
 
@@ -44,7 +44,7 @@ public class TrackModel extends ViewModel {
         return clutch;
     }
 
-    public MutableLiveData<Boolean> getCurrentBrake() {
+    public MutableLiveData<Double> getCurrentBrake() {
         if (brake == null) {
             brake = new MutableLiveData<>();
         }
