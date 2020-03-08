@@ -9,7 +9,7 @@ public class SteeringAngle implements MessageHandler {
     private final TrackModel model;
 
     public SteeringAngle(TrackModel model) {
-        extractor = new Extractor(1, 2, true, new Converter(0.0439457, 0.0));
+        extractor = new Extractor(4, false, 2, true, new Converter(0.045, 0.0));
         this.model = model;
     }
 

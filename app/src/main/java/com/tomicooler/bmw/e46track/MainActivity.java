@@ -85,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
             });
 
             final TextView brake = findViewById(R.id.brake);
-            mService.getModel().getCurrentBrake().observeForever(new Observer<Boolean>() {
+            mService.getModel().getCurrentBrake().observeForever(new Observer<Double>() {
                 @Override
-                public void onChanged(Boolean on) {
-                    brake.setText(on ? "1" : "0");
+                public void onChanged(Double value) {
+                    brake.setText(String.format(Locale.getDefault(), "%f", value));
                 }
             });
 

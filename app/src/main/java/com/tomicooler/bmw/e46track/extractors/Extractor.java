@@ -1,11 +1,6 @@
 package com.tomicooler.bmw.e46track.extractors;
 
-import com.tomicooler.bmw.e46track.Utils;
 import com.tomicooler.bmw.e46track.ds2.Message;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.Arrays;
 
 class Extractor {
 
@@ -13,26 +8,30 @@ class Extractor {
     private final int length;
     private final boolean msb;
     private final Converter converter;
+    private final boolean signed;
 
-    Extractor(int bytepos, int length, boolean msb, final Converter converter) {
+    Extractor(int bytepos, boolean msb, int length, boolean signed, final Converter converter) {
         this.bytepos = bytepos;
         this.length = length;
         this.msb = msb;
         this.converter = converter;
+        this.signed = signed;
     }
 
-    Extractor(int bytepos, int length, final Converter converter) {
+    Extractor(int bytepos, int length, boolean signed, final Converter converter) {
         this.bytepos = bytepos;
         this.length = length;
         this.msb = false;
         this.converter = converter;
+        this.signed = signed;
     }
 
-    Extractor(int bytepos, int length) {
+    Extractor(int bytepos, int length, boolean signed) {
         this.bytepos = bytepos;
         this.length = length;
         this.msb = false;
         this.converter = null;
+        this.signed = signed;
     }
 
     double extract(final Message message) {
@@ -40,25 +39,32 @@ class Extractor {
             return -1.0;
         }
 
-        ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOfRange(message.getData(), bytepos, bytepos + length));
-        if (length > 1) {
-            bb.order(msb ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN);
-        }
-
-        double number = 0.0;
+        double number;
+        final byte[] bytes = message.getData();
 
         switch (length) {
             case 1:
-                number = bb.get() & 0xFF;
+                number = signed ? bytes[bytepos] : bytes[bytepos] & 0xFF;
                 break;
 
-            case 2:
-                number = bb.getShort();
-                break;
+            case 2: // getShort() is not OK. The data is not a 16 bit signed two's complement integer.
+                int num;
 
-            case 4:
-                number = bb.getInt();
+                if (!msb) {
+                    num = (bytes[bytepos] & 0xFF) + ((bytes[bytepos + 1] & 0xFF) << 8);
+                } else {
+                    num = (bytes[bytepos + 1] & 0xFF) + ((bytes[bytepos] & 0xFF) << 8);
+                }
+
+                if (signed) {
+                    num = (num & 0x7FFF) * ((num & 0x8000) > 0 ? -1 : 1);
+                }
+
+                number = num;
+
                 break;
+            default:
+                return -1.0;
         }
 
         return converter == null ? number : converter.convert(number);

@@ -33,30 +33,39 @@ public class Connection implements Runnable {
     @Override
     public void run() {
         try {
+            System.out.println(String.format("connecting '%s:%d'", address, port));
             Socket socket = new Socket(address, port);
+            Thread.sleep(500);
+            System.out.println(String.format("connected '%s:%d'", address, port));
             OutputStream out = socket.getOutputStream();
             InputStream in = socket.getInputStream();
 
-            byte[] buffer = new byte[255];
-            ByteArrayOutputStream inBuffer = new ByteArrayOutputStream();
+            final Parser parser = new Parser();
             while (socket.isConnected()) {
 
                 for (Requester requester : requesters) {
                     out.write(requester.getRequestMessageFramed());
                     out.flush();
+                    System.out.println(String.format("sending '%s'", Utils.bytesToHex(requester.getRequestMessageFramed())));
 
                     boolean messageReceived = false;
+                    ByteArrayOutputStream inBuffer = new ByteArrayOutputStream();
                     while (!messageReceived) {
+                        System.out.println("try receiving");
+                        byte[] buffer = new byte[255];
                         int size = in.read(buffer);
                         if (size == -1) {
                             break;
                         }
+                        System.out.println(String.format("try chunk %d '%s'", size, Utils.bytesToHex(buffer)));
                         inBuffer.write(buffer, inBuffer.size(), size);
                         try {
-                            Message message = Parser.parse(inBuffer.toByteArray());
+                            System.out.println(String.format("try parsing '%s'", Utils.bytesToHex(inBuffer.toByteArray())));
+                            Message message = parser.parse(inBuffer.toByteArray());
                             requester.process(message);
                             inBuffer.reset();;
                             messageReceived = true;
+                            System.out.println("parsed");
                         } catch (NotEnoughData notEnoughData) {
                             Log.e(TAG, "Not enough data");
                         }
