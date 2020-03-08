@@ -9,7 +9,7 @@ public class Throttle implements MessageHandler {
     private final TrackModel model;
 
     public Throttle(TrackModel model) {
-        extractor = new Extractor(7, 1,  new Converter(0.466406, 0.513281));
+        extractor = new Extractor(7, 1, false, new Converter(0.466406, 0.513281));
         this.model = model;
     }
 

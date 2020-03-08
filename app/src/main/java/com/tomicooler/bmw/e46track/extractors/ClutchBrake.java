@@ -8,7 +8,7 @@ public class ClutchBrake implements MessageHandler {
     private final TrackModel model;
 
     public ClutchBrake(TrackModel model) {
-        extractor = new Extractor(1, 1);
+        extractor = new Extractor(1, 1, false);
         this.model = model;
     }
 
