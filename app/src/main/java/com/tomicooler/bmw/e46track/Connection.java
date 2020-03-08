@@ -41,6 +41,7 @@ public class Connection implements Runnable {
             InputStream in = socket.getInputStream();
 
             final Parser parser = new Parser();
+            byte[] buffer = new byte[255];
             while (socket.isConnected()) {
 
                 for (Requester requester : requesters) {
@@ -48,32 +49,24 @@ public class Connection implements Runnable {
                     out.flush();
                     System.out.println(String.format("sending '%s'", Utils.bytesToHex(requester.getRequestMessageFramed())));
 
-                    boolean messageReceived = false;
-                    ByteArrayOutputStream inBuffer = new ByteArrayOutputStream();
-                    while (!messageReceived) {
-                        System.out.println("try receiving");
-                        byte[] buffer = new byte[255];
-                        int size = in.read(buffer);
-                        if (size == -1) {
-                            break;
-                        }
-                        System.out.println(String.format("try chunk %d '%s'", size, Utils.bytesToHex(buffer)));
-                        inBuffer.write(buffer, inBuffer.size(), size);
-                        try {
-                            System.out.println(String.format("try parsing '%s'", Utils.bytesToHex(inBuffer.toByteArray())));
-                            Message message = parser.parse(inBuffer.toByteArray());
-                            requester.process(message);
-                            inBuffer.reset();;
-                            messageReceived = true;
-                            System.out.println("parsed");
-                        } catch (NotEnoughData notEnoughData) {
-                            Log.e(TAG, "Not enough data");
-                        }
+                    int size = in.read(buffer);
+                    if (size == -1) {
+                        System.out.println("size -1");
+                        Thread.sleep(200);
+                        continue;
+                    }
+
+                    try {
+                        System.out.println(String.format("try parsing '%s'", Utils.bytesToHex(buffer)));
+                        Message message = parser.parse(buffer);
+                        requester.process(message);
+                        System.out.println("parsed");
+                    } catch (NotEnoughData notEnoughData) {
+                        Log.e(TAG, "Not enough data");
                     }
 
                     Thread.sleep(50);
                 }
-
             }
 
 
