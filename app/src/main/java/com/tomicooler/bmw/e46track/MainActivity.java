@@ -68,22 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            final TextView oilTemp = findViewById(R.id.oilTemp);
-            mService.getModel().getCurrentOilTemp().observeForever(new Observer<Double>() {
-                @Override
-                public void onChanged(Double oil) {
-                    oilTemp.setText(String.format(Locale.getDefault(), "%f", oil));
-                }
-            });
-
-            final TextView clutch = findViewById(R.id.clutch);
-            mService.getModel().getCurrentClutch().observeForever(new Observer<Boolean>() {
-                @Override
-                public void onChanged(Boolean on) {
-                    clutch.setText(on ? "1" : "0");
-                }
-            });
-
             final TextView brake = findViewById(R.id.brake);
             mService.getModel().getCurrentBrake().observeForever(new Observer<Double>() {
                 @Override

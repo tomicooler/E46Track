@@ -28,7 +28,6 @@ import com.google.android.gms.tasks.Task;
 import com.tomicooler.bmw.e46track.ds2.Message;
 import com.tomicooler.bmw.e46track.extractors.Brake;
 import com.tomicooler.bmw.e46track.extractors.MessageHandler;
-import com.tomicooler.bmw.e46track.extractors.Oil;
 import com.tomicooler.bmw.e46track.extractors.SteeringAngle;
 import com.tomicooler.bmw.e46track.extractors.Throttle;
 
