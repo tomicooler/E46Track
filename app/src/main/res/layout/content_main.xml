@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="56dp"
     tools:showIn="@layout/activity_main">
 
     <TextView
@@ -122,51 +123,13 @@
         app:layout_constraintTop_toBottomOf="@+id/longitude" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:text="Oil"
-        app:layout_constraintBaseline_toBaselineOf="@+id/oilTemp"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/oilTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="163dp"
-        android:text="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:text="Clutch"
-        app:layout_constraintBaseline_toBaselineOf="@+id/clutch"
-        app:layout_constraintStart_toEndOf="@+id/oilTemp" />
-
-    <TextView
-        android:id="@+id/clutch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="1dp"
-        android:text="0"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
-
-    <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="11dp"
         android:text="Brake"
         app:layout_constraintBaseline_toBaselineOf="@+id/brake"
-        app:layout_constraintStart_toEndOf="@+id/clutch" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/brake"
@@ -174,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="42dp"
-        android:text="0"
+        android:text="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -182,11 +145,12 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:text="Throttle"
-        app:layout_constraintStart_toEndOf="@+id/brake"
-        app:layout_constraintTop_toTopOf="@+id/brake" />
+        app:layout_constraintEnd_toStartOf="@+id/throttle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/throttle"
@@ -202,24 +166,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="24dp"
         android:text="Steering Angle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/steeringAngle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="108dp"
         android:text="0.0"
-        app:layout_constraintBottom_toTopOf="@+id/error"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
+        app:layout_constraintStart_toEndOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/error"
