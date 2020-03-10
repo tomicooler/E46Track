@@ -92,6 +92,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            final TextView rpm = findViewById(R.id.rpm);
+            mService.getModel().getCurrentRPM().observeForever(new Observer<Double>() {
+                @Override
+                public void onChanged(Double value) {
+                    rpm.setText(String.format(Locale.getDefault(), "%f", value));
+                }
+            });
+
             final TextView error = findViewById(R.id.error);
             mService.getModel().getCurrentError().observeForever(new Observer<String>() {
                 @Override

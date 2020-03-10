@@ -10,11 +10,10 @@ public class TrackModel extends ViewModel {
     private MutableLiveData<String> error;
 
     private MutableLiveData<Location> location;
-    private MutableLiveData<Double> oilTemp;
-    private MutableLiveData<Boolean> clutch;
     private MutableLiveData<Double> brake;
     private MutableLiveData<Double> throttle;
     private MutableLiveData<Double> steeringAngle;
+    private MutableLiveData<Double> rpm;
 
     MutableLiveData<String> getCurrentError() {
         if (error == null) {
@@ -28,20 +27,6 @@ public class TrackModel extends ViewModel {
             location = new MutableLiveData<>();
         }
         return location;
-    }
-
-    public MutableLiveData<Double> getCurrentOilTemp() {
-        if (oilTemp == null) {
-            oilTemp = new MutableLiveData<>();
-        }
-        return oilTemp;
-    }
-
-    public MutableLiveData<Boolean> getCurrentClutch() {
-        if (clutch == null) {
-            clutch = new MutableLiveData<>();
-        }
-        return clutch;
     }
 
     public MutableLiveData<Double> getCurrentBrake() {
@@ -63,5 +48,12 @@ public class TrackModel extends ViewModel {
             steeringAngle = new MutableLiveData<>();
         }
         return steeringAngle;
+    }
+
+    public MutableLiveData<Double> getCurrentRPM() {
+        if (rpm == null) {
+            rpm = new MutableLiveData<>();
+        }
+        return rpm;
     }
 }
