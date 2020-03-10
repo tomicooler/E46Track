@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.Task;
 import com.tomicooler.bmw.e46track.ds2.Message;
 import com.tomicooler.bmw.e46track.extractors.Brake;
 import com.tomicooler.bmw.e46track.extractors.MessageHandler;
+import com.tomicooler.bmw.e46track.extractors.RPM;
 import com.tomicooler.bmw.e46track.extractors.SteeringAngle;
 import com.tomicooler.bmw.e46track.extractors.Throttle;
 
@@ -35,6 +36,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -139,9 +142,7 @@ public class TrackService extends Service {
     }
 
     public static List<MessageHandler> messageHandlers(final MessageHandler handler) {
-        List<MessageHandler> handlers = new ArrayList<>();
-        handlers.add(handler);
-        return handlers;
+        return new ArrayList<>(Collections.singletonList(handler));
     }
 
     public void starTracking() {
@@ -155,7 +156,9 @@ public class TrackService extends Service {
 
             List<Requester> requesters = new ArrayList<>();
 
-            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12"), Utils.hexStringToByteArray("0b03")), messageHandlers(new Throttle(model))));
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12"), Utils.hexStringToByteArray("0b03")),
+                    new ArrayList<>(Arrays.asList(new Throttle(model), new RPM(model)))
+            ));
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2201f5")), messageHandlers(new SteeringAngle(model))));
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2106")), messageHandlers(new Brake(model))));
 
