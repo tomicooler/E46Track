@@ -59,6 +59,7 @@ public class DataLogger implements Runnable {
                             .append('\n');
 
                     writer.write(row.toString());
+                    writer.flush();
                     Thread.sleep(80);
                 }
             }
