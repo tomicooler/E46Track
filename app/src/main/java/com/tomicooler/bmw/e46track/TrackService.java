@@ -61,6 +61,7 @@ public class TrackService extends Service {
     private TrackModel model;
 
     private Future connectionFuture;
+    private Future dataLoggerFuture;
 
     private boolean mIsTracking;
 
@@ -151,6 +152,11 @@ public class TrackService extends Service {
         mIsTracking = true;
         model.getCurrentError().postValue("");
         try {
+            model.getCurrentStartTime().setValue(System.currentTimeMillis());
+            ExecutorService executorDataLogger = Executors.newSingleThreadExecutor();
+            DataLogger dataLogger = new DataLogger(model);
+            dataLoggerFuture = executorDataLogger.submit(dataLogger);
+
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -180,6 +186,9 @@ public class TrackService extends Service {
             mFusedLocationClient.removeLocationUpdates(mLocationCallback);
             if (connectionFuture != null) {
                 connectionFuture.cancel(true);
+            }
+            if (dataLoggerFuture != null) {
+                dataLoggerFuture.cancel(true);
             }
             mIsTracking = false;
             stopSelf();

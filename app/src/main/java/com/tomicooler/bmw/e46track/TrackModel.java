@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel;
 public class TrackModel extends ViewModel {
 
     private MutableLiveData<String> error;
+    private MutableLiveData<Long> startTime;
+    private MutableLiveData<Long> elapsedTime;
 
     private MutableLiveData<Location> location;
     private MutableLiveData<Double> brake;
@@ -20,6 +22,20 @@ public class TrackModel extends ViewModel {
             error = new MutableLiveData<>();
         }
         return error;
+    }
+
+    MutableLiveData<Long> getCurrentStartTime() {
+        if (startTime == null) {
+            startTime = new MutableLiveData<>();
+        }
+        return startTime;
+    }
+
+    MutableLiveData<Long> getCurrentElapsedTime() {
+        if (elapsedTime == null) {
+            elapsedTime = new MutableLiveData<>();
+        }
+        return elapsedTime;
     }
 
     MutableLiveData<Location> getCurrentLocation() {
