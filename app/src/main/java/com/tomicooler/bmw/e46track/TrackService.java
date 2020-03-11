@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -154,7 +155,7 @@ public class TrackService extends Service {
         try {
             model.getCurrentStartTime().setValue(System.currentTimeMillis());
             ExecutorService executorDataLogger = Executors.newSingleThreadExecutor();
-            DataLogger dataLogger = new DataLogger(model);
+            DataLogger dataLogger = new DataLogger(model, getApplicationContext().getExternalFilesDir(null).getAbsolutePath());
             dataLoggerFuture = executorDataLogger.submit(dataLogger);
 
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
