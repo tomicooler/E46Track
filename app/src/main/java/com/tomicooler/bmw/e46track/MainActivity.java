@@ -33,6 +33,9 @@ import android.provider.Settings;
 
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -97,6 +100,24 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(Double value) {
                     rpm.setText(String.format(Locale.getDefault(), "%f", value));
+                }
+            });
+
+            final DateFormat df = DateFormat.getTimeInstance();
+            final TextView startTime = findViewById(R.id.startTime);
+            mService.getModel().getCurrentStartTime().observeForever(new Observer<Long>() {
+                @Override
+                public void onChanged(Long value) {
+                    startTime.setText(String.format(Locale.getDefault(), "%s", df.format(new Date(value))));
+                }
+            });
+
+            final DateFormat minutesseconds = new SimpleDateFormat("mm:ss", Locale.getDefault());
+            final TextView elapsedTime = findViewById(R.id.elapsedTime);
+            mService.getModel().getCurrentElapsedTime().observeForever(new Observer<Long>() {
+                @Override
+                public void onChanged(Long value) {
+                    elapsedTime.setText(String.format(Locale.getDefault(), "%s", minutesseconds.format(new Date(value))));
                 }
             });
 

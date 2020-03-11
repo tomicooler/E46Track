@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Binder;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -49,7 +50,7 @@ public class TrackService extends Service {
     private static final String CHANNEL_ID = "channel_01";
     private static final int NOTIFICATION_ID = 12345678;
 
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 500;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 80;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -61,6 +62,7 @@ public class TrackService extends Service {
     private TrackModel model;
 
     private Future connectionFuture;
+    private Future dataLoggerFuture;
 
     private boolean mIsTracking;
 
@@ -151,6 +153,11 @@ public class TrackService extends Service {
         mIsTracking = true;
         model.getCurrentError().postValue("");
         try {
+            model.getCurrentStartTime().setValue(System.currentTimeMillis());
+            ExecutorService executorDataLogger = Executors.newSingleThreadExecutor();
+            DataLogger dataLogger = new DataLogger(model, getApplicationContext().getExternalFilesDir(null).getAbsolutePath());
+            dataLoggerFuture = executorDataLogger.submit(dataLogger);
+
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -180,6 +187,9 @@ public class TrackService extends Service {
             mFusedLocationClient.removeLocationUpdates(mLocationCallback);
             if (connectionFuture != null) {
                 connectionFuture.cancel(true);
+            }
+            if (dataLoggerFuture != null) {
+                dataLoggerFuture.cancel(true);
             }
             mIsTracking = false;
             stopSelf();
