@@ -50,7 +50,7 @@ public class TrackService extends Service {
     private static final String CHANNEL_ID = "channel_01";
     private static final int NOTIFICATION_ID = 12345678;
 
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 500;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 80;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocationClient;
