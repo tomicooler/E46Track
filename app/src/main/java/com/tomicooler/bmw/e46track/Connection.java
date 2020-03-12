@@ -65,7 +65,7 @@ public class Connection implements Runnable {
                                 Log.e(TAG, "Not enough data");
                             }
 
-                            Thread.sleep(80);
+                            Thread.sleep(20);
                         }
                     }
                 } catch (IOException e) {
