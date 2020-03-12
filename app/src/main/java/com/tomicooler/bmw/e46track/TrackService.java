@@ -166,6 +166,7 @@ public class TrackService extends Service {
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("12"), Utils.hexStringToByteArray("0b03")),
                     new ArrayList<>(Arrays.asList(new Throttle(model), new RPM(model)))
             ));
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2102")), null)); // offsets probably, must be sent anyway
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2201f5")), messageHandlers(new SteeringAngle(model))));
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2106")), messageHandlers(new Brake(model))));
 
