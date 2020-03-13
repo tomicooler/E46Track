@@ -48,7 +48,7 @@ public class Connection implements Runnable {
                         for (Requester requester : requesters) {
                             out.write(requester.getRequestMessageFramed());
                             out.flush();
-                            System.out.println(String.format("sending '%s'", Utils.bytesToHex(requester.getRequestMessageFramed())));
+                           // System.out.println(String.format("sending '%s'", Utils.bytesToHex(requester.getRequestMessageFramed())));
 
                             int size = in.read(buffer);
                             if (size == -1) {
@@ -57,10 +57,10 @@ public class Connection implements Runnable {
                             }
 
                             try {
-                                System.out.println(String.format("try parsing '%s'", Utils.bytesToHex(buffer)));
+                               // System.out.println(String.format("try parsing '%s'", Utils.bytesToHex(buffer)));
                                 Message message = parser.parse(buffer);
                                 requester.process(message);
-                                System.out.println("parsed");
+                              //  System.out.println("parsed");
                             } catch (NotEnoughData notEnoughData) {
                                 Log.e(TAG, "Not enough data");
                             }

@@ -16,6 +16,8 @@ public class TrackModel extends ViewModel {
     private MutableLiveData<Double> throttle;
     private MutableLiveData<Double> steeringAngle;
     private MutableLiveData<Double> rpm;
+    private MutableLiveData<Double> latG;
+    private MutableLiveData<Double> yaw;
 
     MutableLiveData<String> getCurrentError() {
         if (error == null) {
@@ -71,5 +73,19 @@ public class TrackModel extends ViewModel {
             rpm = new MutableLiveData<>();
         }
         return rpm;
+    }
+
+    public MutableLiveData<Double> getCurrentLatG() {
+        if (latG == null) {
+            latG = new MutableLiveData<>();
+        }
+        return latG;
+    }
+
+    public MutableLiveData<Double> getCurrentYaw() {
+        if (yaw == null) {
+            yaw = new MutableLiveData<>();
+        }
+        return yaw;
     }
 }
