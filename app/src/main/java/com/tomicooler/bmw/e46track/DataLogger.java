@@ -28,7 +28,7 @@ public class DataLogger implements Runnable {
             try (FileOutputStream output = new FileOutputStream(fileName);
                  Writer writer = new OutputStreamWriter(new GZIPOutputStream(output), "UTF-8");
                ) {
-                writer.write("timestamp,latitude,longitude,altitude,bearing,speed,brake_pressure,steering_angle,throttle,rpm\n");
+                writer.write("timestamp (utc milliseconds),latitude,longitude,altitude,bearing,speed (m/s),brake_pressure (bar),steering_angle (degree),throttle (Voltage),rpm,yaw (degree/sec),lat_G (g)\n");
 
                 final char separator = ',';
                 while (true) {
@@ -56,6 +56,10 @@ public class DataLogger implements Runnable {
                             .append(model.getCurrentThrottle().getValue())
                             .append(separator)
                             .append(model.getCurrentRPM().getValue())
+                            .append(separator)
+                            .append(model.getCurrentYaw().getValue())
+                            .append(separator)
+                            .append(model.getCurrentLatG().getValue())
                             .append('\n');
 
                     writer.write(row.toString());

@@ -28,10 +28,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.tomicooler.bmw.e46track.ds2.Message;
 import com.tomicooler.bmw.e46track.extractors.Brake;
+import com.tomicooler.bmw.e46track.extractors.LatG;
 import com.tomicooler.bmw.e46track.extractors.MessageHandler;
 import com.tomicooler.bmw.e46track.extractors.RPM;
 import com.tomicooler.bmw.e46track.extractors.SteeringAngle;
 import com.tomicooler.bmw.e46track.extractors.Throttle;
+import com.tomicooler.bmw.e46track.extractors.Yaw;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -168,7 +170,9 @@ public class TrackService extends Service {
             ));
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2102")), null)); // offsets probably, must be sent anyway
             requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2201f5")), messageHandlers(new SteeringAngle(model))));
-            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2106")), messageHandlers(new Brake(model))));
+            requesters.add(new Requester(new Message(Utils.hexStringToByteArray("b829f1"), Utils.hexStringToByteArray("2106")),
+                    new ArrayList<>(Arrays.asList(new Brake(model), new Yaw(model), new LatG(model)))
+            ));
 
             Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters, model);
             connectionFuture = executorService.submit(connection);

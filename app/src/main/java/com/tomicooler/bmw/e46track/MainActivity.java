@@ -121,6 +121,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            final TextView yaw = findViewById(R.id.yaw);
+            mService.getModel().getCurrentYaw().observeForever(new Observer<Double>() {
+                @Override
+                public void onChanged(Double value) {
+                    yaw.setText(String.format(Locale.getDefault(), "%f", value));
+                }
+            });
+
+            final TextView latG = findViewById(R.id.latG);
+            mService.getModel().getCurrentLatG().observeForever(new Observer<Double>() {
+                @Override
+                public void onChanged(Double value) {
+                    latG.setText(String.format(Locale.getDefault(), "%f", value));
+                }
+            });
+
             final TextView error = findViewById(R.id.error);
             mService.getModel().getCurrentError().observeForever(new Observer<String>() {
                 @Override
