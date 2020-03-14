@@ -11,7 +11,7 @@ public class Throttle implements MessageHandler {
     private final TrackModel model;
 
     public Throttle(TrackModel model) {
-        extractorIntegral = new Extractor(24, false, 1, false, new Converter(2.56, 0));
+        extractorIntegral = new Extractor(24, false, 1, true, new Converter(2.56, 0));
         extractorFractional = new Extractor(25, false, 1, false, new Converter(1.0/100.0, 0));
         converter = new Converter(0.295, 0.75);
         this.model = model;
