@@ -10,7 +10,7 @@ public class RPM implements MessageHandler {
     private final TrackModel model;
 
     public RPM(TrackModel model) {
-        extractorIntegral = new Extractor(1, false, 1, false, new Converter(2.56, 0));
+        extractorIntegral = new Extractor(1, false, 1, true, new Converter(2.56, 0));
         extractorFractional = new Extractor(2, false, 1, false, new Converter(1.0/100.0, 0));
         this.model = model;
     }
