@@ -1,5 +1,15 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>SteeringWheel.qml</file>
+        <file>SteeringWheelForm.ui.qml</file>
+        <file>Pedal.qml</file>
+        <file>PedalForm.ui.qml</file>
+        <file>LateralG.qml</file>
+        <file>LateralGForm.ui.qml</file>
+        <file>Yaw.qml</file>
+        <file>YawForm.ui.qml</file>
+        <file>Rpm.qml</file>
+        <file>RpmForm.ui.qml</file>
     </qresource>
 </RCC>
