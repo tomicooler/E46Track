@@ -1,10 +1,12 @@
 import QtQuick 2.12
+import QtQuick.Controls 2.12
 
 Rectangle {
     id: wheel
 
     property color backgroundColor: "black"
     property color indicatorColor: "red"
+    property alias label: label
 
     width: 80
     height: width
@@ -52,5 +54,13 @@ Rectangle {
 
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
+    }
+
+    Label {
+        id: label
+        anchors.centerIn: steeringWheel
+        color: "white"
+        font.bold: true
+        rotation: 0 - parent.rotation
     }
 }

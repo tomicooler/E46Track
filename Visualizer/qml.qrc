@@ -11,5 +11,7 @@
         <file>YawForm.ui.qml</file>
         <file>Rpm.qml</file>
         <file>RpmForm.ui.qml</file>
+        <file>Dashboard.qml</file>
+        <file>DashboardForm.ui.qml</file>
     </qresource>
 </RCC>
