@@ -1,11 +1,19 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "csvparser.h"
+#include "converter.h"
+#include "model.h"
+
 int main(int argc, char *argv[])
 {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
   QGuiApplication app(argc, argv);
+
+  qmlRegisterType<CSVParser>("com.tomicooler.e46track", 1, 0, "CSVParser");
+  qmlRegisterType<Converter>("com.tomicooler.e46track", 1, 0, "Converter");
+  qmlRegisterType<Model>("com.tomicooler.e46track", 1, 0, "Model");
 
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/main.qml"));

@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="Visualizer_en_US">
 <context>
+    <name>CSVParser</name>
+    <message>
+        <location filename="csvparser.cpp" line="35"/>
+        <source>Could not open file. &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="csvparser.cpp" line="51"/>
+        <source>Invalid row count &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="csvparser.cpp" line="75"/>
+        <source>Succes!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Dashboard</name>
     <message>
         <location filename="Dashboard.qml" line="5"/>
@@ -57,8 +75,18 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="main.qml" line="10"/>
-        <source>Hello World</source>
+        <location filename="main.qml" line="13"/>
+        <source>E46Track Visualizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="25"/>
+        <source>First decompress the csv: &apos;cat e46track_1584264543426_csv.gzip | gzip -d &amp;&gt; input.csv&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="30"/>
+        <source>Load</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

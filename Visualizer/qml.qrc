@@ -13,5 +13,6 @@
         <file>RpmForm.ui.qml</file>
         <file>Dashboard.qml</file>
         <file>DashboardForm.ui.qml</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

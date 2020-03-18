@@ -31,12 +31,24 @@ set(TS_FILES Visualizer_en_US.ts)
 if(ANDROID)
     add_library(Visualizer SHARED
       main.cpp
+      model.cpp
+      model.h
+      csvparser.cpp
+      csvparser.h
+      converter.cpp
+      converter.h
       qml.qrc
       ${TS_FILES}
     )
 else()
     add_executable(Visualizer
       main.cpp
+      model.cpp
+      model.h
+      csvparser.cpp
+      csvparser.h
+      converter.cpp
+      converter.h
       qml.qrc
       ${TS_FILES}
     )
