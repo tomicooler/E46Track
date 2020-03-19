@@ -20,6 +20,7 @@ ApplicationWindow {
             TextField {
                 id: filepath
                 Layout.fillWidth: true
+                Layout.margins: 10
                 hoverEnabled: true
                 text: "/home/tomi/Desktop/pannoniaring2020_03_15/e46track/e46track_1584272470382_csv.gzip.csv"
                 ToolTip.text: qsTr("First decompress the csv: 'cat e46track_1584264543426_csv.gzip | gzip -d &> input.csv'")
@@ -28,6 +29,7 @@ ApplicationWindow {
             }
             ToolButton {
                 text: qsTr("Load")
+                Layout.margins: 10
                 onClicked: {
                     csv.loadFile(filepath.text);
                 }
@@ -40,19 +42,21 @@ ApplicationWindow {
             anchors.fill: parent
             spacing: 20
             Label {
+                Layout.margins: 10
                 id: status
                 visible: text.length > 0
             }
         }
     }
 
-    GridLayout {
-        anchors.fill: parent
-        columns: 3
+    ColumnLayout {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
 
         Slider {
             id: slider
-            Layout.columnSpan: 3
+            Layout.margins: 20
             Layout.fillWidth: true
             from: 0
             to: csv.size - 1
@@ -64,27 +68,73 @@ ApplicationWindow {
             }
         }
 
-        Button {
-            text: "<"
-            onClicked: csv.prev()
+        RowLayout {
+            Layout.fillWidth: true
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            spacing: 20
+            Button {
+                text: qsTr("<")
+                onClicked: csv.prev()
+            }
+
+            Button {
+                text: checked ? qsTr("stop") : qsTr("play")
+                onClicked: csv.playPause()
+                checkable: true
+            }
+
+            Button {
+                text: qsTr(">")
+                onClicked: csv.next()
+            }
+
+            Item {
+                Layout.fillWidth: true
+            }
         }
 
-        Button {
-            text: "auto"
-            onClicked: csv.playPause()
-        }
+        RowLayout {
+            Layout.fillWidth: true
 
-        Button {
-            text: ">"
-            onClicked: csv.next()
-        }
+            Item {
+                Layout.fillWidth: true
+            }
 
-        Button {
-            text: "grab"
-            onClicked: {
-                content.grabToImage(function(result) {
-                    result.saveToFile("/tmp/something.png");
-                });
+            TextField {
+                selectByMouse: true
+                onEditingFinished: {
+                    root.width = Number(text);
+                }
+                Component.onCompleted: {
+                    text = root.width;
+                }
+            }
+
+            TextField {
+                selectByMouse: true
+                onEditingFinished: {
+                    root.height = Number(text);
+                }
+                Component.onCompleted: {
+                    text = root.height;
+                }
+            }
+
+            Button {
+                text: qsTr("Export")
+                onClicked: {
+                    content.grabToImage(function(result) {
+                        result.saveToFile("/tmp/something.png");
+                    });
+                }
+            }
+
+            Item {
+                Layout.fillWidth: true
             }
         }
     }
@@ -133,6 +183,9 @@ ApplicationWindow {
         }
         onStatus: {
             status.text = message;
+        }
+        onModelChanged: {
+            status.text = new Date(model.timestamp)
         }
     }
 
