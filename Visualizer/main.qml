@@ -55,17 +55,28 @@ ApplicationWindow {
             Layout.columnSpan: 3
             Layout.fillWidth: true
             from: 0
+            to: csv.size - 1
+            value: csv.index
+            stepSize: 1
+            hoverEnabled: true
+            onValueChanged: {
+                csv.index = value;
+            }
         }
 
-        ListView {
-            id: list
-            Layout.columnSpan: 3
-            Layout.fillWidth: true
-            model: csv.listModel
-            orientation: ListView.Horizontal
-            delegate: Label {
-                text: model.modelData.timestamp
-            }
+        Button {
+            text: "<"
+            onClicked: csv.prev()
+        }
+
+        Button {
+            text: "auto"
+            onClicked: csv.next()
+        }
+
+        Button {
+            text: ">"
+            onClicked: csv.next()
         }
 
         Button {
@@ -75,11 +86,6 @@ ApplicationWindow {
                     result.saveToFile("/tmp/something.png");
                 });
             }
-        }
-
-        Button {
-            text: "next"
-            onClicked: csv.next()
         }
     }
 

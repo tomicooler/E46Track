@@ -4,17 +4,17 @@
 <context>
     <name>CSVParser</name>
     <message>
-        <location filename="csvparser.cpp" line="35"/>
+        <location filename="csvparser.cpp" line="32"/>
         <source>Could not open file. &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="csvparser.cpp" line="51"/>
+        <location filename="csvparser.cpp" line="48"/>
         <source>Invalid row count &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="csvparser.cpp" line="75"/>
+        <location filename="csvparser.cpp" line="74"/>
         <source>Succes!</source>
         <translation type="unfinished"></translation>
     </message>

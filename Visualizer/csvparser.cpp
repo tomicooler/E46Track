@@ -22,12 +22,9 @@ CSVParser::CSVParser(QObject *parent) : QObject(parent)
    */
 }
 
-void
-CSVParser::loadFile(const QString &path)
+void CSVParser::loadFile(const QString &path)
 {
-  qDeleteAll(m_list);
-  m_list.clear();
-  emit listModelChanged(m_list);
+  m_sequence.clear();
 
   QFile file(path);
   if (!file.open(QFile::ReadOnly)) {
@@ -66,33 +63,35 @@ CSVParser::loadFile(const QString &path)
     data.yaw = fields.at(10).toDouble();
     data.latg = fields.at(11).toDouble();
 
-    Model *model = new Model();
-    model->setData(data);
-    m_list << model;
+    m_sequence << data;
   }
 
-  emit listModelChanged(m_list);
+  m_size = m_sequence.size();
+  emit sizeChanged(m_size);
+  m_index = 0;
+  emit indexChanged(m_index);
+
   emit status(tr("Succes!"));
 }
 
-bool
-CSVParser::next()
+void CSVParser::next()
 {
-  if (index >= m_list.size())
-    return false;
+  if (m_sequence.isEmpty())
+    return;
 
-  m_model->setData(m_list.at(index)->data());
-  emit modelChanged(m_model);
+  setIndex(m_index + 1);
 
-  ++index;
+  emit indexChanged(m_index);
+}
 
-  if (index < (m_list.size() - 1)) {
-    qint64 diff = m_list.at(index)->data().timestamp - m_model->timestamp();
-    // todo interpolate  NumberAnimation?
-    QTimer::singleShot(diff, this, SLOT(next()));
-  }
+void CSVParser::prev()
+{
+  if (m_sequence.isEmpty())
+    return;
 
-  return true;
+  setIndex(m_index - 1);
+
+  emit indexChanged(m_index);
 }
 
 Model *CSVParser::model() const
@@ -100,7 +99,30 @@ Model *CSVParser::model() const
   return m_model;
 }
 
-QVariant CSVParser::listModel() const
+int CSVParser::index() const
 {
-  return QVariant::fromValue(m_list);
+  return m_index;
+}
+
+int CSVParser::size() const
+{
+  return m_size;
+}
+
+void CSVParser::setIndex(int index)
+{
+  if (index > size() - 1)
+    index = size() - 1;
+
+  if (index < 0)
+    index = 0;
+
+  if (m_index == index)
+    return;
+
+  m_model->setData(m_sequence.at(m_index));
+  emit modelChanged(m_model);
+
+  m_index = index;
+  emit indexChanged(m_index);
 }

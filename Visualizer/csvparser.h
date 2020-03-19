@@ -2,9 +2,8 @@
 #define CSVPARSER_H
 
 #include <QObject>
-#include <QList>
+#include <QVector>
 #include <QFile>
-#include <QVariant>
 
 #include "model.h"
 
@@ -13,16 +12,22 @@ class CSVParser : public QObject
   Q_OBJECT
 
   Q_PROPERTY(Model *model READ model NOTIFY modelChanged);
-  Q_PROPERTY(QVariant listModel READ listModel NOTIFY listModelChanged);
+  Q_PROPERTY(int index READ index WRITE setIndex NOTIFY indexChanged);
+  Q_PROPERTY(int size READ size NOTIFY sizeChanged);
 
 public:
   explicit CSVParser(QObject *parent = nullptr);
 
   Q_INVOKABLE void loadFile(const QString &path);
-  Q_INVOKABLE bool next();
+  Q_INVOKABLE void next();
+  Q_INVOKABLE void prev();
 
   Model * model() const;
-  QVariant listModel() const;
+  int index() const;
+  int size() const;
+
+public slots:
+  void setIndex(int index);
 
 signals:
   void error(const QString &message);
@@ -30,10 +35,15 @@ signals:
   void listModelChanged(QList< Model* > listModel);
   void modelChanged(Model *model);
 
+  void indexChanged(int index);
+
+  void sizeChanged(int size);
+
 private:
   Model *m_model;
-  QList< Model* > m_list;
-  int index{};
+  QVector< Model::Data > m_sequence;
+  int m_index{};
+  int m_size{};
 };
 
 #endif // CSVPARSER_H
