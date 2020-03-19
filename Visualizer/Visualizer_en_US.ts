@@ -80,37 +80,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="26"/>
+        <location filename="main.qml" line="28"/>
         <source>First decompress the csv: &apos;cat e46track_1584264543426_csv.gzip | gzip -d &amp;&gt; input.csv&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="31"/>
+        <location filename="main.qml" line="33"/>
         <source>Load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="80"/>
+        <location filename="main.qml" line="82"/>
         <source>&lt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="85"/>
+        <location filename="main.qml" line="87"/>
         <source>stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="85"/>
+        <location filename="main.qml" line="87"/>
         <source>play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="91"/>
+        <location filename="main.qml" line="93"/>
         <source>&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="126"/>
+        <location filename="main.qml" line="131"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>

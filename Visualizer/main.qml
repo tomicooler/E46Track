@@ -12,6 +12,8 @@ ApplicationWindow {
     height: 720
     title: qsTr("E46Track Visualizer")
 
+    property int exportFrameCount: 0
+
     header: ToolBar {
         RowLayout {
             anchors.fill: parent
@@ -125,11 +127,12 @@ ApplicationWindow {
             }
 
             Button {
+                id: exportButton
                 text: qsTr("Export")
+                checkable: true
                 onClicked: {
-                    content.grabToImage(function(result) {
-                        result.saveToFile("/tmp/something.png");
-                    });
+                    exportFrameCount = 0;
+                    csv.index = 0;
                 }
             }
 
@@ -185,7 +188,14 @@ ApplicationWindow {
             status.text = message;
         }
         onModelChanged: {
-            status.text = new Date(model.timestamp)
+            status.text = new Date(model.timestamp);
+            if (exportButton.checked) {
+                content.grabToImage(function(result) {
+                    result.saveToFile("/tmp/frame_%1.png".arg(String(exportFrameCount).padStart(10, '0')));
+                    exportFrameCount++;
+                    csv.next();
+                });
+            }
         }
     }
 
