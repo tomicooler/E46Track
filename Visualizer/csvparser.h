@@ -21,6 +21,7 @@ public:
   Q_INVOKABLE void loadFile(const QString &path);
   Q_INVOKABLE void next();
   Q_INVOKABLE void prev();
+  Q_INVOKABLE void playPause();
 
   Model * model() const;
   int index() const;
@@ -44,6 +45,7 @@ private:
   QVector< Model::Data > m_sequence;
   int m_index{};
   int m_size{};
+  bool m_playing{false};
 };
 
 #endif // CSVPARSER_H

@@ -71,7 +71,7 @@ ApplicationWindow {
 
         Button {
             text: "auto"
-            onClicked: csv.next()
+            onClicked: csv.playPause()
         }
 
         Button {

@@ -36,11 +36,11 @@ void CSVParser::loadFile(const QString &path)
   QTextStream stream(&file);
   stream.setCodec("utf-8");
 
-  bool first = true;
+  bool skip_header = true;
   while (!stream.atEnd()) {
     QStringList fields = stream.readLine().split(',');
-    if (first) {
-      first = false;
+    if (skip_header) {
+      skip_header = false;
       continue;
     }
 
@@ -63,13 +63,51 @@ void CSVParser::loadFile(const QString &path)
     data.yaw = fields.at(10).toDouble();
     data.latg = fields.at(11).toDouble();
 
+    if (!m_sequence.isEmpty()) { // interpolate to 60 fps
+      Model::Data prev_data = m_sequence.last();
+      qint64 diff_timestamp = data.timestamp - prev_data.timestamp;
+      static const qint64 frame_rate = 1000 / 60;
+      int additional_frame_count = diff_timestamp / frame_rate;
+      double divider = additional_frame_count;
+
+      if (additional_frame_count > 0) {
+        diff_timestamp = static_cast<double>(diff_timestamp) / divider;
+        double diff_latitude = (data.latitude - prev_data.latitude) / divider;
+        double diff_longitude = (data.longitude - prev_data.longitude) / divider;
+        double diff_altitude = (data.altitude - prev_data.altitude) / divider;
+        double diff_bearing = (data.bearing - prev_data.bearing) / divider;
+        double diff_speed = (data.speed - prev_data.speed) / divider;
+        double diff_brake = (data.brake - prev_data.brake) / divider;
+        double diff_steeringAngle = (data.steeringAngle - prev_data.steeringAngle) / divider;
+        double diff_throttle = (data.throttle - prev_data.throttle) / divider;
+        double diff_rpm = (data.rpm - prev_data.rpm) / divider;
+        double diff_yaw = (data.yaw - prev_data.yaw) / divider;
+        double diff_latg = (data.latg - prev_data.latg) / divider;
+
+        for (int i = 0; i < additional_frame_count - 1; ++i) {
+          prev_data.timestamp += diff_timestamp;
+          prev_data.latitude += diff_latitude;
+          prev_data.longitude += diff_longitude;
+          prev_data.altitude += diff_altitude;
+          prev_data.bearing += diff_bearing;
+          prev_data.speed += diff_speed;
+          prev_data.brake += diff_brake;
+          prev_data.steeringAngle += diff_steeringAngle;
+          prev_data.throttle += diff_throttle;
+          prev_data.rpm += diff_rpm;
+          prev_data.yaw += diff_yaw;
+          prev_data.latg += diff_latg;
+          m_sequence << prev_data;
+        }
+      }
+    }
+
     m_sequence << data;
   }
 
   m_size = m_sequence.size();
   emit sizeChanged(m_size);
-  m_index = 0;
-  emit indexChanged(m_index);
+  setIndex(0);
 
   emit status(tr("Succes!"));
 }
@@ -80,6 +118,11 @@ void CSVParser::next()
     return;
 
   setIndex(m_index + 1);
+  if (m_playing) {
+    if (m_index < m_sequence.size() - 1) {
+      QTimer::singleShot(m_sequence.at(m_index + 1).timestamp - m_model->timestamp(), this, SLOT(next()));
+    }
+  }
 
   emit indexChanged(m_index);
 }
@@ -92,6 +135,14 @@ void CSVParser::prev()
   setIndex(m_index - 1);
 
   emit indexChanged(m_index);
+}
+
+void CSVParser::playPause()
+{
+  m_playing = !m_playing;
+  if (m_playing) {
+    next();
+  }
 }
 
 Model *CSVParser::model() const
@@ -117,12 +168,13 @@ void CSVParser::setIndex(int index)
   if (index < 0)
     index = 0;
 
-  if (m_index == index)
+  if (m_index == index && index != 0)
     return;
 
-  m_model->setData(m_sequence.at(m_index));
+  m_index = index;
   emit modelChanged(m_model);
 
-  m_index = index;
+  m_model->setData(m_sequence.at(m_index));
+
   emit indexChanged(m_index);
 }
