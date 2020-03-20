@@ -114,5 +114,11 @@
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="main.qml" line="135"/>
+        <source>ffmpeg -framerate 60 -i /tmp/frame_%10d.png -c:v libx264 -pix_fmt yuv420p -crf 23 output.mp4</source>
+        <oldsource>fmpeg -framerate 60 -i /tmp/frame_%10d.png -c:v libx264 -pix_fmt yuv420p -crf 23 output.mp4</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
