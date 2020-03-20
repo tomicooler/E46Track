@@ -3,11 +3,13 @@ import QtQml 2.12
 
 LateralGForm {
     property double g: 0
+    property color smallIndicatorColor: indicatorColor
+    property color mediumIndicatorColor: indicatorColor
+    property color highIndicatorColor: indicatorColor
 
     label.text: qsTr("%1 g").arg(Number(g).toLocaleString(Qt.locale(), 'f', 2))
 
     onGChanged: {
-        //var g = Math.min(Math.abs(acceleration / 9.81), 1.5) / 1.5 * (acceleration > 0 ? 1 : -1);
         if (g < 0) {
             minusMultiplier = 1.0 + g;
             plusMultiplier = 0.0;
@@ -21,11 +23,11 @@ LateralGForm {
 
         var absG = Math.abs(g);
         if (absG <= 0.4) {
-            indicatorColor = "green";
+            indicatorColor = smallIndicatorColor;
         } else if (absG <= 0.7) {
-            indicatorColor = "orange";
+            indicatorColor = mediumIndicatorColor;
         } else {
-            indicatorColor = "red";
+            indicatorColor = highIndicatorColor;
         }
     }
 }

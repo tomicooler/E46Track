@@ -22,7 +22,7 @@
 <context>
     <name>Dashboard</name>
     <message>
-        <location filename="Dashboard.qml" line="5"/>
+        <location filename="Dashboard.qml" line="6"/>
         <source>%1°</source>
         <translation type="unfinished"></translation>
     </message>
@@ -43,7 +43,7 @@
 <context>
     <name>LateralG</name>
     <message>
-        <location filename="LateralG.qml" line="7"/>
+        <location filename="LateralG.qml" line="10"/>
         <source>%1 g</source>
         <translation type="unfinished"></translation>
     </message>
@@ -110,8 +110,24 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="131"/>
+        <location filename="main.qml" line="111"/>
+        <source>1920</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="117"/>
+        <source>1020</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="123"/>
         <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="130"/>
+        <source>ffmpeg -framerate 60 -i /tmp/frame_%10d.png -c:v libx264 -pix_fmt yuv420p -crf 23 output.mp4</source>
+        <oldsource>fmpeg -framerate 60 -i /tmp/frame_%10d.png -c:v libx264 -pix_fmt yuv420p -crf 23 output.mp4</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
