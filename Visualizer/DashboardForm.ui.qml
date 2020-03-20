@@ -92,7 +92,6 @@ Rectangle {
         anchors.horizontalCenterOffset: steeringWheel.width * 3 / 4
         height: brake.height
         width: brake.width
-        indicatorColor: "green"
     }
 
     Rpm {

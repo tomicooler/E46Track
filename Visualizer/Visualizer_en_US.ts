@@ -22,7 +22,7 @@
 <context>
     <name>Dashboard</name>
     <message>
-        <location filename="Dashboard.qml" line="5"/>
+        <location filename="Dashboard.qml" line="6"/>
         <source>%1°</source>
         <translation type="unfinished"></translation>
     </message>
@@ -43,7 +43,7 @@
 <context>
     <name>LateralG</name>
     <message>
-        <location filename="LateralG.qml" line="7"/>
+        <location filename="LateralG.qml" line="10"/>
         <source>%1 g</source>
         <translation type="unfinished"></translation>
     </message>
