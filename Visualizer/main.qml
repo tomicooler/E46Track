@@ -107,23 +107,15 @@ ApplicationWindow {
             }
 
             TextField {
+                id: videoWidth
+                text: qsTr("1920")
                 selectByMouse: true
-                onEditingFinished: {
-                    root.width = Number(text);
-                }
-                Component.onCompleted: {
-                    text = root.width;
-                }
             }
 
             TextField {
+                id: videoHeight
+                text: qsTr("1020")
                 selectByMouse: true
-                onEditingFinished: {
-                    root.height = Number(text);
-                }
-                Component.onCompleted: {
-                    text = root.height;
-                }
             }
 
             Button {
@@ -133,6 +125,7 @@ ApplicationWindow {
                 onClicked: {
                     exportFrameCount = 0;
                     csv.index = 0;
+                    csv.next();
                 }
                 ToolTip.text: qsTr("ffmpeg -framerate 60 -i /tmp/frame_%10d.png -c:v libx264 -pix_fmt yuv420p -crf 23 output.mp4")
                 ToolTip.visible: hovered
@@ -145,41 +138,35 @@ ApplicationWindow {
         }
     }
 
+    Dashboard {
+        id: dashboard
+        width: videoWidth.text * 0.2
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
 
-    Item {
-        id: content
-        anchors.fill: parent
-
-        Dashboard {
-            id: dashboard
-            width: parent.width * 0.2
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-
-            Converter {
-                id: converterBrake
-                converted: csv.model.brake
-                Component.onCompleted: {
-                    set(-0.07, 105.0, 0.0, 1.0)
-                }
+        Converter {
+            id: converterBrake
+            converted: csv.model.brake
+            Component.onCompleted: {
+                set(-0.07, 105.0, 0.0, 1.0)
             }
-
-            Converter {
-                id: converterThrottle
-                converted: csv.model.throttle
-                Component.onCompleted: {
-                    set(0.75, 3.96, 0.0, 1.0)
-                }
-            }
-
-            yaw.yaw: -1 * csv.model.yaw
-            steeringWheel.angle: -1 * csv.model.steeringAngle
-            brake.position: converterBrake.converted
-            throttle.position: converterThrottle.converted
-            kmph: csv.model.speed * 3.6
-            rpm.rpm: csv.model.rpm
-            latg.g: csv.model.latg
         }
+
+        Converter {
+            id: converterThrottle
+            converted: csv.model.throttle
+            Component.onCompleted: {
+                set(0.75, 3.96, 0.0, 1.0)
+            }
+        }
+
+        yaw.yaw: -1 * csv.model.yaw
+        steeringWheel.angle: -1 * csv.model.steeringAngle
+        brake.position: converterBrake.converted
+        throttle.position: converterThrottle.converted
+        kmph: csv.model.speed * 3.6
+        rpm.rpm: csv.model.rpm
+        latg.g: csv.model.latg
     }
 
     CSVParser {
@@ -193,7 +180,7 @@ ApplicationWindow {
         onModelChanged: {
             status.text = new Date(model.timestamp);
             if (exportButton.checked) {
-                content.grabToImage(function(result) {
+                dashboard.grabToImage(function(result) {
                     result.saveToFile("/tmp/frame_%1.png".arg(String(exportFrameCount).padStart(10, '0')));
                     exportFrameCount++;
                     csv.next();
