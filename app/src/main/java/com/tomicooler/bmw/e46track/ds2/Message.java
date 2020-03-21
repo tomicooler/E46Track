@@ -1,7 +1,5 @@
 package com.tomicooler.bmw.e46track.ds2;
 
-import com.tomicooler.bmw.e46track.Utils;
-
 public class Message {
     private final byte[] ecu;
     private final byte length;
@@ -13,17 +11,13 @@ public class Message {
         this.data = data;
         this.length = ecu.length == 1 ? (byte) (ecu.length + 1 + data.length + 1) : (byte) data.length;
         this.checksum = 0;
-        for (Byte b : ecu) {
+        for (byte b : ecu) {
             this.checksum ^= b;
         }
         this.checksum ^= length;
-        for (Byte b : data) {
+        for (byte b : data) {
             this.checksum ^= b;
         }
-    }
-
-    public byte[] getEcu() {
-        return ecu;
     }
 
     public byte[] getData() {
