@@ -17,6 +17,6 @@ public class Brake implements MessageHandler {
 
     @Override
     public void process(Message message) {
-        model.getCurrentBrake().postValue(extractorIntegral.extract(message) + extractorFractional.extract(message));
+        model.setBrake(extractorIntegral.extract(message) + extractorFractional.extract(message));
     }
 }

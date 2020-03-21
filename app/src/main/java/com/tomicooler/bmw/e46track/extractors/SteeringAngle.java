@@ -15,6 +15,6 @@ public class SteeringAngle implements MessageHandler {
 
     @Override
     public void process(Message message) {
-        model.getCurrentSteeringAngle().postValue(extractor.extract(message));
+        model.setSteeringAngle(extractor.extract(message));
     }
 }

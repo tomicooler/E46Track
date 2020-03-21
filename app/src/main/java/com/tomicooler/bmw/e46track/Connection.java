@@ -7,7 +7,6 @@ import com.tomicooler.bmw.e46track.ds2.Parser;
 import com.tomicooler.bmw.e46track.ds2.exceptions.InvalidChecksum;
 import com.tomicooler.bmw.e46track.ds2.exceptions.NotEnoughData;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,18 +21,22 @@ public class Connection implements Runnable {
     private final InetAddress address;
     private final int port;
     private final List<Requester> requesters;
+    private final TrackViewModel viewModel;
     private final TrackModel model;
+    private final String path;
 
-    Connection(final InetAddress address, final int port, final List<Requester> requesters, final TrackModel model) {
+    Connection(final InetAddress address, final int port, final List<Requester> requesters, final TrackViewModel viewModel, final TrackModel model, final String path) {
         this.address = address;
         this.port = port;
         this.requesters = requesters;
+        this.viewModel = viewModel;
         this.model = model;
+        this.path = path;
     }
 
     @Override
     public void run() {
-        try {
+        try (DataLogger logger = new DataLogger(model, path)) {
             while (true) {
                 System.out.println(String.format(Locale.getDefault(), "Trying to connect %s:%d", address, port));
 
@@ -67,6 +70,8 @@ public class Connection implements Runnable {
 
                             Thread.sleep(20);
                         }
+                        logger.log();
+                        viewModel.getCurrentModel().postValue(model);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -82,6 +87,10 @@ public class Connection implements Runnable {
                 Thread.sleep(500);
             }
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

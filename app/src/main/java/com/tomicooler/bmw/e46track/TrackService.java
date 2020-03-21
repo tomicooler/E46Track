@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Binder;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -61,10 +60,10 @@ public class TrackService extends Service {
     private boolean mChangingConfiguration = false;
     private final IBinder mBinder = new LocalBinder();
     private Handler mServiceHandler;
+    private TrackViewModel viewModel;
     private TrackModel model;
 
     private Future connectionFuture;
-    private Future dataLoggerFuture;
 
     private boolean mIsTracking;
 
@@ -74,6 +73,7 @@ public class TrackService extends Service {
 
     @Override
     public void onCreate() {
+        viewModel = new TrackViewModel();
         model = new TrackModel();
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -153,12 +153,10 @@ public class TrackService extends Service {
         Log.i(TAG, "Requesting location updates");
         startService(new Intent(getApplicationContext(), TrackService.class));
         mIsTracking = true;
-        model.getCurrentError().postValue("");
+        viewModel.getCurrentError().postValue("");
         try {
-            model.getCurrentStartTime().setValue(System.currentTimeMillis());
-            ExecutorService executorDataLogger = Executors.newSingleThreadExecutor();
-            DataLogger dataLogger = new DataLogger(model, getApplicationContext().getExternalFilesDir(null).getAbsolutePath());
-            dataLoggerFuture = executorDataLogger.submit(dataLogger);
+            model.setStartTime(System.currentTimeMillis());
+            viewModel.getCurrentModel().setValue(model);
 
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
             ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -174,7 +172,15 @@ public class TrackService extends Service {
                     new ArrayList<>(Arrays.asList(new Brake(model), new Yaw(model), new LatG(model)))
             ));
 
-            Connection connection = new Connection(InetAddress.getByName(Utils.address(getApplicationContext())), Utils.port(getApplicationContext()), requesters, model);
+            final String path = getApplicationContext().getExternalFilesDir(null).getAbsolutePath();
+            Connection connection = new Connection(
+                    InetAddress.getByName(Utils.address(getApplicationContext())),
+                    Utils.port(getApplicationContext()),
+                    requesters,
+                    viewModel,
+                    model,
+                    path
+            );
             connectionFuture = executorService.submit(connection);
         } catch (SecurityException unlikely) {
             mIsTracking = false;
@@ -193,9 +199,6 @@ public class TrackService extends Service {
             if (connectionFuture != null) {
                 connectionFuture.cancel(true);
             }
-            if (dataLoggerFuture != null) {
-                dataLoggerFuture.cancel(true);
-            }
             mIsTracking = false;
             stopSelf();
         } catch (SecurityException unlikely) {
@@ -204,8 +207,8 @@ public class TrackService extends Service {
         }
     }
 
-    public TrackModel getModel() {
-        return model;
+    public TrackViewModel getViewModel() {
+        return viewModel;
     }
 
     private Notification getNotification() {
@@ -228,7 +231,7 @@ public class TrackService extends Service {
                         @Override
                         public void onComplete(@NonNull Task<Location> task) {
                             if (task.isSuccessful() && task.getResult() != null) {
-                                model.getCurrentLocation().setValue(task.getResult());
+                                model.setLocation(task.getResult());
                             } else {
                                 Log.w(TAG, "Failed to get location.");
                             }
@@ -240,7 +243,7 @@ public class TrackService extends Service {
     }
 
     private void onNewLocation(Location location) {
-        model.getCurrentLocation().setValue(location);
+        model.setLocation(location);
     }
 
     private void createLocationRequest() {

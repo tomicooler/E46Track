@@ -2,90 +2,87 @@ package com.tomicooler.bmw.e46track;
 
 import android.location.Location;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+public class TrackModel {
+    private long startTime;
+    private long elapsedTime;
 
-public class TrackModel extends ViewModel {
+    private Location location;
+    private double brake;
+    private double throttle;
+    private double steeringAngle;
+    private double rpm;
+    private double latG;
+    private double yaw;
 
-    private MutableLiveData<String> error;
-    private MutableLiveData<Long> startTime;
-    private MutableLiveData<Long> elapsedTime;
-
-    private MutableLiveData<Location> location;
-    private MutableLiveData<Double> brake;
-    private MutableLiveData<Double> throttle;
-    private MutableLiveData<Double> steeringAngle;
-    private MutableLiveData<Double> rpm;
-    private MutableLiveData<Double> latG;
-    private MutableLiveData<Double> yaw;
-
-    MutableLiveData<String> getCurrentError() {
-        if (error == null) {
-            error = new MutableLiveData<>();
-        }
-        return error;
-    }
-
-    MutableLiveData<Long> getCurrentStartTime() {
-        if (startTime == null) {
-            startTime = new MutableLiveData<>();
-        }
+    public long getStartTime() {
         return startTime;
     }
 
-    MutableLiveData<Long> getCurrentElapsedTime() {
-        if (elapsedTime == null) {
-            elapsedTime = new MutableLiveData<>();
-        }
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getElapsedTime() {
         return elapsedTime;
     }
 
-    MutableLiveData<Location> getCurrentLocation() {
-        if (location == null) {
-            location = new MutableLiveData<>();
-        }
+    public void setElapsedTime(long elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
+
+    public synchronized Location getLocation() {
         return location;
     }
 
-    public MutableLiveData<Double> getCurrentBrake() {
-        if (brake == null) {
-            brake = new MutableLiveData<>();
-        }
+    public synchronized void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public double getBrake() {
         return brake;
     }
 
-    public MutableLiveData<Double> getCurrentThrottle() {
-        if (throttle == null) {
-            throttle = new MutableLiveData<>();
-        }
+    public void setBrake(double brake) {
+        this.brake = brake;
+    }
+
+    public double getThrottle() {
         return throttle;
     }
 
-    public MutableLiveData<Double> getCurrentSteeringAngle() {
-        if (steeringAngle == null) {
-            steeringAngle = new MutableLiveData<>();
-        }
+    public void setThrottle(double throttle) {
+        this.throttle = throttle;
+    }
+
+    public double getSteeringAngle() {
         return steeringAngle;
     }
 
-    public MutableLiveData<Double> getCurrentRPM() {
-        if (rpm == null) {
-            rpm = new MutableLiveData<>();
-        }
+    public void setSteeringAngle(double steeringAngle) {
+        this.steeringAngle = steeringAngle;
+    }
+
+    public double getRpm() {
         return rpm;
     }
 
-    public MutableLiveData<Double> getCurrentLatG() {
-        if (latG == null) {
-            latG = new MutableLiveData<>();
-        }
+    public void setRpm(double rpm) {
+        this.rpm = rpm;
+    }
+
+    public double getLatG() {
         return latG;
     }
 
-    public MutableLiveData<Double> getCurrentYaw() {
-        if (yaw == null) {
-            yaw = new MutableLiveData<>();
-        }
+    public void setLatG(double latG) {
+        this.latG = latG;
+    }
+
+    public double getYaw() {
         return yaw;
+    }
+
+    public void setYaw(double yaw) {
+        this.yaw = yaw;
     }
 }
