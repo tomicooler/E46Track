@@ -3,7 +3,7 @@ import QtQuick.Controls.Material 2.12
 
 DashboardForm {
     property double kmph: 0
-    kmphLabel.text: qsTr("%1°").arg(Number(kmph).toLocaleString(Qt.locale(), 'f', 0))
+    kmphLabel.text: kmph | 0
 
     color: Material.color(Material.Grey, Material.Shade500)
 

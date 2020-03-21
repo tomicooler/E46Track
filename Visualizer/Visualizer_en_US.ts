@@ -20,14 +20,6 @@
     </message>
 </context>
 <context>
-    <name>Dashboard</name>
-    <message>
-        <location filename="Dashboard.qml" line="6"/>
-        <source>%1°</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DashboardForm.ui</name>
     <message>
         <location filename="DashboardForm.ui.qml" line="72"/>
