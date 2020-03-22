@@ -4,8 +4,7 @@
 #include <QObject>
 #include <QSerialPort>
 
-class SerialInterface : public QObject
-{
+class SerialInterface : public QObject {
   Q_OBJECT
 
   Q_PROPERTY(QString port READ port WRITE setPort NOTIFY portChanged)

@@ -6,14 +6,11 @@
 
 #include <optional>
 
-struct DS2Message
-{
+struct DS2Message {
   explicit DS2Message(const QByteArray &ecu, const QByteArray &data)
-    : ecu(ecu)
-    , length(ecu.size() == 1 ? ecu.size() + 1 + data.size() + 1 : data.size())
-    , data(data)
-    , checksum(length)
-  {
+      : ecu(ecu), length(ecu.size() == 1 ? ecu.size() + 1 + data.size() + 1
+                                         : data.size()),
+        data(data), checksum(length) {
     for (const auto b : ecu)
       checksum ^= b;
     for (const auto b : data)
@@ -21,40 +18,39 @@ struct DS2Message
   }
 
   QByteArray ecu;
-  quint8     length{0};
+  quint8 length{0};
   QByteArray data;
-  char       checksum{'\0'};
+  char checksum{'\0'};
 };
 
-class DS2Parser
-{
+class DS2Parser {
 public:
-  std::optional< DS2Message > parse(QByteArray &data)
-  {
+  std::optional<DS2Message> parse(QByteArray &data) {
     // [ECU ADDRESS] [LENGTH] [DATA1] [DATAN] [CHECKSUM]
     if (data.size() < 3)
       return std::nullopt;
 
     quint8 ecuSize = [&]() -> quint8 {
-        for (const auto &ecu : knownLongEcus) {
+      for (const auto &ecu : knownLongEcus) {
         if (data.startsWith(ecu))
-        return ecu.size();
-  }
-        return 1;
-  }();
+          return ecu.size();
+      }
+      return 1;
+    }();
 
-    struct Length
-    {
+    struct Length {
       quint8 packetSize{};
       quint8 dataSize{};
     };
 
     const Length length = [&]() -> Length {
-        quint8 atEcuSize = data.at(ecuSize);
-        return ecuSize == quint8{1} ?
-          Length{atEcuSize, static_cast<quint8>(atEcuSize - ecuSize - 1)} :
-          Length{static_cast<quint8>(ecuSize + atEcuSize + 2), atEcuSize};
-  }();
+      quint8 atEcuSize = data.at(ecuSize);
+      return ecuSize == quint8{1}
+                 ? Length{atEcuSize,
+                          static_cast<quint8>(atEcuSize - ecuSize - 1)}
+                 : Length{static_cast<quint8>(ecuSize + atEcuSize + 2),
+                          atEcuSize};
+    }();
 
     if (data.size() < length.packetSize)
       return std::nullopt;
@@ -66,14 +62,16 @@ public:
     for (int i = 0; i < msg.size() - 1; ++i)
       checksum ^= msg.at(i);
 
-    if (checksum != msg.at(msg.size() -1))
+    if (checksum != msg.at(msg.size() - 1))
       return std::nullopt;
 
-    return DS2Message{msg.mid(0, ecuSize), msg.mid(ecuSize + 1, length.dataSize)};
+    return DS2Message{msg.mid(0, ecuSize),
+                      msg.mid(ecuSize + 1, length.dataSize)};
   }
 
 private:
-  QList< QByteArray > knownLongEcus{QByteArray::fromHex("b829f1"), QByteArray::fromHex("b8f129")};
+  QList<QByteArray> knownLongEcus{QByteArray::fromHex("b829f1"),
+                                  QByteArray::fromHex("b8f129")};
 };
 
 #endif // DS2MESSAGE_H
