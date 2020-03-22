@@ -19,6 +19,6 @@ public class RPM implements MessageHandler {
     public void process(Message message) {
         final double integral = extractorIntegral.extract(message);
         final double fractional = extractorFractional.extract(message);
-        model.getCurrentRPM().postValue((integral + fractional) * 100.0);
+        model.setRpm((integral + fractional) * 100.0);
     }
 }

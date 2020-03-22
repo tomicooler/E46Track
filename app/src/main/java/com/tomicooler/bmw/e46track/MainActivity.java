@@ -19,7 +19,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.location.Location;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -60,85 +59,44 @@ public class MainActivity extends AppCompatActivity {
             final TextView altitude = findViewById(R.id.altitude);
             final TextView speed = findViewById(R.id.speed);
             final TextView bearing = findViewById(R.id.bearing);
-            mService.getModel().getCurrentLocation().observeForever(new Observer<Location>() {
-                @Override
-                public void onChanged(Location location) {
-                    latitude.setText(String.format(Locale.getDefault(), "%f", location.getLatitude()));
-                    longitude.setText(String.format(Locale.getDefault(), "%f", location.getLongitude()));
-                    altitude.setText(String.format(Locale.getDefault(), "%f", location.getAltitude()));
-                    speed.setText(String.format(Locale.getDefault(), "%f", location.getSpeed() * 3.6));
-                    bearing.setText(String.format(Locale.getDefault(), "%f", location.getBearing()));
-                }
-            });
+
 
             final TextView brake = findViewById(R.id.brake);
-            mService.getModel().getCurrentBrake().observeForever(new Observer<Double>() {
-                @Override
-                public void onChanged(Double value) {
-                    brake.setText(String.format(Locale.getDefault(), "%f", value));
-                }
-            });
-
             final TextView throttle = findViewById(R.id.throttle);
-            mService.getModel().getCurrentThrottle().observeForever(new Observer<Double>() {
-                @Override
-                public void onChanged(Double value) {
-                    throttle.setText(String.format(Locale.getDefault(), "%f", value));
-                }
-            });
-
-            final TextView steeringAgle = findViewById(R.id.steeringAngle);
-            mService.getModel().getCurrentSteeringAngle().observeForever(new Observer<Double>() {
-                @Override
-                public void onChanged(Double value) {
-                    steeringAgle.setText(String.format(Locale.getDefault(), "%f", value));
-                }
-            });
-
+            final TextView steeringAngle = findViewById(R.id.steeringAngle);
             final TextView rpm = findViewById(R.id.rpm);
-            mService.getModel().getCurrentRPM().observeForever(new Observer<Double>() {
-                @Override
-                public void onChanged(Double value) {
-                    rpm.setText(String.format(Locale.getDefault(), "%f", value));
-                }
-            });
-
-            final DateFormat df = DateFormat.getTimeInstance();
-            final TextView startTime = findViewById(R.id.startTime);
-            mService.getModel().getCurrentStartTime().observeForever(new Observer<Long>() {
-                @Override
-                public void onChanged(Long value) {
-                    startTime.setText(String.format(Locale.getDefault(), "%s", df.format(new Date(value))));
-                }
-            });
-
-            final DateFormat minutesseconds = new SimpleDateFormat("mm:ss", Locale.getDefault());
-            final TextView elapsedTime = findViewById(R.id.elapsedTime);
-            mService.getModel().getCurrentElapsedTime().observeForever(new Observer<Long>() {
-                @Override
-                public void onChanged(Long value) {
-                    elapsedTime.setText(String.format(Locale.getDefault(), "%s", minutesseconds.format(new Date(value))));
-                }
-            });
-
             final TextView yaw = findViewById(R.id.yaw);
-            mService.getModel().getCurrentYaw().observeForever(new Observer<Double>() {
-                @Override
-                public void onChanged(Double value) {
-                    yaw.setText(String.format(Locale.getDefault(), "%f", value));
-                }
-            });
-
             final TextView latG = findViewById(R.id.latG);
-            mService.getModel().getCurrentLatG().observeForever(new Observer<Double>() {
+
+            final TextView startTime = findViewById(R.id.startTime);
+            final TextView elapsedTime = findViewById(R.id.elapsedTime);
+
+            final DateFormat startTimeFormatter = DateFormat.getTimeInstance();
+            final DateFormat elapsedFormatter = new SimpleDateFormat("mm:ss", Locale.getDefault());
+
+            mService.getViewModel().getCurrentModel().observeForever(new Observer<TrackModel>() {
                 @Override
-                public void onChanged(Double value) {
-                    latG.setText(String.format(Locale.getDefault(), "%f", value));
+                public void onChanged(TrackModel m) {
+                    latitude.setText(String.format(Locale.getDefault(), "%f", m.getLocation().getLatitude()));
+                    longitude.setText(String.format(Locale.getDefault(), "%f", m.getLocation().getLongitude()));
+                    altitude.setText(String.format(Locale.getDefault(), "%f", m.getLocation().getAltitude()));
+                    speed.setText(String.format(Locale.getDefault(), "%f", m.getLocation().getSpeed() * 3.6));
+                    bearing.setText(String.format(Locale.getDefault(), "%f", m.getLocation().getBearing()));
+
+                    brake.setText(String.format(Locale.getDefault(), "%f", m.getBrake()));
+                    throttle.setText(String.format(Locale.getDefault(), "%f", m.getThrottle()));
+                    steeringAngle.setText(String.format(Locale.getDefault(), "%f", m.getSteeringAngle()));
+                    rpm.setText(String.format(Locale.getDefault(), "%f", m.getRpm()));
+                    yaw.setText(String.format(Locale.getDefault(), "%f", m.getYaw()));
+                    latG.setText(String.format(Locale.getDefault(), "%f", m.getLatG()));
+
+                    startTime.setText(String.format(Locale.getDefault(), "%s", startTimeFormatter.format(new Date(m.getStartTime()))));
+                    elapsedTime.setText(String.format(Locale.getDefault(), "%s", elapsedFormatter.format(new Date(m.getElapsedTime()))));
                 }
             });
 
             final TextView error = findViewById(R.id.error);
-            mService.getModel().getCurrentError().observeForever(new Observer<String>() {
+            mService.getViewModel().getCurrentError().observeForever(new Observer<String>() {
                 @Override
                 public void onChanged(String value) {
                     error.setText(value);

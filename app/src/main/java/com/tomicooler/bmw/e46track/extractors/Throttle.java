@@ -21,6 +21,6 @@ public class Throttle implements MessageHandler {
     public void process(Message message) {
         final double integral = extractorIntegral.extract(message);
         final double fractional = extractorFractional.extract(message);
-        model.getCurrentThrottle().postValue(converter.convert(integral + fractional));
+        model.setThrottle(converter.convert(integral + fractional));
     }
 }

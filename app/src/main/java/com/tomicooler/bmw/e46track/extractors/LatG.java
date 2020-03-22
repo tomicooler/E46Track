@@ -21,6 +21,6 @@ public class LatG implements MessageHandler {
     public void process(Message message) {
         final double integral = extractorIntegral.extract(message);
         final double fractional = extractorFractional.extract(message);
-        model.getCurrentLatG().postValue(converter.convert(integral + fractional));
+        model.setLatG(converter.convert(integral + fractional));
     }
 }

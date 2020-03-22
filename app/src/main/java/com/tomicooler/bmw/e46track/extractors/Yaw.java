@@ -23,6 +23,6 @@ public class Yaw implements MessageHandler {
     public void process(Message message) {
         final double integral = extractorIntegral.extract(message);
         final double fractional = extractorFractional.extract(message);
-        model.getCurrentYaw().postValue(converter2.convert(converter1.convert(integral + fractional)));
+        model.setYaw(converter2.convert(converter1.convert(integral + fractional)));
     }
 }
