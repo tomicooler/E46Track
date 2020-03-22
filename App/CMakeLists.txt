@@ -38,6 +38,9 @@ if(ANDROID)
       model.h
       model.cpp
       extractors.h
+      facade.cpp
+      facade.h
+      requester.h
       ${TS_FILES}
     )
 else()
@@ -52,6 +55,9 @@ else()
       model.h
       model.cpp
       extractors.h
+      facade.cpp
+      facade.h
+      requester.h
       ${TS_FILES}
     )
 

@@ -15,12 +15,17 @@ struct DS2Message {
       checksum ^= b;
     for (const auto b : data)
       checksum ^= b;
+    serialized += ecu;
+    serialized += length;
+    serialized += data;
+    serialized += checksum;
   }
 
   QByteArray ecu;
   quint8 length{0};
   QByteArray data;
   char checksum{'\0'};
+  QByteArray serialized;
 };
 
 class DS2Parser {

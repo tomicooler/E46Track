@@ -16,6 +16,7 @@ public:
   bool connecting() const;
 
 signals:
+  void connected();
   void dataReceived(const QByteArray &data);
   void displayDialog(const QString &title, const QString &details);
   void connectingChanged(bool connecting);

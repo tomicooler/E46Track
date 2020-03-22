@@ -29,6 +29,7 @@ bool TCPInterface::connecting() const {
 void TCPInterface::sendData(const QByteArray &data) {
   if (m_socket.isOpen()) {
     QByteArray framedData = QByteArray::fromHex("000212c02100003c00");
+    framedData += static_cast<quint8>(data.size());
     framedData += data;
     char checksum = 0;
     for (char b : framedData) {
@@ -54,6 +55,7 @@ void TCPInterface::handleStateChanged(QAbstractSocket::SocketState state) {
 
 void TCPInterface::handleConnected() {
   qDebug() << "connected";
+  emit connected();
   emit displayDialog(tr("Wifi interface"), tr("Connection successful!"));
 }
 

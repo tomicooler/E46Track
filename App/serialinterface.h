@@ -21,6 +21,7 @@ public:
   int baud() const;
 
 signals:
+  void connected();
   void dataReceived(const QByteArray &data);
   void portChanged(QString port);
   void baudChanged(int baud);

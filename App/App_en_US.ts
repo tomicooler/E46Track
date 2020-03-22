@@ -31,19 +31,19 @@
     <name>SerialInterface</name>
     <message>
         <location filename="serialinterface.cpp" line="42"/>
-        <location filename="serialinterface.cpp" line="47"/>
-        <location filename="serialinterface.cpp" line="82"/>
+        <location filename="serialinterface.cpp" line="48"/>
+        <location filename="serialinterface.cpp" line="83"/>
         <source>SerialInterface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="serialinterface.cpp" line="43"/>
-        <location filename="serialinterface.cpp" line="83"/>
+        <location filename="serialinterface.cpp" line="84"/>
         <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialinterface.cpp" line="47"/>
+        <location filename="serialinterface.cpp" line="48"/>
         <source>Connected!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -82,24 +82,24 @@
 <context>
     <name>TCPInterface</name>
     <message>
-        <location filename="tcpinterface.cpp" line="47"/>
-        <location filename="tcpinterface.cpp" line="57"/>
-        <location filename="tcpinterface.cpp" line="62"/>
+        <location filename="tcpinterface.cpp" line="48"/>
+        <location filename="tcpinterface.cpp" line="59"/>
+        <location filename="tcpinterface.cpp" line="64"/>
         <source>Wifi interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="48"/>
+        <location filename="tcpinterface.cpp" line="49"/>
         <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="57"/>
+        <location filename="tcpinterface.cpp" line="59"/>
         <source>Connection successful!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="62"/>
+        <location filename="tcpinterface.cpp" line="64"/>
         <source>Connection lost!</source>
         <translation type="unfinished"></translation>
     </message>

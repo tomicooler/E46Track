@@ -6,6 +6,7 @@
 #endif
 #include "tcpinterface.h"
 
+#include "facade.h"
 #include "model.h"
 
 int main(int argc, char *argv[]) {
@@ -20,6 +21,7 @@ int main(int argc, char *argv[]) {
   qmlRegisterType<TCPInterface>("com.tomicooler.e46track", 1, 0,
                                 "TCPInterface");
 
+  qmlRegisterType<Facade>("com.tomicooler.e46track", 1, 0, "Facade");
   qmlRegisterType<Model>("com.tomicooler.e46track", 1, 0, "Model");
 
   QQmlApplicationEngine engine;

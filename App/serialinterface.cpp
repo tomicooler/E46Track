@@ -44,6 +44,7 @@ void SerialInterface::open() {
     return;
   }
 
+  emit connected();
   emit displayDialog(tr("SerialInterface"), tr("Connected!"));
 }
 
