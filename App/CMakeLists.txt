@@ -34,6 +34,7 @@ if(ANDROID)
       qml.qrc
       tcpinterface.cpp
       tcpinterface.h
+      ds2message.h
       ${TS_FILES}
     )
 else()
@@ -44,6 +45,7 @@ else()
       serialinterface.cpp
       tcpinterface.cpp
       tcpinterface.h
+      ds2message.h
       ${TS_FILES}
     )
 
