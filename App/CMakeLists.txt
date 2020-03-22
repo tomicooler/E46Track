@@ -35,6 +35,8 @@ if(ANDROID)
       tcpinterface.cpp
       tcpinterface.h
       ds2message.h
+      model.h
+      model.cpp
       ${TS_FILES}
     )
 else()
@@ -46,6 +48,8 @@ else()
       tcpinterface.cpp
       tcpinterface.h
       ds2message.h
+      model.h
+      model.cpp
       ${TS_FILES}
     )
 

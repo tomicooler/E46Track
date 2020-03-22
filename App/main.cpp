@@ -6,6 +6,8 @@
 #endif
 #include "tcpinterface.h"
 
+#include "model.h"
+
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
@@ -17,6 +19,8 @@ int main(int argc, char *argv[]) {
 #endif
   qmlRegisterType<TCPInterface>("com.tomicooler.e46track", 1, 0,
                                 "TCPInterface");
+
+  qmlRegisterType<Model>("com.tomicooler.e46track", 1, 0, "Model");
 
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/main.qml"));
