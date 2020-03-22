@@ -82,24 +82,24 @@
 <context>
     <name>TCPInterface</name>
     <message>
-        <location filename="tcpinterface.cpp" line="51"/>
-        <location filename="tcpinterface.cpp" line="64"/>
-        <location filename="tcpinterface.cpp" line="71"/>
+        <location filename="tcpinterface.cpp" line="53"/>
+        <location filename="tcpinterface.cpp" line="66"/>
+        <location filename="tcpinterface.cpp" line="73"/>
         <source>Wifi interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="51"/>
+        <location filename="tcpinterface.cpp" line="53"/>
         <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="64"/>
+        <location filename="tcpinterface.cpp" line="66"/>
         <source>Connection successful!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="71"/>
+        <location filename="tcpinterface.cpp" line="73"/>
         <source>Connection lost!</source>
         <translation type="unfinished"></translation>
     </message>

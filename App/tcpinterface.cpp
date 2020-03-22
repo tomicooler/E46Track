@@ -31,17 +31,19 @@ TCPInterface::connecting() const
 void
 TCPInterface::sendData(const QByteArray &data)
 {
-  if (m_socket.isOpen())
-    {
-      // todo why?
-      QByteArray framedData = QByteArray::fromHex("000212c02100003c0005");
-      framedData += data;
-      framedData += QByteArray::fromHex("7a");
-
-      qDebug() << "sending on wifi" << qPrintable(framedData.toHex());
-
-      m_socket.write(framedData);
+  if (m_socket.isOpen()) {
+    QByteArray framedData = QByteArray::fromHex("000212c02100003c00");
+    framedData += data;
+    char checksum = 0;
+    for (char b : framedData) {
+      checksum += b;
     }
+    framedData += checksum;
+
+    qDebug() << "sending on wifi" << qPrintable(framedData.toHex());
+
+    m_socket.write(framedData);
+  }
 }
 
 void
