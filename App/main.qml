@@ -80,6 +80,48 @@ ApplicationWindow {
         Dashboard {
             width: stackView.width
             height: stackView.height
+            NumberAnimation on latg.g {
+                from: -1.0
+                to: 1.0
+                duration: 3000
+                loops: Animation.Infinite
+            }
+            NumberAnimation on yaw.yaw {
+                from: -60
+                to: 60
+                duration: 3000
+                loops: Animation.Infinite
+            }
+            NumberAnimation on steeringWheel.rotation {
+                from: -600
+                to: 600
+                duration: 3000
+                loops: Animation.Infinite
+            }
+            NumberAnimation on rpm.rpm {
+                from: 0
+                to: 8200
+                duration: 3000
+                loops: Animation.Infinite
+            }
+            NumberAnimation on kmph {
+                from: 0
+                to: 280
+                duration: 3000
+                loops: Animation.Infinite
+            }
+            NumberAnimation on brake.position {
+                from: 0.0
+                to: 1.0
+                duration: 3000
+                loops: Animation.Infinite
+            }
+            NumberAnimation on throttle.position {
+                from: 0.0
+                to: 1.0
+                duration: 3000
+                loops: Animation.Infinite
+            }
         }
     }
 
