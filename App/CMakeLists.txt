@@ -37,6 +37,7 @@ if(ANDROID)
       ds2message.h
       model.h
       model.cpp
+      extractors.h
       ${TS_FILES}
     )
 else()
@@ -50,6 +51,7 @@ else()
       ds2message.h
       model.h
       model.cpp
+      extractors.h
       ${TS_FILES}
     )
 
