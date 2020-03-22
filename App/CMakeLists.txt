@@ -32,12 +32,18 @@ if(ANDROID)
     add_library(App SHARED
       main.cpp
       qml.qrc
+      tcpinterface.cpp
+      tcpinterface.h
       ${TS_FILES}
     )
 else()
     add_executable(App
       main.cpp
       qml.qrc
+      serialinterface.h
+      serialinterface.cpp
+      tcpinterface.cpp
+      tcpinterface.h
       ${TS_FILES}
     )
 

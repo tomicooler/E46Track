@@ -16,5 +16,13 @@
         <file>YawForm.ui.qml</file>
         <file>icons/arrow-left.svg</file>
         <file>icons/bars.svg</file>
+        <file>+android/SerialPort.qml</file>
+        <file>WiFiInterface.qml</file>
+        <file>WiFiInterfaceForm.ui.qml</file>
+        <file>SerialPortForm.ui.qml</file>
+        <file>SerialPort.qml</file>
+        <file>Store.qml</file>
+        <file>+android/Store.qml</file>
+        <file>InfoDialog.qml</file>
     </qresource>
 </RCC>

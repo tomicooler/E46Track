@@ -33,6 +33,11 @@ ApplicationWindow {
         }
     }
 
+    Store {
+        id: store
+        anchors.fill: parent
+    }
+
     Drawer {
         id: drawer
         width: window.width * 0.4
@@ -54,7 +59,7 @@ ApplicationWindow {
                 text: qsTr("SerialPort")
                 width: parent.width
                 onClicked: {
-                    //stackView.push(serialport)
+                    stackView.push(serialport)
                     drawer.close()
                 }
             }
@@ -63,7 +68,7 @@ ApplicationWindow {
                 text: qsTr("WiFi")
                 width: parent.width
                 onClicked: {
-                    //stackView.push(wifipage)
+                    stackView.push(wifipage)
                     drawer.close()
                 }
             }
@@ -73,6 +78,24 @@ ApplicationWindow {
     Component {
         id: dashboard
         Dashboard {
+            width: stackView.width
+            height: stackView.height
+        }
+    }
+
+    Component {
+        id: serialport
+        SerialPort {
+            serial: store.serial
+            width: stackView.width
+            height: stackView.height
+        }
+    }
+
+    Component {
+        id: wifipage
+        WiFiInterface {
+            wifi: store.wifi
             width: stackView.width
             height: stackView.height
         }
