@@ -22,7 +22,7 @@ class SignedTwoStepByteExtractor {
 public:
   double extract(const QByteArray &data, int pos, double multiplier = 1.0,
                  double offset = 0.0) const {
-    return (((static_cast<quint8>(data.at(pos)) * 2.56) +
+    return (((static_cast<qint8>(data.at(pos)) * 2.56) +
              (static_cast<quint8>(data.at(pos + 1)) / 100.0))) *
                multiplier +
            offset;
