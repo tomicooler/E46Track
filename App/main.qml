@@ -48,15 +48,6 @@ ApplicationWindow {
             anchors.fill: parent
 
             ItemDelegate {
-                text: qsTr("Configuration")
-                width: parent.width
-                onClicked: {
-                    //stackView.push(config)
-                    drawer.close()
-                }
-            }
-
-            ItemDelegate {
                 text: qsTr("SerialPort")
                 width: parent.width
                 onClicked: {
