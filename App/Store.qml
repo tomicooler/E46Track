@@ -6,6 +6,7 @@ Item {
     property alias wifi: wifi
     property alias infoDialog: infoDialog
     property bool interfaceWifi: false
+    property alias model: facade.model
 
     InfoDialog {
         id: infoDialog

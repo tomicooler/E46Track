@@ -5,6 +5,7 @@ import ".."
 Item {
     property alias wifi: wifi
     property alias infoDialog: infoDialog
+    property alias model: facade.model
 
     InfoDialog {
         id: infoDialog

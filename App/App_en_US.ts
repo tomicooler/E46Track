@@ -166,32 +166,32 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="main.qml" line="11"/>
+        <location filename="main.qml" line="12"/>
         <source>E46Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="18"/>
+        <location filename="main.qml" line="19"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="18"/>
+        <location filename="main.qml" line="19"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="50"/>
+        <location filename="main.qml" line="51"/>
         <source>Configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="59"/>
+        <location filename="main.qml" line="60"/>
         <source>SerialPort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="68"/>
+        <location filename="main.qml" line="69"/>
         <source>WiFi</source>
         <translation type="unfinished"></translation>
     </message>

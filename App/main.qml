@@ -2,6 +2,7 @@ import QtQuick 2.14
 import QtQuick.Window 2.14
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
+import com.tomicooler.e46track 1.0
 
 ApplicationWindow {
     id: window
@@ -80,48 +81,30 @@ ApplicationWindow {
         Dashboard {
             width: stackView.width
             height: stackView.height
-            NumberAnimation on latg.g {
-                from: -1.0
-                to: 1.0
-                duration: 3000
-                loops: Animation.Infinite
+
+            Converter {
+                id: converterBrake
+                converted: store.model.brake
+                Component.onCompleted: {
+                    set(-0.07, 105.0, 0.0, 1.0)
+                }
             }
-            NumberAnimation on yaw.yaw {
-                from: -60
-                to: 60
-                duration: 3000
-                loops: Animation.Infinite
+
+            Converter {
+                id: converterThrottle
+                converted: store.model.throttle
+                Component.onCompleted: {
+                    set(0.75, 3.96, 0.0, 1.0)
+                }
             }
-            NumberAnimation on steeringWheel.rotation {
-                from: -600
-                to: 600
-                duration: 3000
-                loops: Animation.Infinite
-            }
-            NumberAnimation on rpm.rpm {
-                from: 0
-                to: 8200
-                duration: 3000
-                loops: Animation.Infinite
-            }
-            NumberAnimation on kmph {
-                from: 0
-                to: 280
-                duration: 3000
-                loops: Animation.Infinite
-            }
-            NumberAnimation on brake.position {
-                from: 0.0
-                to: 1.0
-                duration: 3000
-                loops: Animation.Infinite
-            }
-            NumberAnimation on throttle.position {
-                from: 0.0
-                to: 1.0
-                duration: 3000
-                loops: Animation.Infinite
-            }
+
+            yaw.yaw: -1 * store.model.yaw
+            steeringWheel.angle: -1 * store.model.steeringAngle
+            brake.position: converterBrake.converted
+            throttle.position: converterThrottle.converted
+            kmph: store.model.speed * 3.6
+            rpm.rpm: store.model.rpm
+            latg.g: store.model.latg
         }
     }
 

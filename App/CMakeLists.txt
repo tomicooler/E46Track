@@ -41,6 +41,8 @@ if(ANDROID)
       facade.cpp
       facade.h
       requester.h
+      converter.cpp
+      converter.h
       ${TS_FILES}
     )
 else()
@@ -58,6 +60,8 @@ else()
       facade.cpp
       facade.h
       requester.h
+      converter.cpp
+      converter.h
       ${TS_FILES}
     )
 
