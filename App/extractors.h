@@ -12,9 +12,9 @@ public:
                  double offset = 0.0) const {
     // The data is not a 16 bit signed two's complement integer.
     // ( != little_endian short )
-    return (((data.at(pos) & 0xFF) + ((data.at(pos + 1) & 0xFF) << 8)) *
-            multiplier) +
-           offset;
+    int number = ((data.at(pos) & 0xFF) + ((data.at(pos + 1) & 0xFF) << 8));
+    number = (number & 0x7FFF) * ((number & 0x8000) > 0 ? -1 : 1);
+    return (number * multiplier) + offset;
   }
 };
 
@@ -68,7 +68,7 @@ private:
 class SteeringAngle : public ModelUpdater {
 public:
   void update(const DS2Message &message, Model &model) const override {
-    model.setSteeringAngle(extractor.extract(message.data, 2, 0.045));
+    model.setSteeringAngle(extractor.extract(message.data, 4, 0.045));
   }
 
 private:
