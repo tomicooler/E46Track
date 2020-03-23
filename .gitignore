@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 *.txt.user
-build-Visualizer*
+build-*
