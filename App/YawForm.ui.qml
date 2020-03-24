@@ -29,6 +29,7 @@ Rectangle {
             anchors.centerIn: parent
             color: "white"
             font.bold: true
+            font.pointSize: label.font.pointSize
         }
     }
 
@@ -38,6 +39,7 @@ Rectangle {
         anchors.verticalCenter: arrow.verticalCenter
         anchors.verticalCenterOffset: arrow.height
         font.bold: true
+        font.pointSize: (wheel.width / 24) > 4 ? (wheel.width / 24) : 4
         antialiasing: true
     }
 }

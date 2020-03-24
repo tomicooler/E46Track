@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-Page {
+Item {
     property alias yaw: yaw
     property alias steeringWheel: steeringWheel
     property alias brake: brake
@@ -9,10 +9,7 @@ Page {
     property alias throttle: throttle
     property alias rpm: rpm
     property alias latg: latg
-
-    width: 400
-    height: width * 1.1
-    title: qsTr("Dashboard")
+    property int minSize: width > height ? height : width
 
     Yaw {
         id: yaw
@@ -24,9 +21,10 @@ Page {
 
     SteeringWheel {
         id: steeringWheel
-        width: parent.width * 0.4
+        width: minSize * 0.35
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: -width * 0.4
         anchors.topMargin: width * 0.4
         antialiasing: true
         smooth: true
@@ -48,7 +46,7 @@ Page {
         anchors.horizontalCenter: steeringWheel.horizontalCenter
         anchors.verticalCenter: brake.verticalCenter
         font.bold: true
-        font.pointSize: 24
+        font.pointSize: (minSize / 22) > 4 ? (minSize / 22) : 4
     }
 
     Label {

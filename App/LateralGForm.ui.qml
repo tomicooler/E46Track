@@ -43,5 +43,6 @@ Rectangle {
         id: label
         anchors.centerIn: parent
         font.bold: true
+        font.pointSize: (parent.height / 2) > 4 ? (parent.height / 2) : 4
     }
 }
