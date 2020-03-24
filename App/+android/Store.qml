@@ -1,15 +1,20 @@
 import QtQuick 2.14
 import com.tomicooler.e46track 1.0
-import ".."
 
 Item {
     property alias wifi: wifi
     property alias infoDialog: infoDialog
     property alias model: facade.model
+    property alias serial: serial
+    property bool serialAvailable: false
 
     InfoDialog {
         id: infoDialog
         anchors.fill: parent
+    }
+
+    Item {
+        id: serial
     }
 
     Facade {
