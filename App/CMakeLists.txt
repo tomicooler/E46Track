@@ -43,6 +43,8 @@ if(ANDROID)
       requester.h
       converter.cpp
       converter.h
+      datalogger.cpp
+      datalogger.h
       ${TS_FILES}
     )
 else()
@@ -62,6 +64,8 @@ else()
       requester.h
       converter.cpp
       converter.h
+      datalogger.cpp
+      datalogger.h
       ${TS_FILES}
     )
 

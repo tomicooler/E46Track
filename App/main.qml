@@ -85,15 +85,19 @@ ApplicationWindow {
                     }
 
                     Label {
-                        text: new Date(store.model.timestamp).toLocaleString(Qt.locale(), "MM-dd hh:mm:ss")
+                        text: new Date(store.logger.startTime).toLocaleString(Qt.locale(), "MM-dd hh:mm:ss")
                     }
 
                     Label {
-                        text: new Date(2500).toLocaleString(Qt.locale(), "mm:ss")
+                        text: new Date(store.logger.elapsedTime).toLocaleString(Qt.locale(), "mm:ss")
                     }
 
                     Switch {
                         text: qsTr("Recording")
+                        checked: store.logger.logging
+                        onClicked: {
+                            store.logger.logging = !store.logger.logging;
+                        }
                     }
 
                     Item {

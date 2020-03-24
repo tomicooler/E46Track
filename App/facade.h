@@ -3,6 +3,7 @@
 
 #include <QObject>
 
+#include "datalogger.h"
 #include "ds2message.h"
 #include "requester.h"
 
@@ -10,11 +11,13 @@ class Facade : public QObject {
   Q_OBJECT
 
   Q_PROPERTY(Model *model READ model CONSTANT)
+  Q_PROPERTY(DataLogger *logger READ logger CONSTANT)
 
 public:
   explicit Facade(QObject *parent = nullptr);
 
   Model *model();
+  DataLogger *logger();
 
 signals:
   void sendData(const QByteArray &data);
@@ -30,6 +33,7 @@ private:
   size_t index{};
   QByteArray buffer;
   DS2Parser parser;
+  DataLogger m_logger;
 };
 
 #endif // FACADE_H

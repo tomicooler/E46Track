@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
   qmlRegisterType<Facade>("com.tomicooler.e46track", 1, 0, "Facade");
   qmlRegisterType<Model>("com.tomicooler.e46track", 1, 0, "Model");
   qmlRegisterType<Converter>("com.tomicooler.e46track", 1, 0, "Converter");
+  qmlRegisterType<DataLogger>("com.tomicooler.e46track", 1, 0, "DataLogger");
 
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/main.qml"));

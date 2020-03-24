@@ -21,9 +21,13 @@ Facade::Facade(QObject *parent)
                                QByteArray::fromHex("2106")},
                     {std::make_shared<Brake>(), std::make_shared<Yaw>(),
                      std::make_shared<LatG>()},
-                    m_model}} {}
+                    m_model}} {
+  logger()->setModel(m_model);
+}
 
 Model *Facade::model() { return m_model.get(); }
+
+DataLogger *Facade::logger() { return &m_logger; }
 
 void Facade::dataReceived(const QByteArray &data) {
   if (index >= requesters.size())
