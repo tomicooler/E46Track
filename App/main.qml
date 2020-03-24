@@ -50,6 +50,7 @@ ApplicationWindow {
             ItemDelegate {
                 text: qsTr("SerialPort")
                 width: parent.width
+                visible: store.serialAvailable
                 onClicked: {
                     stackView.push(serialport)
                     drawer.close()

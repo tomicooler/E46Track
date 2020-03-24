@@ -186,7 +186,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="60"/>
+        <location filename="main.qml" line="61"/>
         <source>WiFi</source>
         <translation type="unfinished"></translation>
     </message>

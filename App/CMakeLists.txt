@@ -24,7 +24,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(Qt5 COMPONENTS Core Quick QuickControls2 Network LinguistTools REQUIRED)
+find_package(Qt5 COMPONENTS Core Quick QuickControls2 Network Svg LinguistTools REQUIRED)
 
 set(TS_FILES App_en_US.ts)
 
@@ -74,6 +74,6 @@ endif()
 target_compile_definitions(App
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(App
-  PRIVATE Qt5::Core Qt5::Quick Qt5::Network Qt5::QuickControls2)
+  PRIVATE Qt5::Core Qt5::Quick Qt5::Network Qt5::QuickControls2 Qt5::Svg)
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
