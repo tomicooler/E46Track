@@ -58,9 +58,10 @@ Rectangle {
 
     Label {
         id: label
-        anchors.centerIn: steeringWheel
+        anchors.centerIn: wheel
         color: "white"
         font.bold: true
+        font.pointSize: (wheel.width / 14) > 4 ? (wheel.width / 14) : 4
         rotation: 0 - parent.rotation
     }
 }

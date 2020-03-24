@@ -4,17 +4,12 @@
 <context>
     <name>DashboardForm.ui</name>
     <message>
-        <location filename="DashboardForm.ui.qml" line="15"/>
-        <source>Dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="DashboardForm.ui.qml" line="47"/>
+        <location filename="DashboardForm.ui.qml" line="45"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="DashboardForm.ui.qml" line="55"/>
+        <location filename="DashboardForm.ui.qml" line="53"/>
         <source>km/h</source>
         <translation type="unfinished"></translation>
     </message>
@@ -188,6 +183,16 @@
     <message>
         <location filename="main.qml" line="61"/>
         <source>WiFi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="74"/>
+        <source>Dashboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="96"/>
+        <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
