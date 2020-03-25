@@ -8,6 +8,7 @@ Item {
     property bool interfaceWifi: false
     property alias model: facade.model
     property bool serialAvailable: true
+    property alias logger: facade.logger
 
     InfoDialog {
         id: infoDialog

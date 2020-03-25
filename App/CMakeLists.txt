@@ -15,14 +15,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
 # They need to be set before the find_package(Qt5 ...) call.
 
-#if(ANDROID)
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-#    if (ANDROID_ABI STREQUAL "armeabi-v7a")
-#        set(ANDROID_EXTRA_LIBS
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
-#    endif()
-#endif()
+if(ANDROID)
+    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
+endif()
 
 find_package(Qt5 COMPONENTS Core Quick QuickControls2 Network Svg LinguistTools REQUIRED)
 
@@ -43,8 +38,15 @@ if(ANDROID)
       requester.h
       converter.cpp
       converter.h
+      datalogger.cpp
+      datalogger.h
       ${TS_FILES}
     )
+
+find_package(Qt5 COMPONENTS AndroidExtras REQUIRED)
+target_link_libraries(App
+  PRIVATE Qt5::AndroidExtras)
+
 else()
     add_executable(App
       main.cpp
@@ -62,6 +64,8 @@ else()
       requester.h
       converter.cpp
       converter.h
+      datalogger.cpp
+      datalogger.h
       ${TS_FILES}
     )
 
