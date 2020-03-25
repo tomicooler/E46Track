@@ -31,6 +31,24 @@
     </message>
 </context>
 <context>
+    <name>ReplayModel</name>
+    <message>
+        <location filename="replaymodel.cpp" line="16"/>
+        <source>Could not open file. &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="replaymodel.cpp" line="32"/>
+        <source>Invalid row count &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="replaymodel.cpp" line="85"/>
+        <source>Succes!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SerialInterface</name>
     <message>
         <location filename="serialinterface.cpp" line="42"/>

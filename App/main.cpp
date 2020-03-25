@@ -9,24 +9,27 @@
 #include "converter.h"
 #include "facade.h"
 #include "model.h"
+#include "replaymodel.h"
 
-#if defined (Q_OS_ANDROID)
+#if defined(Q_OS_ANDROID)
 #include <QtAndroid>
 
-bool requestAndroidPermissions(){
-    const QVector<QString> permissions({"android.permission.WRITE_EXTERNAL_STORAGE",
-                                        "android.permission.READ_EXTERNAL_STORAGE"});
+bool requestAndroidPermissions() {
+  const QVector<QString> permissions(
+      {"android.permission.WRITE_EXTERNAL_STORAGE",
+       "android.permission.READ_EXTERNAL_STORAGE"});
 
-    for(const QString &permission : permissions){
-        auto result = QtAndroid::checkPermission(permission);
-        if(result == QtAndroid::PermissionResult::Denied){
-            auto resultHash = QtAndroid::requestPermissionsSync(QStringList({permission}));
-            if(resultHash[permission] == QtAndroid::PermissionResult::Denied)
-                return false;
-        }
+  for (const QString &permission : permissions) {
+    auto result = QtAndroid::checkPermission(permission);
+    if (result == QtAndroid::PermissionResult::Denied) {
+      auto resultHash =
+          QtAndroid::requestPermissionsSync(QStringList({permission}));
+      if (resultHash[permission] == QtAndroid::PermissionResult::Denied)
+        return false;
     }
+  }
 
-    return true;
+  return true;
 }
 #endif
 
@@ -49,6 +52,7 @@ int main(int argc, char *argv[]) {
   qmlRegisterType<Model>("com.tomicooler.e46track", 1, 0, "Model");
   qmlRegisterType<Converter>("com.tomicooler.e46track", 1, 0, "Converter");
   qmlRegisterType<DataLogger>("com.tomicooler.e46track", 1, 0, "DataLogger");
+  qmlRegisterType<ReplayModel>("com.tomicooler.e46track", 1, 0, "ReplayModel");
 
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/main.qml"));

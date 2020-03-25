@@ -40,6 +40,8 @@ if(ANDROID)
       converter.h
       datalogger.cpp
       datalogger.h
+      replaymodel.cpp
+      replaymodel.h
       ${TS_FILES}
     )
 
@@ -66,6 +68,8 @@ else()
       converter.h
       datalogger.cpp
       datalogger.h
+      replaymodel.cpp
+      replaymodel.h
       ${TS_FILES}
     )
 
