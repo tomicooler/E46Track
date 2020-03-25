@@ -42,6 +42,11 @@ if(ANDROID)
       datalogger.h
       ${TS_FILES}
     )
+
+find_package(Qt5 COMPONENTS AndroidExtras REQUIRED)
+target_link_libraries(App
+  PRIVATE Qt5::AndroidExtras)
+
 else()
     add_executable(App
       main.cpp

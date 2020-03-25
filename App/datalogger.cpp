@@ -50,7 +50,7 @@ void DataLogger::setLogging(bool logging) {
     setStartTime(QDateTime::currentMSecsSinceEpoch());
     setElapsedTime(0);
     QStringList locations =
-        QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+        QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
     QString location = locations.isEmpty() ? "/tmp" : locations.first();
     QDir dir;
     dir.mkpath(location);
