@@ -30,7 +30,7 @@ void ReplayModel::loadFile(const QString &path) {
 
     if (fields.size() != 8) {
       emit error(tr("Invalid row count '%1'").arg(fields.join(",")));
-      continue;
+      return;
     }
 
     Model::Data data;
@@ -76,6 +76,11 @@ void ReplayModel::loadFile(const QString &path) {
     }
 
     m_sequence << data;
+  }
+
+  if (m_sequence.isEmpty()) {
+    emit error(tr("No valid data in file='%1'").arg(file.fileName()));
+    return;
   }
 
   m_size = m_sequence.size();

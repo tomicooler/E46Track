@@ -31,6 +31,19 @@
     </message>
 </context>
 <context>
+    <name>ReplayForm.ui</name>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="12"/>
+        <source>Replay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="35"/>
+        <source>Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ReplayModel</name>
     <message>
         <location filename="replaymodel.cpp" line="16"/>
@@ -43,7 +56,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="85"/>
+        <location filename="replaymodel.cpp" line="82"/>
+        <source>No valid data in file=&apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="replaymodel.cpp" line="90"/>
         <source>Succes!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -209,6 +227,11 @@
     <message>
         <location filename="main.qml" line="61"/>
         <source>WiFi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="70"/>
+        <source>Replay</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

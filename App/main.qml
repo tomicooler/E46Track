@@ -65,12 +65,22 @@ ApplicationWindow {
                     drawer.close()
                 }
             }
+
+            ItemDelegate {
+                text: qsTr("Replay")
+                width: parent.width
+                onClicked: {
+                    stackView.push(replaypage)
+                    drawer.close()
+                }
+            }
         }
     }
 
     Component {
         id: dashboard
         Main {
+            title: window.title
             width: stackView.width
             height: stackView.height
             model: store.model
@@ -91,6 +101,14 @@ ApplicationWindow {
         id: wifipage
         WiFiInterface {
             wifi: store.wifi
+            width: stackView.width
+            height: stackView.height
+        }
+    }
+
+    Component {
+        id: replaypage
+        Replay {
             width: stackView.width
             height: stackView.height
         }

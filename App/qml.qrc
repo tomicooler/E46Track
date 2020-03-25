@@ -26,5 +26,7 @@
         <file>InfoDialog.qml</file>
         <file>Main.qml</file>
         <file>MainForm.ui.qml</file>
+        <file>Replay.qml</file>
+        <file>ReplayForm.ui.qml</file>
     </qresource>
 </RCC>
