@@ -88,13 +88,14 @@ void DataLogger::setElapsedTime(qint64 elapsedTime) {
 
 void DataLogger::timeout() {
   qint64 timestamp = m_startTime + elapsed.elapsed();
-  logger->stream << QString("%1,%2,%3,%4,%5,%6,%7\n")
+  logger->stream << QString("%1,%2,%3,%4,%5,%6,%7,%8\n")
                         .arg(timestamp)
                         .arg(model.get()->speed(), 0, 'f', 2)
                         .arg(model.get()->brake(), 0, 'f', 2)
                         .arg(model.get()->steeringAngle(), 0, 'f', 2)
                         .arg(model.get()->throttle(), 0, 'f', 4)
                         .arg(model.get()->rpm(), 0, 'f', 0)
+                        .arg(model.get()->yaw(), 0, 'f', 4)
                         .arg(model.get()->latg(), 0, 'f', 4);
   logger->stream.flush();
   setElapsedTime(elapsed.elapsed());
