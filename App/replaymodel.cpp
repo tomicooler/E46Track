@@ -85,7 +85,8 @@ void ReplayModel::loadFile(const QString &path) {
 
   m_size = m_sequence.size();
   emit sizeChanged(m_size);
-  setIndex(0);
+  m_model.setData(m_sequence.at(m_index));
+  emit modelChanged();
 
   emit status(tr("Succes!"));
 }
@@ -135,7 +136,7 @@ void ReplayModel::setIndex(int index) {
   if (index < 0)
     index = 0;
 
-  if (m_index == index && index != 0)
+  if (m_index == index)
     return;
 
   m_index = index;
@@ -143,4 +144,5 @@ void ReplayModel::setIndex(int index) {
   m_model.setData(m_sequence.at(m_index));
 
   emit indexChanged(m_index);
+  emit modelChanged();
 }

@@ -34,6 +34,7 @@ signals:
   void status(const QString &message);
   void indexChanged(int index);
   void sizeChanged(int size);
+  void modelChanged();
 
 private:
   Model m_model;

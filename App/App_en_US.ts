@@ -4,12 +4,12 @@
 <context>
     <name>DashboardForm.ui</name>
     <message>
-        <location filename="DashboardForm.ui.qml" line="45"/>
+        <location filename="DashboardForm.ui.qml" line="46"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="DashboardForm.ui.qml" line="53"/>
+        <location filename="DashboardForm.ui.qml" line="54"/>
         <source>km/h</source>
         <translation type="unfinished"></translation>
     </message>
@@ -33,13 +33,48 @@
 <context>
     <name>ReplayForm.ui</name>
     <message>
-        <location filename="ReplayForm.ui.qml" line="12"/>
+        <location filename="ReplayForm.ui.qml" line="20"/>
         <source>Replay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="35"/>
-        <source>Recording</source>
+        <location filename="ReplayForm.ui.qml" line="69"/>
+        <source>400</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="80"/>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="63"/>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="75"/>
+        <source>px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="100"/>
+        <source>&lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="106"/>
+        <source>stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="106"/>
+        <source>play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="113"/>
+        <source>&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -61,7 +96,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="90"/>
+        <location filename="replaymodel.cpp" line="91"/>
         <source>Succes!</source>
         <translation type="unfinished"></translation>
     </message>
