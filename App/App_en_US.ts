@@ -23,6 +23,14 @@
     </message>
 </context>
 <context>
+    <name>MainForm.ui</name>
+    <message>
+        <location filename="MainForm.ui.qml" line="34"/>
+        <source>Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SerialInterface</name>
     <message>
         <location filename="serialinterface.cpp" line="42"/>
@@ -183,11 +191,6 @@
     <message>
         <location filename="main.qml" line="61"/>
         <source>WiFi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="main.qml" line="96"/>
-        <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

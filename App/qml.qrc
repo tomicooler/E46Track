@@ -24,5 +24,7 @@
         <file>Store.qml</file>
         <file>+android/Store.qml</file>
         <file>InfoDialog.qml</file>
+        <file>Main.qml</file>
+        <file>MainForm.ui.qml</file>
     </qresource>
 </RCC>

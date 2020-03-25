@@ -70,47 +70,11 @@ ApplicationWindow {
 
     Component {
         id: dashboard
-        Page {
-            title: window.title
-
-            ColumnLayout {
-                anchors.fill: parent
-
-                RowLayout {
-                    Layout.margins: 10
-                    spacing: 10
-
-                    Item {
-                        Layout.fillWidth: true
-                    }
-
-                    Label {
-                        text: new Date(store.logger.startTime).toLocaleString(Qt.locale(), "MM-dd hh:mm:ss")
-                    }
-
-                    Label {
-                        text: new Date(store.logger.elapsedTime).toLocaleString(Qt.locale(), "mm:ss")
-                    }
-
-                    Switch {
-                        text: qsTr("Recording")
-                        checked: store.logger.logging
-                        onClicked: {
-                            store.logger.logging = !store.logger.logging;
-                        }
-                    }
-
-                    Item {
-                        Layout.fillWidth: true
-                    }
-                }
-
-                Dashboard {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    model: store.model
-                }
-            }
+        Main {
+            width: stackView.width
+            height: stackView.height
+            model: store.model
+            logger: store.logger
         }
     }
 
