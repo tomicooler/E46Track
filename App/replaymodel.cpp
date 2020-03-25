@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFile>
+#include <QQmlFile>
 #include <QStandardPaths>
 #include <QTextStream>
 #include <QTimer>
@@ -17,21 +18,33 @@ QUrl ReplayModel::directory() {
 }
 
 QString ReplayModel::exportDirectory() {
-  QDir dir;
-  dir.mkdir(exportDir);
+  if (!exportDir.isEmpty()) {
+    QDir dir;
+    dir.mkdir(exportDir);
+  }
   return exportDir;
 }
 
 void ReplayModel::loadUrl(const QUrl &url) {
+  m_index = 0;
+  m_size = 0;
+  m_playing = false;
+  emit indexChanged(m_index);
+  emit sizeChanged(m_size);
+  exportDir.clear();
   m_sequence.clear();
 
-  QFile file(url.toLocalFile());
+  QFile file(QQmlFile::urlToLocalFileOrQrc(url));
   if (!file.open(QFile::ReadOnly)) {
     emit error(tr("Could not open file. '%1'").arg(file.errorString()));
     return;
   }
 
-  exportDir = QString("%1.frames").arg(file.fileName());
+  exportDir = QString("%1/e46track_export_%2")
+                  .arg(directory().toLocalFile())
+                  .arg(QDateTime::fromMSecsSinceEpoch(
+                           QDateTime::currentMSecsSinceEpoch())
+                           .toString("yyyy-MM-dd_hh:mm:ss"));
 
   QTextStream stream(&file);
   stream.setCodec("utf-8");
@@ -103,8 +116,6 @@ void ReplayModel::loadUrl(const QUrl &url) {
   emit sizeChanged(m_size);
   m_model.setData(m_sequence.at(m_index));
   emit modelChanged();
-
-  emit status(tr("Succes!"));
 }
 
 void ReplayModel::next() {
@@ -117,6 +128,8 @@ void ReplayModel::next() {
       QTimer::singleShot(m_sequence.at(m_index + 1).timestamp -
                              m_model.timestamp(),
                          this, SLOT(next()));
+    } else {
+      m_playing = false;
     }
   }
 

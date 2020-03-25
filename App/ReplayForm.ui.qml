@@ -98,20 +98,17 @@ Page {
             Button {
                 id: prevButton
                 text: qsTr("<")
-                enabled: !exportButton.checked
             }
 
             Button {
                 id: playPauseButton
                 text: checked ? qsTr("stop") : qsTr("play")
                 checkable: true
-                enabled: !exportButton.checked
             }
 
             Button {
                 id: nextButton
                 text: qsTr(">")
-                enabled: !exportButton.checked
             }
 
             Item {

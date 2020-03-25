@@ -34,7 +34,6 @@ public slots:
 
 signals:
   void error(const QString &message);
-  void status(const QString &message);
   void indexChanged(int index);
   void sizeChanged(int size);
   void modelChanged();

@@ -6,6 +6,11 @@ import com.tomicooler.e46track 1.0
 ReplayForm {
     property int frameIndex: 0;
 
+    InfoDialog {
+        id: info
+        anchors.fill: parent
+    }
+
     FileDialog {
         id: dialog
         title: qsTr("Please coose a CSV file")
@@ -36,17 +41,28 @@ ReplayForm {
             }
         }
 
-        onIndexChanged: slider.value = index
+        onIndexChanged: {
+            if (index >= (size - 1)) {
+                playPauseButton.checked = false;
+            }
+
+            slider.value = index
+        }
+
+        onError: info.displayDialog(qsTr("error"), message)
     }
 
-    slider.to: replaymodel.size
+    slider.to: replaymodel.size - 1
     slider.onValueChanged: replaymodel.index = slider.value
 
     timestampLabel.text: new Date(replaymodel.model.timestamp).toLocaleString(Qt.locale(), "MM-dd hh:mm:ss")
 
     prevButton.onClicked: replaymodel.prev()
+    prevButton.enabled: replaymodel.index >= 1 && !exportButton.checked
     playPauseButton.onClicked: replaymodel.playPause()
+    playPauseButton.enabled: nextButton.enabled
     nextButton.onClicked: replaymodel.next()
+    nextButton.enabled: replaymodel.index < (replaymodel.size - 1) && !exportButton.checked
 
     exportButton.onClicked: {
         frameIndex = 0;

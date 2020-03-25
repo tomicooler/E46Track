@@ -33,8 +33,13 @@
 <context>
     <name>Replay</name>
     <message>
-        <location filename="Replay.qml" line="11"/>
+        <location filename="Replay.qml" line="16"/>
         <source>Please coose a CSV file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Replay.qml" line="52"/>
+        <source>error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -71,17 +76,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="106"/>
+        <location filename="ReplayForm.ui.qml" line="105"/>
         <source>stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="106"/>
+        <location filename="ReplayForm.ui.qml" line="105"/>
         <source>play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="113"/>
+        <location filename="ReplayForm.ui.qml" line="111"/>
         <source>&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -89,23 +94,18 @@
 <context>
     <name>ReplayModel</name>
     <message>
-        <location filename="replaymodel.cpp" line="30"/>
+        <location filename="replaymodel.cpp" line="39"/>
         <source>Could not open file. &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="48"/>
+        <location filename="replaymodel.cpp" line="61"/>
         <source>Invalid row count &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="98"/>
+        <location filename="replaymodel.cpp" line="111"/>
         <source>No valid data in file=&apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="replaymodel.cpp" line="107"/>
-        <source>Succes!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
