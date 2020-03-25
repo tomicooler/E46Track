@@ -71,7 +71,7 @@ ApplicationWindow {
     Component {
         id: dashboard
         Page {
-            title: qsTr("Dashboard")
+            title: window.title
 
             ColumnLayout {
                 anchors.fill: parent
@@ -108,30 +108,7 @@ ApplicationWindow {
                 Dashboard {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-
-                    Converter {
-                        id: converterBrake
-                        converted: store.model.brake
-                        Component.onCompleted: {
-                            set(-0.07, 105.0, 0.0, 1.0)
-                        }
-                    }
-
-                    Converter {
-                        id: converterThrottle
-                        converted: store.model.throttle
-                        Component.onCompleted: {
-                            set(0.75, 3.96, 0.0, 1.0)
-                        }
-                    }
-
-                    yaw.yaw: -1 * store.model.yaw
-                    steeringWheel.angle: -1 * store.model.steeringAngle
-                    brake.position: converterBrake.converted
-                    throttle.position: converterThrottle.converted
-                    kmph: store.model.speed * 3.6
-                    rpm.rpm: store.model.rpm
-                    latg.g: store.model.latg
+                    model: store.model
                 }
             }
         }

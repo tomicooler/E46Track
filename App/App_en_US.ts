@@ -186,11 +186,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="74"/>
-        <source>Dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="main.qml" line="96"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
