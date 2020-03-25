@@ -1,19 +1,35 @@
 import QtQuick 2.12
+import QtQuick.Controls 2.12
+import QtQuick.Dialogs 1.2
 import com.tomicooler.e46track 1.0
 
 ReplayForm {
     property int frameIndex: 0;
 
+    FileDialog {
+        id: dialog
+        title: qsTr("Please coose a CSV file")
+        folder: replaymodel.directory()
+        nameFilters: ["CSV files (*.csv)"]
+
+        onAccepted: {
+            replaymodel.loadUrl(dialog.fileUrl)
+            replaymodel.exportPath = replaymodel.exportDirectory();
+        }
+
+        Component.onCompleted: {
+            visible = true;
+        }
+    }
+
     ReplayModel {
         id: replaymodel
-        Component.onCompleted: {
-            loadFile("/home/tomi/Downloads/2020-03-25 16:39:41.csv");
-        }
+        property string exportPath: "/tmp"
 
         onModelChanged: {
             if (exportButton.checked) {
                 dashboard.grabToImage(function(result) {
-                    result.saveToFile("/tmp/frame_%1.png".arg(String(frameIndex).padStart(10, '0')));
+                    result.saveToFile(exportPath + "/%1.png".arg(String(frameIndex).padStart(10, '0')));
                     frameIndex++;
                     replaymodel.next();
                 });

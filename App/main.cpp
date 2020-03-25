@@ -54,6 +54,9 @@ int main(int argc, char *argv[]) {
   qmlRegisterType<DataLogger>("com.tomicooler.e46track", 1, 0, "DataLogger");
   qmlRegisterType<ReplayModel>("com.tomicooler.e46track", 1, 0, "ReplayModel");
 
+  app.setOrganizationName("E46Track");
+  app.setOrganizationDomain("com.tomicooler.bmw");
+
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/main.qml"));
   QObject::connect(

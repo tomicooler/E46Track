@@ -3,6 +3,7 @@
 
 #include <QFile>
 #include <QObject>
+#include <QUrl>
 #include <QVector>
 
 #include "model.h"
@@ -17,7 +18,9 @@ class ReplayModel : public QObject {
 public:
   explicit ReplayModel(QObject *parent = nullptr);
 
-  Q_INVOKABLE void loadFile(const QString &path);
+  Q_INVOKABLE QUrl directory();
+  Q_INVOKABLE QString exportDirectory();
+  Q_INVOKABLE void loadUrl(const QUrl &url);
   Q_INVOKABLE void next();
   Q_INVOKABLE void prev();
   Q_INVOKABLE void playPause();
@@ -42,6 +45,7 @@ private:
   int m_index{};
   int m_size{};
   bool m_playing{false};
+  QString exportDir;
 };
 
 #endif // REPLAYMODEL_H

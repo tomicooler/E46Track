@@ -31,6 +31,14 @@
     </message>
 </context>
 <context>
+    <name>Replay</name>
+    <message>
+        <location filename="Replay.qml" line="11"/>
+        <source>Please coose a CSV file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ReplayForm.ui</name>
     <message>
         <location filename="ReplayForm.ui.qml" line="20"/>
@@ -81,22 +89,22 @@
 <context>
     <name>ReplayModel</name>
     <message>
-        <location filename="replaymodel.cpp" line="16"/>
+        <location filename="replaymodel.cpp" line="30"/>
         <source>Could not open file. &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="32"/>
+        <location filename="replaymodel.cpp" line="48"/>
         <source>Invalid row count &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="82"/>
+        <location filename="replaymodel.cpp" line="98"/>
         <source>No valid data in file=&apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="91"/>
+        <location filename="replaymodel.cpp" line="107"/>
         <source>Succes!</source>
         <translation type="unfinished"></translation>
     </message>

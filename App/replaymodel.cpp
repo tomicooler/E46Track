@@ -2,20 +2,36 @@
 
 #include <QDateTime>
 #include <QDebug>
+#include <QDir>
 #include <QFile>
+#include <QStandardPaths>
 #include <QTextStream>
 #include <QTimer>
 
 ReplayModel::ReplayModel(QObject *parent) : QObject(parent) {}
 
-void ReplayModel::loadFile(const QString &path) {
+QUrl ReplayModel::directory() {
+  QStringList locations =
+      QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
+  return locations.isEmpty() ? QUrl{} : QUrl::fromLocalFile(locations.first());
+}
+
+QString ReplayModel::exportDirectory() {
+  QDir dir;
+  dir.mkdir(exportDir);
+  return exportDir;
+}
+
+void ReplayModel::loadUrl(const QUrl &url) {
   m_sequence.clear();
 
-  QFile file(path);
+  QFile file(url.toLocalFile());
   if (!file.open(QFile::ReadOnly)) {
     emit error(tr("Could not open file. '%1'").arg(file.errorString()));
     return;
   }
+
+  exportDir = QString("%1.frames").arg(file.fileName());
 
   QTextStream stream(&file);
   stream.setCodec("utf-8");
