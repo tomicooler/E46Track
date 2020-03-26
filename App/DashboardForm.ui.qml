@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
-Item {
+Rectangle {
     property alias yaw: yaw
     property alias steeringWheel: steeringWheel
     property alias brake: brake
@@ -10,6 +10,7 @@ Item {
     property alias rpm: rpm
     property alias latg: latg
     property int minSize: width > height ? height : width
+    color: "transparent"
 
     Yaw {
         id: yaw

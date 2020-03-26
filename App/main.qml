@@ -65,75 +65,26 @@ ApplicationWindow {
                     drawer.close()
                 }
             }
+
+            ItemDelegate {
+                text: qsTr("Replay")
+                width: parent.width
+                onClicked: {
+                    stackView.push(replaypage)
+                    drawer.close()
+                }
+            }
         }
     }
 
     Component {
         id: dashboard
-        Page {
-            title: qsTr("Dashboard")
-
-            ColumnLayout {
-                anchors.fill: parent
-
-                RowLayout {
-                    Layout.margins: 10
-                    spacing: 10
-
-                    Item {
-                        Layout.fillWidth: true
-                    }
-
-                    Label {
-                        text: new Date(store.logger.startTime).toLocaleString(Qt.locale(), "MM-dd hh:mm:ss")
-                    }
-
-                    Label {
-                        text: new Date(store.logger.elapsedTime).toLocaleString(Qt.locale(), "mm:ss")
-                    }
-
-                    Switch {
-                        text: qsTr("Recording")
-                        checked: store.logger.logging
-                        onClicked: {
-                            store.logger.logging = !store.logger.logging;
-                        }
-                    }
-
-                    Item {
-                        Layout.fillWidth: true
-                    }
-                }
-
-                Dashboard {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-
-                    Converter {
-                        id: converterBrake
-                        converted: store.model.brake
-                        Component.onCompleted: {
-                            set(-0.07, 105.0, 0.0, 1.0)
-                        }
-                    }
-
-                    Converter {
-                        id: converterThrottle
-                        converted: store.model.throttle
-                        Component.onCompleted: {
-                            set(0.75, 3.96, 0.0, 1.0)
-                        }
-                    }
-
-                    yaw.yaw: -1 * store.model.yaw
-                    steeringWheel.angle: -1 * store.model.steeringAngle
-                    brake.position: converterBrake.converted
-                    throttle.position: converterThrottle.converted
-                    kmph: store.model.speed * 3.6
-                    rpm.rpm: store.model.rpm
-                    latg.g: store.model.latg
-                }
-            }
+        Main {
+            title: window.title
+            width: stackView.width
+            height: stackView.height
+            model: store.model
+            logger: store.logger
         }
     }
 
@@ -150,6 +101,14 @@ ApplicationWindow {
         id: wifipage
         WiFiInterface {
             wifi: store.wifi
+            width: stackView.width
+            height: stackView.height
+        }
+    }
+
+    Component {
+        id: replaypage
+        Replay {
             width: stackView.width
             height: stackView.height
         }

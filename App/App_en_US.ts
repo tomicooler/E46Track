@@ -4,12 +4,12 @@
 <context>
     <name>DashboardForm.ui</name>
     <message>
-        <location filename="DashboardForm.ui.qml" line="45"/>
+        <location filename="DashboardForm.ui.qml" line="46"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="DashboardForm.ui.qml" line="53"/>
+        <location filename="DashboardForm.ui.qml" line="54"/>
         <source>km/h</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19,6 +19,93 @@
     <message>
         <location filename="LateralG.qml" line="10"/>
         <source>%1 g</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainForm.ui</name>
+    <message>
+        <location filename="MainForm.ui.qml" line="34"/>
+        <source>Recording</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Replay</name>
+    <message>
+        <location filename="Replay.qml" line="16"/>
+        <source>Please coose a CSV file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Replay.qml" line="52"/>
+        <source>error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ReplayForm.ui</name>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="20"/>
+        <source>Replay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="69"/>
+        <source>400</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="80"/>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="63"/>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="75"/>
+        <source>px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="100"/>
+        <source>&lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="105"/>
+        <source>stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="105"/>
+        <source>play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="111"/>
+        <source>&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ReplayModel</name>
+    <message>
+        <location filename="replaymodel.cpp" line="39"/>
+        <source>Could not open file. &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="replaymodel.cpp" line="61"/>
+        <source>Invalid row count &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="replaymodel.cpp" line="111"/>
+        <source>No valid data in file=&apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -186,13 +273,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="74"/>
-        <source>Dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="main.qml" line="96"/>
-        <source>Recording</source>
+        <location filename="main.qml" line="70"/>
+        <source>Replay</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
