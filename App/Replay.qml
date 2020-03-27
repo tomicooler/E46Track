@@ -18,8 +18,7 @@ ReplayForm {
         nameFilters: ["CSV files (*.csv)"]
 
         onAccepted: {
-            replaymodel.loadUrl(dialog.fileUrl)
-            replaymodel.exportPath = replaymodel.exportDirectory();
+            replaymodel.loadUrl(dialog.fileUrl);
         }
 
         Component.onCompleted: {
@@ -65,6 +64,7 @@ ReplayForm {
     nextButton.enabled: replaymodel.index < (replaymodel.size - 1) && !exportButton.checked
 
     exportButton.onClicked: {
+        replaymodel.exportPath = replaymodel.exportDirectory();
         frameIndex = 0;
         replaymodel.index = replaymodel.index > 1 ? replaymodel.index - 1 : 0;
         replaymodel.next();

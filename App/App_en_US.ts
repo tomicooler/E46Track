@@ -38,7 +38,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Replay.qml" line="52"/>
+        <location filename="Replay.qml" line="51"/>
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
