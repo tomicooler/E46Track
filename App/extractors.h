@@ -95,4 +95,11 @@ private:
   const SignedTwoStepByteExtractor extractor{};
 };
 
+class Speed : public ModelUpdater {
+public:
+  void update(const DS2Message &message, Model &model) const override {
+    model.setSpeed(static_cast<quint8>(message.data.at(2)));
+  }
+};
+
 #endif // EXTRACTORS_H
