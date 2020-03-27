@@ -35,7 +35,6 @@ public slots:
 protected slots:
   void handleReadyRead();
   void handleError(QSerialPort::SerialPortError error);
-  void handleBytesWritten(qint64 written);
 
 private:
   QSerialPort m_serial;
