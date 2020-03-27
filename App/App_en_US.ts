@@ -112,20 +112,20 @@
 <context>
     <name>SerialInterface</name>
     <message>
-        <location filename="serialinterface.cpp" line="42"/>
-        <location filename="serialinterface.cpp" line="48"/>
-        <location filename="serialinterface.cpp" line="83"/>
+        <location filename="serialinterface.cpp" line="40"/>
+        <location filename="serialinterface.cpp" line="46"/>
+        <location filename="serialinterface.cpp" line="81"/>
         <source>SerialInterface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialinterface.cpp" line="43"/>
-        <location filename="serialinterface.cpp" line="84"/>
+        <location filename="serialinterface.cpp" line="41"/>
+        <location filename="serialinterface.cpp" line="82"/>
         <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="serialinterface.cpp" line="48"/>
+        <location filename="serialinterface.cpp" line="46"/>
         <source>Connected!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -164,24 +164,24 @@
 <context>
     <name>TCPInterface</name>
     <message>
-        <location filename="tcpinterface.cpp" line="48"/>
-        <location filename="tcpinterface.cpp" line="59"/>
-        <location filename="tcpinterface.cpp" line="64"/>
+        <location filename="tcpinterface.cpp" line="46"/>
+        <location filename="tcpinterface.cpp" line="57"/>
+        <location filename="tcpinterface.cpp" line="62"/>
         <source>Wifi interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="49"/>
+        <location filename="tcpinterface.cpp" line="47"/>
         <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="59"/>
+        <location filename="tcpinterface.cpp" line="57"/>
         <source>Connection successful!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="64"/>
+        <location filename="tcpinterface.cpp" line="62"/>
         <source>Connection lost!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -189,42 +189,42 @@
 <context>
     <name>WiFiInterfaceForm.ui</name>
     <message>
-        <location filename="WiFiInterfaceForm.ui.qml" line="14"/>
+        <location filename="WiFiInterfaceForm.ui.qml" line="15"/>
         <source>WiFi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WiFiInterfaceForm.ui.qml" line="21"/>
+        <location filename="WiFiInterfaceForm.ui.qml" line="22"/>
         <source>Host:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WiFiInterfaceForm.ui.qml" line="26"/>
+        <location filename="WiFiInterfaceForm.ui.qml" line="27"/>
         <source>192.168.0.10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WiFiInterfaceForm.ui.qml" line="29"/>
+        <location filename="WiFiInterfaceForm.ui.qml" line="30"/>
         <source>Port:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WiFiInterfaceForm.ui.qml" line="34"/>
+        <location filename="WiFiInterfaceForm.ui.qml" line="35"/>
         <source>35000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WiFiInterfaceForm.ui.qml" line="44"/>
+        <location filename="WiFiInterfaceForm.ui.qml" line="45"/>
         <source>Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WiFiInterfaceForm.ui.qml" line="54"/>
+        <location filename="WiFiInterfaceForm.ui.qml" line="55"/>
         <source>OBDII Wifi: &lt;a href=&quot;https://www.ebay.com/usr/catastefy&quot;&gt;ebay - catastefy&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="WiFiInterfaceForm.ui.qml" line="63"/>
+        <location filename="WiFiInterfaceForm.ui.qml" line="64"/>
         <source>NOTE: turn off mobil data and connect to OBDII wifi.</source>
         <translation type="unfinished"></translation>
     </message>
