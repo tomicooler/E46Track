@@ -9,6 +9,10 @@ Facade::Facade(QObject *parent)
                                QByteArray::fromHex("0b03")},
                     {std::make_shared<Throttle>(), std::make_shared<RPM>()},
                     m_model},
+          Requester{DS2Message{QByteArray::fromHex("12"),
+                               QByteArray::fromHex("0b13")},
+                    {std::make_shared<Speed>()},
+                    m_model},
           Requester{DS2Message{QByteArray::fromHex("b829f1"),
                                QByteArray::fromHex("2102")},
                     {}, // DSC offsets, must be sent

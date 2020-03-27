@@ -117,6 +117,19 @@ additional multiplier = 100
 
 The resolution of the data was just 1 seconds~ that's the only problem with the chart.
 
+**speed (km per hour)**
+
+
+```
+DS2 request: 12050b130f
+DS2 response: 125ea00037037000000f730f560f740f7f0f500f9e0f7a0f7a012a012a012a012a012a012a000000007f3c7f1881a200000000000200000000000000000000fb0500000000000000000000000a23127200007276011330000000000000dc
+```
+
+Bytepos 2 as unsiged integer. TODO: what happens over 255 km/h? Maybe + unsigned bytepos 1?
+
+![alt text](doc/calculations_speed.png?raw=true "RPM: INPA vs E46Track")
+
+
 **Brake pressure (bar) [-10:200, mine goes from -0.7-100]**
 
 ![alt text](doc/inpa_brake_pressure.png?raw=true "Brake INPA")
