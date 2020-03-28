@@ -1,6 +1,20 @@
 #include "facade.h"
 
+#include <QDateTime>
+#include <QDebug>
 #include <QTimer>
+
+namespace {
+
+static const inline QByteArray acknowledgement = QByteArray::fromHex("a0");
+static const inline QByteArray dscResponse = QByteArray::fromHex("b8f129");
+
+bool isResponse(const DS2Message &message) {
+  return message.data.startsWith(QByteArray::fromHex("a0")) ||
+         message.ecu.startsWith(QByteArray::fromHex("b8f129"));
+}
+
+} // namespace
 
 Facade::Facade(QObject *parent)
     : QObject(parent), m_model(std::make_shared<Model>()),
@@ -43,15 +57,17 @@ void Facade::dataReceived(const QByteArray &data) {
   }
 
   if (const auto message = parser.parse(buffer); message.has_value()) {
-    requesters.at(index).processResponse(message.value());
-  }
+    if (isResponse(message.value())) {
+      requesters.at(index).processResponse(message.value());
 
-  ++index;
-  if (index >= requesters.size()) {
-    index = 0;
-  }
+      ++index;
+      if (index >= requesters.size()) {
+        index = 0;
+      }
 
-  QTimer::singleShot(20, this, &Facade::sendRequest);
+      QTimer::singleShot(40, this, &Facade::sendRequest);
+    }
+  }
 }
 
 void Facade::sendRequest() {
