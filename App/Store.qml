@@ -32,6 +32,7 @@ Item {
 
         onConnected: {
             interfaceWifi = false;
+            facade.setDelay(40);
             facade.connected();
         }
 
@@ -49,6 +50,7 @@ Item {
 
         onConnected: {
             interfaceWifi = true;
+            facade.setDelay(0);
             facade.connected();
         }
 
