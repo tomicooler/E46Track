@@ -48,6 +48,9 @@ public:
       quint8 dataSize{};
     };
 
+    if (data.size() < (ecuSize + 1))
+      return std::nullopt;
+
     const Length length = [&]() -> Length {
       quint8 atEcuSize = data.at(ecuSize);
       return ecuSize == quint8{1}
