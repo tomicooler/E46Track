@@ -1,0 +1,10 @@
+[Unit]
+Description=E46Network
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/alarm/e46network.sh
+
+[Install]
+WantedBy=multi-user.target
