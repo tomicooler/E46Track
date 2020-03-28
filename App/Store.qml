@@ -9,6 +9,7 @@ Item {
     property alias model: facade.model
     property bool serialAvailable: true
     property alias logger: facade.logger
+    property alias latencyMs: facade.latency
 
     InfoDialog {
         id: infoDialog

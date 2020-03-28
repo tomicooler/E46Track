@@ -23,9 +23,17 @@
     </message>
 </context>
 <context>
+    <name>Main</name>
+    <message>
+        <location filename="Main.qml" line="11"/>
+        <source>Latency: %1 ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MainForm.ui</name>
     <message>
-        <location filename="MainForm.ui.qml" line="34"/>
+        <location filename="MainForm.ui.qml" line="35"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>

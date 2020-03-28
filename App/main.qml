@@ -85,6 +85,7 @@ ApplicationWindow {
             height: stackView.height
             model: store.model
             logger: store.logger
+            latencyMs: store.latencyMs
         }
     }
 
