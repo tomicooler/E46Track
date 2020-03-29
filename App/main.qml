@@ -17,7 +17,7 @@ ApplicationWindow {
         ToolButton {
             id: toolButton
             icon.name: stackView.depth > 1 ? qsTr("Back") : qsTr("Settings")
-            icon.source: stackView.depth > 1 ? "qrc:/icons/arrow-left.svg" : "qrc:/icons/bars.svg"
+            icon.source: stackView.depth > 1 ? "qrc:/icons/navigate_before-black-48dp.svg" : "qrc:/icons/settings-black-48dp.svg"
             onClicked: {
                 if (stackView.depth > 1) {
                     stackView.pop()

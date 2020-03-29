@@ -69,6 +69,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="ReplayForm.ui.qml" line="101"/>
+        <source>Previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="107"/>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="107"/>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ReplayForm.ui.qml" line="114"/>
+        <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="ReplayForm.ui.qml" line="63"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
@@ -76,26 +96,6 @@
     <message>
         <location filename="ReplayForm.ui.qml" line="75"/>
         <source>px</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ReplayForm.ui.qml" line="100"/>
-        <source>&lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ReplayForm.ui.qml" line="105"/>
-        <source>stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ReplayForm.ui.qml" line="105"/>
-        <source>play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ReplayForm.ui.qml" line="111"/>
-        <source>&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
