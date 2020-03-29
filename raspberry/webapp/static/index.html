@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+  <meta charset="utf-8">
+  <title>E46Track Launcher</title>
+  <link rel="stylesheet" href="/main.css">
+  <script>
+    function setHref() {
+      var elements = document.getElementsByClassName("modify-me");
+      var length = elements.length;
+      for (var i = 0; i < length; i++) {
+	    elements[i].href = window.location.protocol + "//" + window.location.hostname + elements[i].href.substring(1);
+	  }
+    }
+</script>
+</head>
+<body onload="setHref()">
+  <p class="aligncenter">
+    <a href="a:8080" class="modify-me"><img src="/speed-black-48dp.svg" alt="Launch E46Track"/></a>
+  </p>
+  <p class="aligncenter">
+    <a href="/downloads"><img src="/get_app-black-48dp.svg" alt="Downloads"/></a>
+  </p>
+  <p class="aligncenter">
+    <a href="a:9999" class="modify-me"><img src="/power_settings_new-black-48dp.svg" alt="Power off"/></a>
+  </p>
+</body>
+</html>
