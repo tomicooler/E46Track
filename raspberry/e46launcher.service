@@ -1,0 +1,12 @@
+[Unit]
+Description=E46Launcher
+After=network.target
+
+[Service]
+Type=simple
+User=alarm
+ExecStart=go run main.go
+WorkingDirectory=/home/alarm/webapp
+
+[Install]
+WantedBy=multi-user.target
