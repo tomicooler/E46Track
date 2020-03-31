@@ -10,6 +10,7 @@ Page {
     property alias dashboard: dashboard
     width: 640
     height: 480
+    title: qsTr("E46Track")
 
     ColumnLayout {
         anchors.fill: parent

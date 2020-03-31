@@ -33,7 +33,12 @@
 <context>
     <name>MainForm.ui</name>
     <message>
-        <location filename="MainForm.ui.qml" line="35"/>
+        <location filename="MainForm.ui.qml" line="13"/>
+        <source>E46Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="MainForm.ui.qml" line="36"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -42,7 +47,8 @@
     <name>Replay</name>
     <message>
         <location filename="Replay.qml" line="16"/>
-        <source>Please coose a CSV file</source>
+        <source>Please choose a CSV file</source>
+        <oldsource>Please coose a CSV file</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -256,32 +262,32 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="main.qml" line="12"/>
+        <location filename="main.qml" line="11"/>
         <source>E46Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="19"/>
+        <location filename="main.qml" line="18"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="19"/>
+        <location filename="main.qml" line="18"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="51"/>
+        <location filename="main.qml" line="50"/>
         <source>SerialPort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="61"/>
+        <location filename="main.qml" line="60"/>
         <source>WiFi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="70"/>
+        <location filename="main.qml" line="69"/>
         <source>Replay</source>
         <translation type="unfinished"></translation>
     </message>

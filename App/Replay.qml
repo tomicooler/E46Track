@@ -13,7 +13,7 @@ ReplayForm {
 
     FileDialog {
         id: dialog
-        title: qsTr("Please coose a CSV file")
+        title: qsTr("Please choose a CSV file")
         folder: replaymodel.directory()
         nameFilters: ["CSV files (*.csv)"]
 

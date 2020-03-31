@@ -5,7 +5,6 @@ import QtQuick.Layouts 1.12
 import com.tomicooler.e46track 1.0
 
 ApplicationWindow {
-    id: window
     visible: true
     width: 1020
     height: 720
@@ -41,8 +40,8 @@ ApplicationWindow {
 
     Drawer {
         id: drawer
-        width: window.width * 0.4
-        height: window.height
+        width: parent.width * 0.4
+        height: parent.height
 
         Column {
             anchors.fill: parent
@@ -80,7 +79,6 @@ ApplicationWindow {
     Component {
         id: dashboard
         Main {
-            title: window.title
             width: stackView.width
             height: stackView.height
             model: store.model
