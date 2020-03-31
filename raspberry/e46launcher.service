@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=alarm
 ExecStart=go run main.go
-WorkingDirectory=/home/alarm/webapp
+WorkingDirectory=/home/alarm/E46Track/raspberry/webapp
 
 [Install]
 WantedBy=multi-user.target

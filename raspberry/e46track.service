@@ -5,8 +5,7 @@ After=network.target
 [Service]
 Type=simple
 User=alarm
-ExecStart=/home/alarm/build-App/App -platform webgl:port=8080
-WorkingDirectory=/home/alarm/build-App
+ExecStart=/home/alarm/E46Track/build-App/App -platform webgl:port=8080
 
 [Install]
 WantedBy=multi-user.target
