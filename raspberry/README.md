@@ -7,6 +7,8 @@ During my tests java.socket, java.nio, and even my Qt app produced the issue, I 
 
 Raspberry deployment would work with iPhone too.
 
+Most importantly, if you can't buy a WiFi OBD K+DCAN adapter, then you can fallback to the usb serial cable which is highly available in the market.
+
 ## How it is working?
 
 1. Create a WiFi HotSpot with your phone.
