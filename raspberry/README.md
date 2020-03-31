@@ -72,7 +72,7 @@ $ gpasswd -a alarm uucp
 
 Networking:
 
-/etc/netctl/wlan0-YourPhoneHotSpot (first use IP=dhcp then fill the static ip)
+/etc/netctl/wlan0-YourPhoneHotSpot (first use IP=dhcp then fill the static ip, NOTE: this will need more bandwith!!!)
 ```
 Description='Create a HotSpot with your phone'
 Interface=wlan0
