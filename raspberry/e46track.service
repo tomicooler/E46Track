@@ -1,0 +1,11 @@
+[Unit]
+Description=E46Track
+After=network.target
+
+[Service]
+Type=simple
+User=alarm
+ExecStart=/home/alarm/E46Track/build-App/App -platform webgl:port=8080
+
+[Install]
+WantedBy=multi-user.target

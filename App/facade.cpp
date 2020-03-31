@@ -1,6 +1,20 @@
 #include "facade.h"
 
+#include <QDateTime>
+#include <QDebug>
 #include <QTimer>
+
+namespace {
+
+static const inline QByteArray acknowledgement = QByteArray::fromHex("a0");
+static const inline QByteArray dscResponse = QByteArray::fromHex("b8f129");
+
+bool isResponse(const DS2Message &message) {
+  return message.data.startsWith(QByteArray::fromHex("a0")) ||
+         message.ecu.startsWith(QByteArray::fromHex("b8f129"));
+}
+
+} // namespace
 
 Facade::Facade(QObject *parent)
     : QObject(parent), m_model(std::make_shared<Model>()),
@@ -33,6 +47,10 @@ Model *Facade::model() { return m_model.get(); }
 
 DataLogger *Facade::logger() { return &m_logger; }
 
+int Facade::delay() const { return m_delay; }
+
+int Facade::latency() const { return m_latency; }
+
 void Facade::dataReceived(const QByteArray &data) {
   if (index >= requesters.size())
     return;
@@ -43,15 +61,21 @@ void Facade::dataReceived(const QByteArray &data) {
   }
 
   if (const auto message = parser.parse(buffer); message.has_value()) {
-    requesters.at(index).processResponse(message.value());
-  }
+    if (isResponse(message.value())) {
+      qint64 now = QDateTime::currentMSecsSinceEpoch();
+      setLatency(now - last_response);
+      last_response = now;
 
-  ++index;
-  if (index >= requesters.size()) {
-    index = 0;
-  }
+      requesters.at(index).processResponse(message.value());
 
-  QTimer::singleShot(20, this, &Facade::sendRequest);
+      ++index;
+      if (index >= requesters.size()) {
+        index = 0;
+      }
+
+      QTimer::singleShot(delay(), this, &Facade::sendRequest);
+    }
+  }
 }
 
 void Facade::sendRequest() {
@@ -61,4 +85,23 @@ void Facade::sendRequest() {
   emit sendData(requesters.at(index).get_message().serialized);
 }
 
-void Facade::connected() { sendRequest(); }
+void Facade::connected() {
+  last_response = QDateTime::currentMSecsSinceEpoch();
+  sendRequest();
+}
+
+void Facade::setDelay(int delay) {
+  if (m_delay == delay)
+    return;
+
+  m_delay = delay;
+  emit delayChanged(m_delay);
+}
+
+void Facade::setLatency(int latency) {
+  if (m_latency == latency)
+    return;
+
+  m_latency = latency;
+  emit latencyChanged(m_latency);
+}

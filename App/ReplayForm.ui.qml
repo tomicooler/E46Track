@@ -75,9 +75,10 @@ Page {
                 text: qsTr("px")
             }
 
-            Button {
+            ToolButton {
                 id: exportButton
-                text: qsTr("Export")
+                icon.name: qsTr("Export")
+                icon.source: "qrc:/icons/get_app-black-48dp.svg"
                 checkable: true
                 enabled: !playPauseButton.checked
             }
@@ -95,20 +96,23 @@ Page {
                 Layout.fillWidth: true
             }
 
-            Button {
+            ToolButton {
                 id: prevButton
-                text: qsTr("<")
+                icon.name: qsTr("Previous")
+                icon.source: "qrc:/icons/skip_previous-black-48dp.svg"
             }
 
-            Button {
+            ToolButton {
                 id: playPauseButton
-                text: checked ? qsTr("stop") : qsTr("play")
+                icon.name: checked ? qsTr("Pause") : qsTr("Play")
+                icon.source: checked ? "qrc:/icons/pause-black-48dp.svg" : "qrc:/icons/play_arrow-black-48dp.svg"
                 checkable: true
             }
 
-            Button {
+            ToolButton {
                 id: nextButton
-                text: qsTr(">")
+                icon.name: qsTr("Next")
+                icon.source: "qrc:/icons/skip_next-black-48dp.svg"
             }
 
             Item {

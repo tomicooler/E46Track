@@ -37,8 +37,6 @@ void TCPInterface::sendData(const QByteArray &data) {
     }
     framedData += checksum;
 
-    qDebug() << "sending on wifi" << qPrintable(framedData.toHex());
-
     m_socket.write(framedData);
   }
 }

@@ -1,0 +1,9 @@
+[Unit]
+Description=bbpi socket
+PartOf=bbpi.service
+
+[Socket]
+ListenStream=0.0.0.0:9999
+
+[Install]
+WantedBy=sockets.target

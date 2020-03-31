@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QIcon>
 
 #ifndef Q_OS_ANDROID
 #include "serialinterface.h"
@@ -37,6 +38,7 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
   QGuiApplication app(argc, argv);
+  app.setWindowIcon(QIcon(":/icons/appicon.png"));
 
 #ifndef Q_OS_ANDROID
   qmlRegisterType<SerialInterface>("com.tomicooler.e46track", 1, 0,

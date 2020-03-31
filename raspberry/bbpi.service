@@ -1,0 +1,12 @@
+[Unit]
+Description=Shuts down the Pi
+After=network.target bbpi.socket
+Requires=bbpi.socket
+
+[Service]
+Type=simple
+ExecStart=systemctl poweroff
+TimeoutStopSec=130
+
+[Install]
+WantedBy=default.target

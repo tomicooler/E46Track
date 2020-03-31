@@ -1,6 +1,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
+import Qt.labs.settings 1.0
 import QtQml 2.2
 
 Page {
@@ -62,5 +63,10 @@ Page {
         visible: Qt.platform.os == "android"
         text: qsTr("NOTE: turn off mobil data and connect to OBDII wifi.")
         wrapMode: Text.Wrap
+    }
+
+    Settings {
+        property alias host: host.text
+        property alias port: port.text
     }
 }

@@ -9,6 +9,7 @@ Item {
     property alias model: facade.model
     property bool serialAvailable: true
     property alias logger: facade.logger
+    property alias latencyMs: facade.latency
 
     InfoDialog {
         id: infoDialog
@@ -32,6 +33,7 @@ Item {
 
         onConnected: {
             interfaceWifi = false;
+            facade.setDelay(40);
             facade.connected();
         }
 
@@ -49,6 +51,7 @@ Item {
 
         onConnected: {
             interfaceWifi = true;
+            facade.setDelay(0);
             facade.connected();
         }
 

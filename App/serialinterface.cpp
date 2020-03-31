@@ -15,8 +15,6 @@ SerialInterface::SerialInterface(QObject *parent) : QObject(parent) {
 
   connect(&m_serial, &QIODevice::readyRead, this,
           &SerialInterface::handleReadyRead);
-  connect(&m_serial, &QSerialPort::bytesWritten, this,
-          &SerialInterface::handleBytesWritten);
   connect(&m_serial, &QSerialPort::errorOccurred, this,
           &SerialInterface::handleError);
 }
@@ -82,8 +80,4 @@ void SerialInterface::handleError(QSerialPort::SerialPortError error) {
   qDebug() << error;
   emit displayDialog(tr("SerialInterface"),
                      tr("Error: %1").arg(m_serial.errorString()));
-}
-
-void SerialInterface::handleBytesWritten(qint64 written) {
-  qDebug() << "written" << written;
 }

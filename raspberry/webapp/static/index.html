@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+  <link rel="apple-touch-icon" sizes="128x128" href="/appicon.png">
+  <link rel="icon" sizes="192x192" href="/appicon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/main.css">
+  <meta charset="utf-8">
+  <title>E46Track Launcher</title>
+  <script>
+    function setHref() {
+      var elements = document.getElementsByClassName("modify-me");
+      var length = elements.length;
+      for (var i = 0; i < length; i++) {
+	    elements[i].href = window.location.protocol + "//" + window.location.hostname + elements[i].href.substring(1);
+	  }
+    }
+</script>
+</head>
+<body onload="setHref()">
+  <a href="a:8080" class="modify-me"><div class="imgbox"><img src="/speed-black-48dp.svg" class="center-fit" alt="Launch E46Track"/></div></a>
+  <a href="/downloads"><div class="imgbox"><img src="/get_app-black-48dp.svg" class="center-fit" alt="Downloads"/></div></a>
+  <a href="a:9999" class="modify-me"><div class="imgbox"><img src="/power_settings_new-black-48dp.svg" class="center-fit" alt="Power off"/></div></a>
+</body>
+</html>
