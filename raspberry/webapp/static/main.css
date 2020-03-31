@@ -5,7 +5,7 @@ html, body {
 }
 .imgbox {
     display: grid;
-    height: 30%;
+    height: 33%;
 }
 .center-fit {
    width: 100%;
