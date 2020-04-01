@@ -60,22 +60,26 @@ void Facade::dataReceived(const QByteArray &data) {
     buffer.clear();
   }
 
-  if (const auto message = parser.parse(buffer); message.has_value()) {
-    if (isResponse(message.value())) {
-      qint64 now = QDateTime::currentMSecsSinceEpoch();
-      setLatency(now - last_response);
-      last_response = now;
+  do {
+    if (const auto message = parser.parse(buffer); message.has_value()) {
+      if (isResponse(message.value())) {
+        qint64 now = QDateTime::currentMSecsSinceEpoch();
+        setLatency(now - last_response);
+        last_response = now;
 
-      requesters.at(index).processResponse(message.value());
+        requesters.at(index).processResponse(message.value());
 
-      ++index;
-      if (index >= requesters.size()) {
-        index = 0;
+        ++index;
+        if (index >= requesters.size()) {
+          index = 0;
+        }
+
+        QTimer::singleShot(delay(), this, &Facade::sendRequest);
       }
-
-      QTimer::singleShot(delay(), this, &Facade::sendRequest);
+    } else {
+      break;
     }
-  }
+  } while (buffer.size() > 0);
 }
 
 void Facade::sendRequest() {
