@@ -62,6 +62,7 @@ void SerialInterface::setPort(QString port) {
     return;
 
   m_port = port;
+  m_serial.setPortName(port);
   emit portChanged(m_port);
 }
 
