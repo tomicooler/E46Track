@@ -53,6 +53,7 @@ int SerialInterface::baud() const { return m_serial.baudRate(); }
 void SerialInterface::sendData(const QByteArray &data) {
   if (m_serial.isOpen()) {
     m_serial.write(data);
+    m_serial.flush();
   }
 }
 
@@ -61,6 +62,7 @@ void SerialInterface::setPort(QString port) {
     return;
 
   m_port = port;
+  m_serial.setPortName(port);
   emit portChanged(m_port);
 }
 

@@ -38,6 +38,7 @@ void TCPInterface::sendData(const QByteArray &data) {
     framedData += checksum;
 
     m_socket.write(framedData);
+    m_socket.flush();
   }
 }
 

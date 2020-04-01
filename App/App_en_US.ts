@@ -128,13 +128,13 @@
     <message>
         <location filename="serialinterface.cpp" line="40"/>
         <location filename="serialinterface.cpp" line="46"/>
-        <location filename="serialinterface.cpp" line="81"/>
+        <location filename="serialinterface.cpp" line="82"/>
         <source>SerialInterface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="serialinterface.cpp" line="41"/>
-        <location filename="serialinterface.cpp" line="82"/>
+        <location filename="serialinterface.cpp" line="83"/>
         <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -178,24 +178,24 @@
 <context>
     <name>TCPInterface</name>
     <message>
-        <location filename="tcpinterface.cpp" line="46"/>
-        <location filename="tcpinterface.cpp" line="57"/>
-        <location filename="tcpinterface.cpp" line="62"/>
+        <location filename="tcpinterface.cpp" line="47"/>
+        <location filename="tcpinterface.cpp" line="58"/>
+        <location filename="tcpinterface.cpp" line="63"/>
         <source>Wifi interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="47"/>
+        <location filename="tcpinterface.cpp" line="48"/>
         <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="57"/>
+        <location filename="tcpinterface.cpp" line="58"/>
         <source>Connection successful!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tcpinterface.cpp" line="62"/>
+        <location filename="tcpinterface.cpp" line="63"/>
         <source>Connection lost!</source>
         <translation type="unfinished"></translation>
     </message>
