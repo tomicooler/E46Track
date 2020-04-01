@@ -54,7 +54,7 @@ public:
     const Length length = [&]() -> Length {
       quint8 atEcuSize = data.at(ecuSize);
       return ecuSize == quint8{1}
-                 ? Length{atEcuSize,
+                 ? Length{std::max(atEcuSize, static_cast<quint8>(3)),
                           static_cast<quint8>(atEcuSize - ecuSize - 1)}
                  : Length{static_cast<quint8>(ecuSize + atEcuSize + 2),
                           atEcuSize};
