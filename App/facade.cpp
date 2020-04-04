@@ -91,7 +91,7 @@ void Facade::sendRequest() {
 
 void Facade::connected() {
   last_response = QDateTime::currentMSecsSinceEpoch();
-  sendRequest();
+  QTimer::singleShot(100, this, &Facade::sendRequest);
 }
 
 void Facade::setDelay(int delay) {

@@ -31,6 +31,7 @@ Item {
         id: wifi
 
         onConnected: {
+            facade.setDelay(0);
             facade.connected();
         }
 

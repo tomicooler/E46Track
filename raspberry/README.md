@@ -11,12 +11,12 @@ Most importantly, if you can't buy a WiFi OBD K+DCAN adapter, then you can fallb
 
 ## How it is working?
 
-1. Create a WiFi HotSpot with your phone.
-2. Connect the Raspberry to this network.
+1. Create a WiFi HotSpot with your phone. NOTE: Turn off bluetooth for more bandwith!
+2. Connect the Raspberry to this network. Details below.
 3. Open <raspberry-ip>:5000 from your Phone, e.g: with Google Chrome.
-4. Use the Add to home screen functionality, and you will have an App.
-
-From this E46Launcher app you can start the E46Track app, download the recordings and power off the pi.
+4. Tip: use the Add to home screen functionality to create an Application from the launcher.
+5. Start the E46Track App from the launcher.
+6. Connect to WiFi OBD or Cable. NOTE: before connecting to the OBD interface (WiFi or Cable) turn the key to ignition, or start your engine.
 
 ## Known issues
 
@@ -35,7 +35,7 @@ $ ssh alarm@<raspberry-pi-ip-address>
 Install dependencies:
 ```
 $ su root
-$ pacman -S base-devel git cmake go qt5-base qt5-declarative qt5-quickcontrols qt5-quickcontrols2 qt5-serialport qt5-svg qt5-tools qt5-webglplugin qt5-websockets ttf-dejavu
+$ pacman -S base-devel git cmake go qt5-base qt5-declarative qt5-quickcontrols qt5-quickcontrols2 qt5-serialport qt5-svg qt5-tools qt5-webglplugin qt5-websockets ttf-dejavu ntp
 ```
 
 Clone E46Track:
@@ -103,4 +103,11 @@ IP=dhcp
 
 ```
 systemctl enable netctl-auto@wlan1.interface
+```
+
+Set time:
+```
+$ su root
+$ ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime
+$ systemctl enable ntpd.service
 ```
