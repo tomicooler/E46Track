@@ -1,24 +1,64 @@
 # E46Track
 
+E46Track is a "not so serious" Real-Time Telemetry applicaton for BMW E46 M3 owners. It is more like a toy due to some serious limitations.
+
+**What data is collected?**
+ - speed (km/h)
+ - engine rpm
+ - steering angle (degree)
+ - yaw rate (degress/sec)
+ - lateral G (g)
+ - brake pressure (bar)
+ - throttle sensor position (V)
+
+**What can you do with the collected data?**
+ - replay them with E46Track
+ - export frames for video rendering from E46Track
+ - whatever you like, it's a simple CSV
+
+**Do I need to modify my car in any way?**
+ - No, not for this app.
+
+**Why it is a "not so serious" application?**
+ - The data is queried from the car (the same way as you go live diagnostic mode with INPA software).
+ - Need to make 5 separate queries each takes up 150ms (one is 250ms).
+ - Anyway the replaying tool interpolates the data series, it is enchanced a bit.
+
+ **Why don't I use CAN?**
+  - There are already cool options out there. [RaceCapture](https://wiki.autosportlabs.com/BMW_E46_CAN)
+  - The goal of this project was to get familiar with my car and improve myself and share the knowledge with everyone interested.
+
 ## Requirements
 
- - **Technical skills, and patience!**
+ - **Technical skills and patience!**
+
  - BMW E46 M3
-   - Check your car with INPA, do you see live data on the menu points?
-     - S54B32 engine. INPA: MSS52 DS0 for S54
-     - DSC MK60 module
- - WiFi K+DCAN interface
- - Android 10+ mobile phone with my app installed
-   - **Mobile data must be disabled!**
-   - Connect your mobile phone to the WiFi K+DCAN interface's WIFI hotspot
-   - The gateway's ip address should be configured in the app's settings, the port should be 35000
+
+   - If you have INPA, make sure these options work for you:
+
+![alt text](doc/requirements_inpa_engine.png?raw=true "MS S54 for S54 M3")
+
+![alt text](doc/requirements_inpa_dsc.png?raw=true "DSC MK60")
+
+ - WiFi K+DCAN interface or K+DCAN cable and a Raspberry Pi / Laptop
+
+ ## Android App
+  - **Mobile data must be disabled!**
+  - Connect your mobile phone to the WiFi K+DCAN interface's WiFi hotspot
+  - The gateway's ip address should be configured in the app's settings, the port should be 35000.
+  - Unfortunately my Nokia 7 plus adds some periodic delay on the communication, that's why I moved for a Raspberry Pi setup.
+    - GPS data logging would be an awesome feature. It would improve the logging as well, since I could spare a 250 ms query for the speed.
+
+## Raspberry Pi deployment
+
+[DETAILS](https://github.com/tomicooler/E46Track/tree/master/raspberry)
 
 ## Under the hood
 
- - Basically my app mimics the INPA BMW diagnostics software.
- - My app communicates with the car, the same way as INPA does - DS2 protocol - a request response
+ - Basically E46Track mimics the INPA BMW diagnostics software.
+ - E46Track communicates with the car, the same way as INPA does - DS2 protocol - a request response
    binary protocol.
- - The WiFi K+DCAN interface adds an additional framing on the DS2 requests.
+ - NOTE: the WiFi K+DCAN interface adds an additional framing over the DS2 requests. Details later.
 
 **DS2 request**
 ```
@@ -117,7 +157,7 @@ additional multiplier = 100
 
 The resolution of the data was just 1 seconds~ that's the only problem with the chart.
 
-**speed (km per hour)**
+**Speed (km per hour)**
 
 
 ```

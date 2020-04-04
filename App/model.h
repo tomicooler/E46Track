@@ -65,6 +65,7 @@ signals:
   void rpmChanged(double rpm);
   void yawChanged(double yaw);
   void latgChanged(double latg);
+  void updated();
 
 private:
   Data m_data;
