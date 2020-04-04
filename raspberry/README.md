@@ -3,11 +3,11 @@
 ## Why is there a Raspberry edition?
 
 Unfortunately my phone (Nokia 7 plus) adds some delay (quite much, even 1+ second) periodically on the socket which makes the playback rather unpleasant.
-During my tests java.socket, java.nio, and even my Qt app produced the issue, I tried with several thread priority, etc, but I couldn't fix the issue.
+During my tests java.socket, java.nio, and even my Qt app produced the issue, I tried with several methods, changing thread priority, etc, but I couldn't fix the issue.
 
 Raspberry deployment would work with iPhone too.
 
-Most importantly, if you can't buy a WiFi OBD K+DCAN adapter, then you can fallback to the usb serial cable which is highly available in the market.
+Most importantly, if you can't find a WiFi OBD K+DCAN adapter, then you can use the widely available usb serial cable.
 
 ## How it is working?
 
@@ -90,6 +90,8 @@ Key=YourHotSpotSecretKey
 ```
 systemctl enable netctl-auto@wlan0.interface
 ```
+
+For this buy an additional WiFi Adapter for your Raspberry Pie. I bought a Tenda U3 for this purpose.
 
 /etc/netctl/wlan0-WiFi_OBDII (If you will be using WIFI_OBDII interface)
 ```

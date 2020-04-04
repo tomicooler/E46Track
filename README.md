@@ -28,6 +28,21 @@ E46Track is a "not so serious" Real-Time Telemetry applicaton for BMW E46 M3 own
   - There are already cool options out there. [RaceCapture](https://wiki.autosportlabs.com/BMW_E46_CAN)
   - The goal of this project was to get familiar with my car and improve myself and share the knowledge with everyone interested.
 
+
+## Screenshots
+
+**Android App**
+
+<img src="doc/Screenshot_20200404-174320.png" width="300"/><img src="doc/Screenshot_20200404-174332.png" width="300"/>
+<img src="doc/Screenshot_20200404-174356.png" width="300"/>
+
+**Raspberry App**
+
+<img src="doc/Screenshot_20200404-174906.png" width="300"/><img src="doc/Screenshot_20200404-174935.png" width="300"/>
+<img src="doc/Screenshot_20200404-175007.png" width="300"/><img src="doc/Screenshot_20200404-175018.png" width="300"/>
+<img src="doc/Screenshot_20200404-175038.png" width="300"/><img src="doc/Screenshot_20200404-175044.png" width="300"/>
+<img src="doc/Screenshot_20200404-175058.png" width="300"/>
+
 ## Requirements
 
  - **Technical skills and patience!**
@@ -42,12 +57,15 @@ E46Track is a "not so serious" Real-Time Telemetry applicaton for BMW E46 M3 own
 
  - WiFi K+DCAN interface or K+DCAN cable and a Raspberry Pi / Laptop
 
+![alt text](doc/requirements_tools.jpg?raw=true "Tools")
+
  ## Android App
   - **Mobile data must be disabled!**
   - Connect your mobile phone to the WiFi K+DCAN interface's WiFi hotspot
   - The gateway's ip address should be configured in the app's settings, the port should be 35000.
   - Unfortunately my Nokia 7 plus adds some periodic delay on the communication, that's why I moved for a Raspberry Pi setup.
     - GPS data logging would be an awesome feature. It would improve the logging as well, since I could spare a 250 ms query for the speed.
+  - Known issue: the app crashes if you open the second CSV for replay.
 
 ## Raspberry Pi deployment
 
