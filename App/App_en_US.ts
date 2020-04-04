@@ -128,13 +128,13 @@
     <message>
         <location filename="serialinterface.cpp" line="40"/>
         <location filename="serialinterface.cpp" line="46"/>
-        <location filename="serialinterface.cpp" line="82"/>
+        <location filename="serialinterface.cpp" line="83"/>
         <source>SerialInterface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="serialinterface.cpp" line="41"/>
-        <location filename="serialinterface.cpp" line="83"/>
+        <location filename="serialinterface.cpp" line="84"/>
         <source>Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
