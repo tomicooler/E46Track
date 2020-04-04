@@ -25,8 +25,6 @@ public:
 };
 
 DataLogger::DataLogger(QObject *parent) : QObject(parent) {
-  timer.setInterval(80);
-  connect(&timer, &QTimer::timeout, this, &DataLogger::timeout);
   setStartTime(QDateTime::currentMSecsSinceEpoch());
 }
 
@@ -59,10 +57,10 @@ void DataLogger::setLogging(bool logging) {
             .arg(location)
             .arg(QDateTime::fromMSecsSinceEpoch(m_startTime)
                      .toString("yyyy-MM-dd_hh:mm:ss")));
-    timer.start();
+    connect(model.get(), &Model::updated, this, &DataLogger::log);
     elapsed.start();
   } else {
-    timer.stop();
+    disconnect(model.get(), &Model::updated, this, &DataLogger::log);
     logger.reset();
   }
 
@@ -86,7 +84,7 @@ void DataLogger::setElapsedTime(qint64 elapsedTime) {
   emit elapsedTimeChanged(m_elapsedTime);
 }
 
-void DataLogger::timeout() {
+void DataLogger::log() {
   qint64 timestamp = m_startTime + elapsed.elapsed();
   logger->stream << QString("%1,%2,%3,%4,%5,%6,%7,%8\n")
                         .arg(timestamp)

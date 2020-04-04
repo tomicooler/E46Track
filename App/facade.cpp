@@ -71,6 +71,7 @@ void Facade::dataReceived(const QByteArray &data) {
 
         ++index;
         if (index >= requesters.size()) {
+          emit m_model->updated();
           index = 0;
         }
 

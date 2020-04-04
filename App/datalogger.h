@@ -3,7 +3,6 @@
 
 #include <QElapsedTimer>
 #include <QObject>
-#include <QTimer>
 
 #include <memory>
 
@@ -39,10 +38,9 @@ signals:
   void elapsedTimeChanged(qint64 elapsedTime);
 
 private slots:
-  void timeout();
+  void log();
 
 private:
-  QTimer timer;
   bool m_logging{};
   qint64 m_startTime{};
   qint64 m_elapsedTime{};
