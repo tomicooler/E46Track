@@ -31,6 +31,10 @@ E46Track is a "not so serious" Real-Time Telemetry applicaton for BMW E46 M3 own
 
 ## Screenshots
 
+**Video frame**
+
+<img src="doc/video_frame.jpg" width="300"/>
+
 **Android App**
 
 <img src="doc/Screenshot_20200404-174320.png" width="300"/><img src="doc/Screenshot_20200404-174332.png" width="300"/>
