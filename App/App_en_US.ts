@@ -40,15 +40,18 @@
     </message>
 </context>
 <context>
+    <name>Dashboard</name>
+    <message>
+        <location filename="Dashboard.qml" line="43"/>
+        <source>%1 km/h</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DashboardForm.ui</name>
     <message>
         <location filename="DashboardForm.ui.qml" line="46"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="DashboardForm.ui.qml" line="54"/>
-        <source>km/h</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -63,7 +66,7 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="Main.qml" line="11"/>
+        <location filename="Main.qml" line="12"/>
         <source>Latency: %1 ms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -151,12 +154,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="61"/>
+        <location filename="replaymodel.cpp" line="62"/>
         <source>Invalid row count &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="111"/>
+        <location filename="replaymodel.cpp" line="114"/>
         <source>No valid data in file=&apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>

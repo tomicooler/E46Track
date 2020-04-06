@@ -50,6 +50,7 @@ void ReplayModel::loadUrl(const QUrl &url) {
   stream.setCodec("utf-8");
 
   bool skip_header = true;
+  m_hasSpeed = false;
   while (!stream.atEnd()) {
     QStringList fields = stream.readLine().split(',');
     if (skip_header) {
@@ -71,6 +72,8 @@ void ReplayModel::loadUrl(const QUrl &url) {
     data.rpm = fields.at(5).toDouble();
     data.yaw = fields.at(6).toDouble();
     data.latg = fields.at(7).toDouble();
+
+    m_hasSpeed = m_hasSpeed || data.speed > 0.0;
 
     if (!m_sequence.isEmpty()) { // interpolate to 60 fps
       Model::Data prev_data = m_sequence.last();
@@ -113,6 +116,7 @@ void ReplayModel::loadUrl(const QUrl &url) {
   }
 
   m_size = m_sequence.size();
+  emit hasSpeedChanged(m_hasSpeed);
   emit sizeChanged(m_size);
   m_model.setData(m_sequence.at(m_index));
   emit modelChanged();
@@ -157,6 +161,8 @@ Model *ReplayModel::model() { return &m_model; }
 int ReplayModel::index() const { return m_index; }
 
 int ReplayModel::size() const { return m_size; }
+
+bool ReplayModel::hasSpeed() const { return m_hasSpeed; }
 
 void ReplayModel::setIndex(int index) {
   if (index > size() - 1)

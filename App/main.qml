@@ -102,6 +102,7 @@ ApplicationWindow {
             model: store.model
             logger: store.logger
             latencyMs: store.latencyMs
+            kmphDisabled: store.facade.speedFrequency == 0
         }
     }
 
