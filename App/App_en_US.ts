@@ -2,15 +2,56 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="App_en_US">
 <context>
+    <name>ConfigurationForm.ui</name>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="13"/>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="25"/>
+        <source>The lower the more frequent. Zero -&gt; disable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="30"/>
+        <source>Throttle &amp; RPM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="41"/>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="52"/>
+        <source>DSC offsets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="63"/>
+        <source>Steering Andle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="74"/>
+        <source>Brake &amp; Yaw &amp; LatG</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Dashboard</name>
+    <message>
+        <location filename="Dashboard.qml" line="43"/>
+        <source>%1 km/h</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DashboardForm.ui</name>
     <message>
         <location filename="DashboardForm.ui.qml" line="46"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="DashboardForm.ui.qml" line="54"/>
-        <source>km/h</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -25,7 +66,7 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="Main.qml" line="11"/>
+        <location filename="Main.qml" line="12"/>
         <source>Latency: %1 ms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -113,12 +154,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="61"/>
+        <location filename="replaymodel.cpp" line="62"/>
         <source>Invalid row count &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="111"/>
+        <location filename="replaymodel.cpp" line="114"/>
         <source>No valid data in file=&apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -278,16 +319,21 @@
     </message>
     <message>
         <location filename="main.qml" line="50"/>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="59"/>
         <source>SerialPort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="60"/>
+        <location filename="main.qml" line="69"/>
         <source>WiFi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="69"/>
+        <location filename="main.qml" line="78"/>
         <source>Replay</source>
         <translation type="unfinished"></translation>
     </message>

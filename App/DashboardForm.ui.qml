@@ -22,10 +22,10 @@ Rectangle {
 
     SteeringWheel {
         id: steeringWheel
-        width: minSize * 0.35
+        width: minSize * 0.4
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: -width * 0.4
+        anchors.verticalCenterOffset: -width * 0.25
         anchors.topMargin: width * 0.4
         antialiasing: true
         smooth: true
@@ -34,7 +34,7 @@ Rectangle {
     Pedal {
         id: brake
         anchors.verticalCenter: steeringWheel.verticalCenter
-        anchors.verticalCenterOffset: steeringWheel.height * 3 / 4
+        anchors.verticalCenterOffset: steeringWheel.height * 2 / 5
         anchors.horizontalCenter: steeringWheel.horizontalCenter
         anchors.horizontalCenterOffset: -steeringWheel.width * 3 / 4
         height: steeringWheel.height
@@ -45,18 +45,10 @@ Rectangle {
         id: kmphLabel
         text: qsTr("0")
         anchors.horizontalCenter: steeringWheel.horizontalCenter
-        anchors.verticalCenter: brake.verticalCenter
+        anchors.verticalCenter: steeringWheel.verticalCenter
+        anchors.verticalCenterOffset: steeringWheel.height * 0.75
         font.bold: true
-        font.pointSize: (minSize / 22) > 4 ? (minSize / 22) : 4
-    }
-
-    Label {
-        text: qsTr("km/h")
-        anchors.horizontalCenter: kmphLabel.horizontalCenter
-        anchors.verticalCenter: kmphLabel.verticalCenter
-        anchors.verticalCenterOffset: kmphLabel.height * 1.2
-        font.bold: true
-        font.pointSize: kmphLabel.font.pointSize
+        font.pointSize: (minSize / 30) > 4 ? (minSize / 30) : 4
     }
 
     Pedal {
@@ -74,7 +66,7 @@ Rectangle {
         height: brake.width
         anchors.horizontalCenter: steeringWheel.horizontalCenter
         anchors.verticalCenter: steeringWheel.verticalCenter
-        anchors.verticalCenterOffset: steeringWheel.height * 1.5
+        anchors.verticalCenterOffset: steeringWheel.height * 1.1
     }
 
     LateralG {

@@ -22,24 +22,29 @@ Facade::Facade(QObject *parent)
           Requester{DS2Message{QByteArray::fromHex("12"),
                                QByteArray::fromHex("0b03")},
                     {std::make_shared<Throttle>(), std::make_shared<RPM>()},
-                    m_model},
+                    m_model,
+                    m_throttleAndRPMFrequency},
           Requester{DS2Message{QByteArray::fromHex("12"),
                                QByteArray::fromHex("0b13")},
                     {std::make_shared<Speed>()},
-                    m_model},
+                    m_model,
+                    m_speedFrequency},
           Requester{DS2Message{QByteArray::fromHex("b829f1"),
                                QByteArray::fromHex("2102")},
                     {}, // DSC offsets, must be sent
-                    m_model},
+                    m_model,
+                    m_dscOffsetsFrequency},
           Requester{DS2Message{QByteArray::fromHex("b829f1"),
                                QByteArray::fromHex("2201f5")},
                     {std::make_shared<SteeringAngle>()},
-                    m_model},
+                    m_model,
+                    m_dscSteeringAngleFrequency},
           Requester{DS2Message{QByteArray::fromHex("b829f1"),
                                QByteArray::fromHex("2106")},
                     {std::make_shared<Brake>(), std::make_shared<Yaw>(),
                      std::make_shared<LatG>()},
-                    m_model}} {
+                    m_model,
+                    m_dscBrakeYawLatgFrequency}} {
   logger()->setModel(m_model);
 }
 
@@ -50,6 +55,22 @@ DataLogger *Facade::logger() { return &m_logger; }
 int Facade::delay() const { return m_delay; }
 
 int Facade::latency() const { return m_latency; }
+
+int Facade::throttleAndRPMFrequency() const {
+  return m_throttleAndRPMFrequency;
+}
+
+int Facade::speedFrequency() const { return m_speedFrequency; }
+
+int Facade::dscOffsetsFrequency() const { return m_dscOffsetsFrequency; }
+
+int Facade::dscSteeringAngleFrequency() const {
+  return m_dscSteeringAngleFrequency;
+}
+
+int Facade::dscBrakeYawLatgFrequency() const {
+  return m_dscBrakeYawLatgFrequency;
+}
 
 void Facade::dataReceived(const QByteArray &data) {
   if (index >= requesters.size())
@@ -69,12 +90,7 @@ void Facade::dataReceived(const QByteArray &data) {
 
         requesters.at(index).processResponse(message.value());
 
-        ++index;
-        if (index >= requesters.size()) {
-          emit m_model->updated();
-          index = 0;
-        }
-
+        chooseNextRequester();
         QTimer::singleShot(delay(), this, &Facade::sendRequest);
       }
     } else {
@@ -92,6 +108,7 @@ void Facade::sendRequest() {
 
 void Facade::connected() {
   last_response = QDateTime::currentMSecsSinceEpoch();
+  chooseNextRequester();
   QTimer::singleShot(100, this, &Facade::sendRequest);
 }
 
@@ -109,4 +126,62 @@ void Facade::setLatency(int latency) {
 
   m_latency = latency;
   emit latencyChanged(m_latency);
+}
+
+void Facade::setThrottleAndRPMFrequency(int throttleAndRPMFrequency) {
+  if (m_throttleAndRPMFrequency == throttleAndRPMFrequency)
+    return;
+
+  m_throttleAndRPMFrequency = throttleAndRPMFrequency;
+  requesters.at(0).setFrequency(m_throttleAndRPMFrequency);
+  emit throttleAndRPMFrequencyChanged(m_throttleAndRPMFrequency);
+}
+
+void Facade::setSpeedFrequency(int speedFrequency) {
+  if (m_speedFrequency == speedFrequency)
+    return;
+
+  m_speedFrequency = speedFrequency;
+  requesters.at(1).setFrequency(m_speedFrequency);
+  emit speedFrequencyChanged(m_speedFrequency);
+}
+
+void Facade::setDscOffsetsFrequency(int dscOffsetsFrequency) {
+  if (m_dscOffsetsFrequency == dscOffsetsFrequency)
+    return;
+
+  m_dscOffsetsFrequency = dscOffsetsFrequency;
+  requesters.at(2).setFrequency(m_dscOffsetsFrequency);
+  emit dscOffsetsFrequencyChanged(m_dscOffsetsFrequency);
+}
+
+void Facade::setDscSteeringAngleFrequency(int dscSteeringAngleFrequency) {
+  if (m_dscSteeringAngleFrequency == dscSteeringAngleFrequency)
+    return;
+
+  m_dscSteeringAngleFrequency = dscSteeringAngleFrequency;
+  requesters.at(3).setFrequency(m_dscSteeringAngleFrequency);
+  emit dscSteeringAngleFrequencyChanged(m_dscSteeringAngleFrequency);
+}
+
+void Facade::setDscBrakeYawLatgFrequency(int dscBrakeYawLatgFrequency) {
+  if (m_dscBrakeYawLatgFrequency == dscBrakeYawLatgFrequency)
+    return;
+
+  m_dscBrakeYawLatgFrequency = dscBrakeYawLatgFrequency;
+  requesters.at(4).setFrequency(m_dscBrakeYawLatgFrequency);
+  emit dscBrakeYawLatgFrequencyChanged(m_dscBrakeYawLatgFrequency);
+}
+
+void Facade::chooseNextRequester() {
+  while (true) {
+    ++index;
+    if (index >= requesters.size()) {
+      emit m_model->updated();
+      index = 0;
+    }
+
+    if (requesters.at(index).shouldRequest())
+      break;
+  }
 }

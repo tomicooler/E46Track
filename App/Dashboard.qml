@@ -4,6 +4,8 @@ import com.tomicooler.e46track 1.0
 
 DashboardForm {
     property Model model
+    property bool kmphDisabled
+    property int elapsed
 
     latg.smallIndicatorColor: Material.color(Material.Amber, Material.Shade200)
     latg.mediumIndicatorColor: Material.color(Material.Orange, Material.Shade200)
@@ -38,7 +40,7 @@ DashboardForm {
     steeringWheel.angle: -1 * model.steeringAngle
     brake.position: converterBrake.converted
     throttle.position: converterThrottle.converted
-    kmphLabel.text: model.speed | 0
+    kmphLabel.text: kmphDisabled ? new Date(elapsed).toLocaleString(Qt.locale(), "mm:ss.zzz") : qsTr("%1 km/h").arg(model.speed | 0)
     rpm.rpm: model.rpm
     latg.g: model.latg
 }

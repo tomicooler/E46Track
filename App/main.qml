@@ -47,6 +47,15 @@ ApplicationWindow {
             anchors.fill: parent
 
             ItemDelegate {
+                text: qsTr("Configuration")
+                width: parent.width
+                onClicked: {
+                    stackView.push(configpage)
+                    drawer.close()
+                }
+            }
+
+            ItemDelegate {
                 text: qsTr("SerialPort")
                 width: parent.width
                 visible: store.serialAvailable
@@ -77,6 +86,15 @@ ApplicationWindow {
     }
 
     Component {
+        id: configpage
+        Configuration {
+            facade: store.facade
+            width: stackView.width
+            height: stackView.height
+        }
+    }
+
+    Component {
         id: dashboard
         Main {
             width: stackView.width
@@ -84,6 +102,7 @@ ApplicationWindow {
             model: store.model
             logger: store.logger
             latencyMs: store.latencyMs
+            kmphDisabled: store.facade.speedFrequency == 0
         }
     }
 

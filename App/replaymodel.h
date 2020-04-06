@@ -14,6 +14,7 @@ class ReplayModel : public QObject {
   Q_PROPERTY(Model *model READ model CONSTANT);
   Q_PROPERTY(int index READ index WRITE setIndex NOTIFY indexChanged);
   Q_PROPERTY(int size READ size NOTIFY sizeChanged);
+  Q_PROPERTY(bool hasSpeed READ hasSpeed NOTIFY hasSpeedChanged);
 
 public:
   explicit ReplayModel(QObject *parent = nullptr);
@@ -28,6 +29,7 @@ public:
   Model *model();
   int index() const;
   int size() const;
+  bool hasSpeed() const;
 
 public slots:
   void setIndex(int index);
@@ -37,6 +39,7 @@ signals:
   void indexChanged(int index);
   void sizeChanged(int size);
   void modelChanged();
+  void hasSpeedChanged(bool hasSpeed);
 
 private:
   Model m_model;
@@ -45,6 +48,7 @@ private:
   int m_size{};
   bool m_playing{false};
   QString exportDir;
+  bool m_hasSpeed{false};
 };
 
 #endif // REPLAYMODEL_H

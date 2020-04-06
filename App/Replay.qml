@@ -70,6 +70,8 @@ ReplayForm {
         replaymodel.next();
     }
 
+    dashboard.kmphDisabled: !replaymodel.hasSpeed
+    dashboard.kmphLabel.visible: !dashboard.kmphDisabled || !exportButton.checked
     dashboard.model: replaymodel.model
     dashboard.width: Number(dashWidth.text)
 }

@@ -5,6 +5,7 @@ MainForm {
     property Model model
     property DataLogger logger
     property int latencyMs
+    property bool kmphDisabled
 
     startTimeLabel.text: new Date(logger.startTime).toLocaleString(Qt.locale(), "MM-dd hh:mm:ss")
     elapsedTimeLabel.text: new Date(logger.elapsedTime).toLocaleString(Qt.locale(), "mm:ss")
@@ -14,4 +15,6 @@ MainForm {
         logger.logging = !logger.logging;
     }
     dashboard.model: model
+    dashboard.kmphDisabled: kmphDisabled
+    dashboard.elapsed: logger.elapsedTime
 }
