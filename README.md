@@ -21,7 +21,7 @@ E46Track is a "not so serious" Real-Time Telemetry applicaton for BMW E46 M3 own
 
 **Why it is a "not so serious" application?**
  - The data is queried from the car (the same way as you go live diagnostic mode with INPA software).
- - Need to make 5 separate queries each takes up 150ms (one is 250ms).
+ - Need to make 5 separate queries each takes up 150ms (one is 250ms). The queries are configurable, e.g: speed is disabled by default.
  - Anyway the replaying tool interpolates the data series, it is enchanced a bit.
 
  **Why don't I use CAN?**
@@ -44,6 +44,7 @@ E46Track is a "not so serious" Real-Time Telemetry applicaton for BMW E46 M3 own
 
 <img src="doc/Screenshot_20200404-174906.png" width="300"/><img src="doc/Screenshot_20200404-174935.png" width="300"/>
 <img src="doc/Screenshot_20200404-175007.png" width="300"/><img src="doc/Screenshot_20200404-175018.png" width="300"/>
+<img src="doc/Screenshot_20200406-195815.png" width="300"/><img src="doc/Screenshot_20200406-195823.png" width="300"/>
 <img src="doc/Screenshot_20200404-175038.png" width="300"/><img src="doc/Screenshot_20200404-175044.png" width="300"/>
 <img src="doc/Screenshot_20200404-175058.png" width="300"/>
 
