@@ -2,6 +2,44 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="App_en_US">
 <context>
+    <name>ConfigurationForm.ui</name>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="13"/>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="25"/>
+        <source>The lower the more frequent. Zero -&gt; disable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="30"/>
+        <source>Throttle &amp; RPM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="41"/>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="52"/>
+        <source>DSC offsets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="63"/>
+        <source>Steering Andle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ConfigurationForm.ui.qml" line="74"/>
+        <source>Brake &amp; Yaw &amp; LatG</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DashboardForm.ui</name>
     <message>
         <location filename="DashboardForm.ui.qml" line="46"/>
@@ -278,16 +316,21 @@
     </message>
     <message>
         <location filename="main.qml" line="50"/>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="main.qml" line="59"/>
         <source>SerialPort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="60"/>
+        <location filename="main.qml" line="69"/>
         <source>WiFi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="main.qml" line="69"/>
+        <location filename="main.qml" line="78"/>
         <source>Replay</source>
         <translation type="unfinished"></translation>
     </message>

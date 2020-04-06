@@ -1,4 +1,5 @@
 import QtQuick 2.14
+import Qt.labs.settings 1.0
 import com.tomicooler.e46track 1.0
 
 Item {
@@ -10,6 +11,7 @@ Item {
     property bool serialAvailable: true
     property alias logger: facade.logger
     property alias latencyMs: facade.latency
+    property alias facade: facade
 
     InfoDialog {
         id: infoDialog
@@ -26,6 +28,14 @@ Item {
                 serial.sendData(data);
             }
         }
+    }
+
+    Settings {
+        property alias throttleAndRPMFrequency: facade.throttleAndRPMFrequency
+        property alias speedFrequency: facade.speedFrequency
+        property alias dscOffsetsFrequency: facade.dscOffsetsFrequency
+        property alias dscSteeringAngleFrequency: facade.dscSteeringAngleFrequency
+        property alias dscBrakeYawLatgFrequency: facade.dscBrakeYawLatgFrequency
     }
 
     SerialInterface {

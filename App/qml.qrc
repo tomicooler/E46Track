@@ -36,5 +36,7 @@
         <file>icons/navigate_before-black-48dp.svg</file>
         <file>icons/get_app-black-48dp.svg</file>
         <file>icons/appicon.png</file>
+        <file>Configuration.qml</file>
+        <file>ConfigurationForm.ui.qml</file>
     </qresource>
 </RCC>

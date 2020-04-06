@@ -47,6 +47,15 @@ ApplicationWindow {
             anchors.fill: parent
 
             ItemDelegate {
+                text: qsTr("Configuration")
+                width: parent.width
+                onClicked: {
+                    stackView.push(configpage)
+                    drawer.close()
+                }
+            }
+
+            ItemDelegate {
                 text: qsTr("SerialPort")
                 width: parent.width
                 visible: store.serialAvailable
@@ -73,6 +82,15 @@ ApplicationWindow {
                     drawer.close()
                 }
             }
+        }
+    }
+
+    Component {
+        id: configpage
+        Configuration {
+            facade: store.facade
+            width: stackView.width
+            height: stackView.height
         }
     }
 
