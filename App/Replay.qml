@@ -53,6 +53,8 @@ ReplayForm {
 
     slider.to: replaymodel.size - 1
     slider.onValueChanged: replaymodel.index = slider.value
+    position.text: replaymodel.index + 1
+    size.text: replaymodel.size
 
     timestampLabel.text: new Date(replaymodel.model.timestamp).toLocaleString(Qt.locale(), "MM-dd hh:mm:ss")
 

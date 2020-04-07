@@ -14,6 +14,8 @@ Page {
     property alias dashboard: dashboard
     property alias dashWidth: dashWidth
     property alias slider: slider
+    property alias position: position
+    property alias size: size
 
     width: 640
     height: 480
@@ -43,12 +45,29 @@ Page {
 
         Slider {
             id: slider
-            Layout.margins: 20
+            Layout.leftMargin: 5
+            Layout.rightMargin: 5
             Layout.fillWidth: true
             from: 0
             stepSize: 1
             hoverEnabled: true
             enabled: !exportButton.checked
+        }
+
+        RowLayout {
+            Label {
+                id: position
+                Layout.leftMargin: 5
+            }
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            Label {
+                id: size
+                Layout.rightMargin: 5
+            }
         }
 
         RowLayout {

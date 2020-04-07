@@ -79,7 +79,7 @@ void ReplayModel::loadUrl(const QUrl &url) {
       Model::Data prev_data = m_sequence.last();
       qint64 diff_timestamp = data.timestamp - prev_data.timestamp;
       static const qint64 frame_rate = 1000 / 60;
-      int additional_frame_count = diff_timestamp / frame_rate;
+      int additional_frame_count = (diff_timestamp / frame_rate) - 2;
       double divider = additional_frame_count;
 
       if (additional_frame_count > 0) {

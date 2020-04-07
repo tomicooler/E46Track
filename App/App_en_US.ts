@@ -101,47 +101,47 @@
 <context>
     <name>ReplayForm.ui</name>
     <message>
-        <location filename="ReplayForm.ui.qml" line="20"/>
+        <location filename="ReplayForm.ui.qml" line="22"/>
         <source>Replay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="69"/>
+        <location filename="ReplayForm.ui.qml" line="88"/>
         <source>400</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="80"/>
+        <location filename="ReplayForm.ui.qml" line="99"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="101"/>
+        <location filename="ReplayForm.ui.qml" line="120"/>
         <source>Previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="107"/>
+        <location filename="ReplayForm.ui.qml" line="126"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="107"/>
+        <location filename="ReplayForm.ui.qml" line="126"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="114"/>
+        <location filename="ReplayForm.ui.qml" line="133"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="63"/>
+        <location filename="ReplayForm.ui.qml" line="82"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ReplayForm.ui.qml" line="75"/>
+        <location filename="ReplayForm.ui.qml" line="94"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
