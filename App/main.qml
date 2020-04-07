@@ -141,5 +141,20 @@ ApplicationWindow {
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
         setY(Screen.height / 2 - height / 2);
+        store.infoDialog.displayDialog(qsTr("Welcome to E46Track"),
+                                       qsTr("E46Track is a \"not so serious\" Real-Time Telemetry applicaton for BMW E46 M3 owners. " +
+                                            "It is more like a toy due to some serious limitations.<br/><br/>" +
+                                            "<b>What data is collected?</b>" +
+                                            "<ul>" +
+                                            "<li>Engine RPM</li>" +
+                                            "<li>Steering angle (°)</li>" +
+                                            "<li>Yaw rate (°/s)</li>" +
+                                            "<li>Lateral G (g)</li>" +
+                                            "<li>Brake pressure (bar)</li>" +
+                                            "<li>Throttle sensor position (V)</li>" +
+                                            "<li>Speed (km/h)</li>" +
+                                            "</ul>" +
+                                            "<br/><br/>This is an open source project - <a href=\"https://github.com/tomicooler/E46Track\">GitHub</a> - feel free to contribute.<br/>"
+                                             ));
     }
 }
