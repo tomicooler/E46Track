@@ -59,4 +59,9 @@ android {
     aaptOptions {
         noCompress 'rcc'
     }
+
+    // https://bugreports.qt.io/browse/QTBUG-817350
+    defaultConfig {
+        resConfigs "en"
+    }
 }
