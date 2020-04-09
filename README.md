@@ -1,12 +1,12 @@
 # E46Track
 
-E46Track is a "not so serious" Real-Time Telemetry applicaton for BMW E46 M3 owners. It is more like a toy due to some serious limitations.
+E46Track is a "not so serious" Real-Time Telemetry application for BMW E46 M3 owners. It is more like a toy due to latency problems.
 
 **What data is collected?**
  - speed (km/h)
  - engine rpm
- - steering angle (degree)
- - yaw rate (degress/sec)
+ - steering angle (°)
+ - yaw rate (°/sec)
  - lateral G (g)
  - brake pressure (bar)
  - throttle sensor position (V)
@@ -22,7 +22,7 @@ E46Track is a "not so serious" Real-Time Telemetry applicaton for BMW E46 M3 own
 **Why it is a "not so serious" application?**
  - The data is queried from the car (the same way as you go live diagnostic mode with INPA software).
  - Need to make 5 separate queries each takes up 150ms (one is 250ms). The queries are configurable, e.g: speed is disabled by default.
- - Anyway the replaying tool interpolates the data series, it is enchanced a bit.
+ - Anyway the replaying tool interpolates the data series, it is enhanced a bit.
 
  **Why don't I use CAN?**
   - There are already cool options out there. [RaceCapture](https://wiki.autosportlabs.com/BMW_E46_CAN)
@@ -67,10 +67,9 @@ E46Track is a "not so serious" Real-Time Telemetry applicaton for BMW E46 M3 own
  ## Android App
   - **Mobile data must be disabled!**
   - Connect your mobile phone to the WiFi K+DCAN interface's WiFi hotspot
-  - The gateway's ip address should be configured in the app's settings, the port should be 35000.
-  - Unfortunately my Nokia 7 plus adds some periodic delay on the communication, that's why I moved for a Raspberry Pi setup.
+  - The gateway's IP address should be configured in the app's settings, the port should be 35000.
+  - Unfortunately my Nokia 7 Plus adds some periodic delay on the communication, that's why I moved for a Raspberry Pi setup.
     - GPS data logging would be an awesome feature. It would improve the logging as well, since I could spare a 250 ms query for the speed.
-  - Known issue: the app crashes if you open the second CSV for replay.
 
 ## Raspberry Pi deployment
 
@@ -119,7 +118,7 @@ Environment
  - tools/scripts from my BMW E46 Oil project (branch: [e46track-app-reverse-engineering](https://github.com/tomicooler/bmwe46oil/tree/e46track-app-reverse-engineering/scripts))
    - inpatrafficparser --help for details
 
-**WiFi K+DCAN interace additional framing**
+**WiFi K+DCAN interface additional framing**
 
 ```
 000212c02100003c00[LENGTH][DS2REQUEST][CHECKSUM]
@@ -188,7 +187,7 @@ DS2 request: 12050b130f
 DS2 response: 125ea00037037000000f730f560f740f7f0f500f9e0f7a0f7a012a012a012a012a012a012a000000007f3c7f1881a200000000000200000000000000000000fb0500000000000000000000000a23127200007276011330000000000000dc
 ```
 
-Bytepos 2 as unsiged integer. TODO: what happens over 255 km/h? Maybe + unsigned bytepos 1?
+Byte position 2 as unsigned integer. TODO: what happens over 255 km/h? Maybe + unsigned bytepos 1?
 
 ![alt text](doc/calculations_speed.png?raw=true "RPM: INPA vs E46Track")
 

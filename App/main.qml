@@ -142,8 +142,8 @@ ApplicationWindow {
         setX(Screen.width / 2 - width / 2);
         setY(Screen.height / 2 - height / 2);
         store.infoDialog.displayDialog(qsTr("Welcome to E46Track"),
-                                       qsTr("E46Track is a \"not so serious\" Real-Time Telemetry applicaton for BMW E46 M3 owners. " +
-                                            "It is more like a toy due to some serious limitations.<br/><br/>" +
+                                       qsTr("E46Track is a \"not so serious\" Real-Time Telemetry application for BMW E46 M3 owners. " +
+                                            "It is more like a toy due to latency problems.<br/><br/>" +
                                             "<b>What data is collected?</b>" +
                                             "<ul>" +
                                             "<li>Engine RPM</li>" +

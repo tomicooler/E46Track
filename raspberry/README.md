@@ -11,7 +11,7 @@ Most importantly, if you can't find a WiFi OBD K+DCAN adapter, then you can use 
 
 ## How it is working?
 
-1. Create a WiFi HotSpot with your phone. NOTE: Turn off bluetooth for more bandwith!
+1. Create a WiFi HotSpot with your phone. NOTE: Turn off bluetooth for more bandwidth!
 2. Connect the Raspberry to this network. Details below.
 3. Open <raspberry-ip>:5000 from your Phone, e.g: with Google Chrome.
 4. Tip: use the Add to home screen functionality to create an Application from the launcher.
@@ -74,7 +74,7 @@ $ gpasswd -a alarm uucp
 
 Networking:
 
-/etc/netctl/wlan0-YourPhoneHotSpot (first use IP=dhcp then fill the static ip, NOTE: this will need more bandwith!!!)
+/etc/netctl/wlan0-YourPhoneHotSpot (first use IP=dhcp then fill the static ip, NOTE: this will need more bandwidth!!!)
 ```
 Description='Create a HotSpot with your phone'
 Interface=wlan0
