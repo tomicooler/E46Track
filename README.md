@@ -71,6 +71,7 @@ E46Track is a "not so serious" Real-Time Telemetry application for BMW E46 M3 ow
   - The gateway's IP address should be configured in the app's settings, the port should be 35000.
   - Unfortunately my Nokia 7 Plus adds some periodic delay on the communication, that's why I moved for a Raspberry Pi setup.
     - GPS data logging would be an awesome feature. It would improve the logging as well, since I could spare a 250 ms query for the speed.
+  - <a href="https://play.google.com/store/apps/details?id=com.tomicooler.bmw.e46track">Available on Google Play</a>
 
 ## Raspberry Pi deployment
 
