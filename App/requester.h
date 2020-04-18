@@ -13,11 +13,15 @@ using ModelUpdaters = std::vector<ModelUpdaterPtr>;
 class Requester {
 public:
   explicit Requester(const DS2Message &message, ModelUpdaters &&updaters,
-                     const std::shared_ptr<Model> &model, int frequency)
+                     const std::shared_ptr<Model> &model, int frequency,
+                     quint8 expectedResponseLength)
       : message(message), updaters(updaters), model(model), counter(frequency),
-        frequency(frequency) {}
+        frequency(frequency), expectedResponseLength(expectedResponseLength) {}
 
   void processResponse(const DS2Message &response) {
+    if (response.data.size() != expectedResponseLength)
+      return;
+
     for (const auto &updater : updaters)
       updater->update(response, *model);
   }
@@ -40,6 +44,7 @@ private:
   std::shared_ptr<Model> model;
   quint64 counter{};
   int frequency{1};
+  quint8 expectedResponseLength{};
 };
 
 #endif // REQUESTER_H
