@@ -8,6 +8,8 @@ namespace {
 
 static const inline QByteArray acknowledgement = QByteArray::fromHex("a0");
 static const inline QByteArray dscResponse = QByteArray::fromHex("b8f129");
+static const inline QByteArray skipFirstResponsse =
+    QByteArray::fromHex("80001595");
 
 bool isResponse(const DS2Message &message) {
   return message.data.startsWith(QByteArray::fromHex("a0")) ||
@@ -44,8 +46,11 @@ Facade::Facade(QObject *parent)
                     {std::make_shared<Brake>(), std::make_shared<Yaw>(),
                      std::make_shared<LatG>()},
                     m_model,
-                    m_dscBrakeYawLatgFrequency}} {
+                    m_dscBrakeYawLatgFrequency}},
+      location(m_model) {
   logger()->setModel(m_model);
+  logger()->setHasLocation(location.hasLocation());
+  qDebug() << "haslocation" << location.hasLocation();
 }
 
 Model *Facade::model() { return m_model.get(); }
@@ -81,12 +86,17 @@ void Facade::dataReceived(const QByteArray &data) {
     buffer.clear();
   }
 
+  if (m_first_response && buffer.startsWith(skipFirstResponsse)) {
+    buffer.remove(0, skipFirstResponsse.size());
+  }
+
   do {
     if (const auto message = parser.parse(buffer); message.has_value()) {
       if (isResponse(message.value())) {
         qint64 now = QDateTime::currentMSecsSinceEpoch();
         setLatency(now - last_response);
         last_response = now;
+        m_first_response = false;
 
         requesters.at(index).processResponse(message.value());
 
@@ -107,6 +117,7 @@ void Facade::sendRequest() {
 }
 
 void Facade::connected() {
+  m_first_response = true;
   last_response = QDateTime::currentMSecsSinceEpoch();
   chooseNextRequester();
   QTimer::singleShot(100, this, &Facade::sendRequest);

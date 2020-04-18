@@ -58,20 +58,28 @@ void ReplayModel::loadUrl(const QUrl &url) {
       continue;
     }
 
-    if (fields.size() != 8) {
+    if (fields.size() != 8 &&
+        fields.size() != 12) { // ugly but good enough for me :)
       emit error(tr("Invalid row count '%1'").arg(fields.join(",")));
       return;
     }
 
     Model::Data data;
     data.timestamp = fields.at(0).toULongLong();
-    data.speed = fields.at(1).toDouble();
-    data.brake = fields.at(2).toDouble();
-    data.steeringAngle = fields.at(3).toDouble();
-    data.throttle = fields.at(4).toDouble();
-    data.rpm = fields.at(5).toDouble();
-    data.yaw = fields.at(6).toDouble();
-    data.latg = fields.at(7).toDouble();
+    if (fields.size() == 12) {
+      data.latitude = fields.at(1).toDouble();
+      data.longitude = fields.at(2).toDouble();
+      data.altitude = fields.at(3).toDouble();
+      data.bearing = fields.at(4).toDouble();
+    }
+    int speedShift = fields.size() == 8 ? 0 : 4;
+    data.speed = fields.at(1 + speedShift).toDouble();
+    data.brake = fields.at(2 + speedShift).toDouble();
+    data.steeringAngle = fields.at(3 + speedShift).toDouble();
+    data.throttle = fields.at(4 + speedShift).toDouble();
+    data.rpm = fields.at(5 + speedShift).toDouble();
+    data.yaw = fields.at(6 + speedShift).toDouble();
+    data.latg = fields.at(7 + speedShift).toDouble();
 
     m_hasSpeed = m_hasSpeed || data.speed > 0.0;
 
@@ -84,6 +92,17 @@ void ReplayModel::loadUrl(const QUrl &url) {
 
       if (additional_frame_count > 0) {
         diff_timestamp = static_cast<double>(diff_timestamp) / divider;
+
+        // When location updates are slower than the other data upate rate, the
+        // interpolation won't be accurate for the location data. E.g: my phone
+        // max update rate on location is 1 sec, a tipical roundtrip for inpa
+        // data is 400-500 ms.. Anyway this is a PoC forr location updates.
+        double diff_latitude = (data.latitude - prev_data.latitude) / divider;
+        double diff_longitude =
+            (data.longitude - prev_data.longitude) / divider;
+        double diff_altitude = (data.altitude - prev_data.altitude) / divider;
+        double diff_bearing = (data.bearing - prev_data.bearing) / divider;
+
         double diff_speed = (data.speed - prev_data.speed) / divider;
         double diff_brake = (data.brake - prev_data.brake) / divider;
         double diff_steeringAngle =
@@ -95,6 +114,10 @@ void ReplayModel::loadUrl(const QUrl &url) {
 
         for (int i = 0; i < additional_frame_count - 1; ++i) {
           prev_data.timestamp += diff_timestamp;
+          prev_data.latitude += diff_latitude;
+          prev_data.longitude += diff_longitude;
+          prev_data.altitude += diff_altitude;
+          prev_data.bearing += diff_bearing;
           prev_data.speed += diff_speed;
           prev_data.brake += diff_brake;
           prev_data.steeringAngle += diff_steeringAngle;

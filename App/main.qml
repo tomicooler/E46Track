@@ -153,6 +153,7 @@ ApplicationWindow {
                                             "<li>Brake pressure (bar)</li>" +
                                             "<li>Throttle sensor position (V)</li>" +
                                             "<li>Speed (km/h)</li>" +
+                                            "<li>Latitude, longitude, altitude, bearing (if available)</li>" +
                                             "</ul>" +
                                             "<br/><br/>This is an open source project - <a href=\"https://github.com/tomicooler/E46Track\">GitHub</a> - feel free to contribute.<br/>"
                                              ));

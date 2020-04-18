@@ -4,6 +4,14 @@ Model::Model(QObject *parent) : QObject(parent) {}
 
 qint64 Model::timestamp() const { return m_data.timestamp; }
 
+double Model::latitude() const { return m_data.latitude; }
+
+double Model::longitude() const { return m_data.longitude; }
+
+double Model::altitude() const { return m_data.altitude; }
+
+double Model::bearing() const { return m_data.bearing; }
+
 double Model::speed() const { return m_data.speed; }
 
 double Model::brake() const { return m_data.brake; }
@@ -26,6 +34,38 @@ void Model::setTimestamp(qint64 timestamp) {
 
   m_data.timestamp = timestamp;
   emit timestampChanged(m_data.timestamp);
+}
+
+void Model::setLatitude(double latitude) {
+  if (qFuzzyCompare(m_data.latitude, latitude))
+    return;
+
+  m_data.latitude = latitude;
+  emit latitudeChanged(m_data.latitude);
+}
+
+void Model::setLongitude(double longitude) {
+  if (qFuzzyCompare(m_data.longitude, longitude))
+    return;
+
+  m_data.longitude = longitude;
+  emit longitudeChanged(m_data.longitude);
+}
+
+void Model::setAltitude(double altitude) {
+  if (qFuzzyCompare(m_data.altitude, altitude))
+    return;
+
+  m_data.altitude = altitude;
+  emit altitudeChanged(m_data.altitude);
+}
+
+void Model::setBearing(double bearing) {
+  if (qFuzzyCompare(m_data.bearing, bearing))
+    return;
+
+  m_data.bearing = bearing;
+  emit bearingChanged(m_data.bearing);
 }
 
 void Model::setSpeed(double speed) {

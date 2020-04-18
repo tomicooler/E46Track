@@ -35,7 +35,7 @@ $ ssh alarm@<raspberry-pi-ip-address>
 Install dependencies:
 ```
 $ su root
-$ pacman -S base-devel git cmake go qt5-base qt5-declarative qt5-quickcontrols qt5-quickcontrols2 qt5-serialport qt5-svg qt5-tools qt5-webglplugin qt5-websockets ttf-dejavu ntp
+$ pacman -S base-devel git cmake go qt5-base qt5-declarative qt5-quickcontrols qt5-quickcontrols2 qt5-serialport qt5-svg qt5-tools qt5-webglplugin qt5-websockets qt5-location ttf-dejavu ntp
 ```
 
 Clone E46Track:
