@@ -6,6 +6,7 @@
 #include "datalogger.h"
 #include "ds2message.h"
 #include "requester.h"
+#include "location.h"
 
 class Facade : public QObject {
   Q_OBJECT
@@ -86,6 +87,7 @@ private:
   int m_dscBrakeYawLatgFrequency{1};
 
   std::vector<Requester> requesters;
+  Location location;
 };
 
 #endif // FACADE_H

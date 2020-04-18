@@ -44,8 +44,11 @@ Facade::Facade(QObject *parent)
                     {std::make_shared<Brake>(), std::make_shared<Yaw>(),
                      std::make_shared<LatG>()},
                     m_model,
-                    m_dscBrakeYawLatgFrequency}} {
+                    m_dscBrakeYawLatgFrequency}},
+      location(m_model) {
   logger()->setModel(m_model);
+  logger()->setHasLocation(location.hasLocation());
+  qDebug() << "haslocation" << location.hasLocation();
 }
 
 Model *Facade::model() { return m_model.get(); }

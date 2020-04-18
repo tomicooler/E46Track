@@ -19,7 +19,7 @@ if(ANDROID)
     set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
 endif()
 
-find_package(Qt5 COMPONENTS Core Quick QuickControls2 Network Svg LinguistTools REQUIRED)
+find_package(Qt5 COMPONENTS Core Quick QuickControls2 Network Location Svg LinguistTools REQUIRED)
 
 set(TS_FILES App_en_US.ts)
 
@@ -42,6 +42,8 @@ if(ANDROID)
       datalogger.h
       replaymodel.cpp
       replaymodel.h
+      location.cpp
+      location.h
       ${TS_FILES}
     )
 
@@ -70,6 +72,8 @@ else()
       datalogger.h
       replaymodel.cpp
       replaymodel.h
+      location.cpp
+      location.h
       ${TS_FILES}
     )
 
@@ -82,6 +86,6 @@ endif()
 target_compile_definitions(App
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(App
-  PRIVATE Qt5::Core Qt5::Quick Qt5::Network Qt5::QuickControls2 Qt5::Svg)
+  PRIVATE Qt5::Core Qt5::Quick Qt5::Network Qt5::QuickControls2 Qt5::Svg Qt5::Location)
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

@@ -26,6 +26,7 @@ public:
   qint64 elapsedTime() const;
 
   void setModel(const std::shared_ptr<Model> &model);
+  void setHasLocation(bool hasLocation);
 
 public slots:
   void setLogging(bool logging);
@@ -42,6 +43,7 @@ private slots:
 
 private:
   bool m_logging{};
+  bool m_hasLocation{};
   qint64 m_startTime{};
   qint64 m_elapsedTime{};
   std::shared_ptr<Model> model;

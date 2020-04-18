@@ -40,6 +40,10 @@ void DataLogger::setModel(const std::shared_ptr<Model> &model) {
   this->model = model;
 }
 
+void DataLogger::setHasLocation(bool hasLocation) {
+  this->m_hasLocation = hasLocation;
+}
+
 void DataLogger::setLogging(bool logging) {
   if (m_logging == logging)
     return;
