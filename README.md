@@ -10,6 +10,7 @@ E46Track is a "not so serious" Real-Time Telemetry application for BMW E46 M3 ow
  - lateral G (g)
  - brake pressure (bar)
  - throttle sensor position (V)
+ - latitude, longitude, altitude, bearing (if available)
 
 **What can you do with the collected data?**
  - replay them with E46Track
@@ -69,8 +70,9 @@ E46Track is a "not so serious" Real-Time Telemetry application for BMW E46 M3 ow
   - **Mobile data must be disabled!**
   - Connect your mobile phone to the WiFi K+DCAN interface's WiFi hotspot
   - The gateway's IP address should be configured in the app's settings, the port should be 35000.
-  - Unfortunately my Nokia 7 Plus adds some periodic delay on the communication, that's why I moved for a Raspberry Pi setup.
-    - GPS data logging would be an awesome feature. It would improve the logging as well, since I could spare a 250 ms query for the speed.
+    Unfortunately my phone (Nokia 7 plus) adds some periodic delay on the communication (even 4-5 sec sometimes).
+    A Nokia 2.2 works even though it is a much cheaper phone.
+    The location update rate on my phone is maximum 1 seconds, couldn't get any lower than that.
   - <a href="https://play.google.com/store/apps/details?id=com.tomicooler.bmw.e46track">Available on Google Play</a>
 
 ## Raspberry Pi deployment
