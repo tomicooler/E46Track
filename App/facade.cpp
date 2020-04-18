@@ -120,6 +120,7 @@ void Facade::sendRequest() {
 void Facade::connected() {
   m_first_response = true;
   last_response = QDateTime::currentMSecsSinceEpoch();
+  index = -1;
   chooseNextRequester();
   QTimer::singleShot(100, this, &Facade::sendRequest);
 }
