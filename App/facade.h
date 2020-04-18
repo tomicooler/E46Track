@@ -5,8 +5,8 @@
 
 #include "datalogger.h"
 #include "ds2message.h"
-#include "requester.h"
 #include "location.h"
+#include "requester.h"
 
 class Facade : public QObject {
   Q_OBJECT
@@ -16,8 +16,9 @@ class Facade : public QObject {
   Q_PROPERTY(int delay READ delay WRITE setDelay NOTIFY delayChanged)
   Q_PROPERTY(int latency READ latency WRITE setLatency NOTIFY latencyChanged)
 
-  Q_PROPERTY(int throttleAndRPMFrequency READ throttleAndRPMFrequency WRITE
-                 setThrottleAndRPMFrequency NOTIFY throttleAndRPMFrequencyChanged)
+  Q_PROPERTY(
+      int throttleAndRPMFrequency READ throttleAndRPMFrequency WRITE
+          setThrottleAndRPMFrequency NOTIFY throttleAndRPMFrequencyChanged)
   Q_PROPERTY(int speedFrequency READ speedFrequency WRITE setSpeedFrequency
                  NOTIFY speedFrequencyChanged)
   Q_PROPERTY(int dscOffsetsFrequency READ dscOffsetsFrequency WRITE
@@ -88,6 +89,7 @@ private:
 
   std::vector<Requester> requesters;
   Location location;
+  bool m_first_response{true};
 };
 
 #endif // FACADE_H
