@@ -24,5 +24,9 @@ bool Location::hasLocation() const {
 
 void Location::positionUpdated(const QGeoPositionInfo &pos) {
   qDebug() << "location update" << pos;
+  model->setLatitude(pos.coordinate().latitude());
+  model->setLongitude(pos.coordinate().longitude());
+  model->setAltitude(pos.coordinate().altitude());
+  model->setBearing(pos.attribute(QGeoPositionInfo::Direction));
   model->setSpeed(pos.attribute(QGeoPositionInfo::GroundSpeed) * 3.6);
 }

@@ -7,6 +7,10 @@ class Model : public QObject {
 public:
   struct Data {
     qint64 timestamp{};
+    double latitude{};
+    double longitude{};
+    double altitude{};
+    double bearing{};
     double speed{};
     double brake{};
     double steeringAngle{};
@@ -22,6 +26,13 @@ private:
   Q_PROPERTY(qint64 timestamp READ timestamp WRITE setTimestamp NOTIFY
                  timestampChanged)
 
+  Q_PROPERTY(
+      double latitude READ latitude WRITE setLatitude NOTIFY latitudeChanged)
+  Q_PROPERTY(double longitude READ longitude WRITE setLongitude NOTIFY
+                 longitudeChanged)
+  Q_PROPERTY(
+      double altitude READ altitude WRITE setAltitude NOTIFY altitudeChanged)
+  Q_PROPERTY(double bearing READ bearing WRITE setBearing NOTIFY bearingChanged)
   Q_PROPERTY(double speed READ speed WRITE setSpeed NOTIFY speedChanged)
   Q_PROPERTY(double brake READ brake WRITE setBrake NOTIFY brakeChanged)
   Q_PROPERTY(double steeringAngle READ steeringAngle WRITE setSteeringAngle
@@ -36,6 +47,10 @@ public:
   explicit Model(QObject *parent = nullptr);
 
   qint64 timestamp() const;
+  double latitude() const;
+  double longitude() const;
+  double altitude() const;
+  double bearing() const;
   double speed() const;
   double brake() const;
   double steeringAngle() const;
@@ -47,6 +62,10 @@ public:
 
 public slots:
   void setTimestamp(qint64 timestamp);
+  void setLatitude(double latitude);
+  void setLongitude(double longitude);
+  void setAltitude(double altitude);
+  void setBearing(double bearing);
   void setSpeed(double speed);
   void setBrake(double brake);
   void setSteeringAngle(double steeringAngle);
@@ -58,6 +77,10 @@ public slots:
 
 signals:
   void timestampChanged(qint64 timestamp);
+  void latitudeChanged(double latitude);
+  void longitudeChanged(double longitude);
+  void altitudeChanged(double altitude);
+  void bearingChanged(double bearing);
   void speedChanged(double speed);
   void brakeChanged(double brake);
   void steeringAngleChanged(double steeringAngle);
