@@ -8,8 +8,6 @@ namespace {
 
 static const inline QByteArray acknowledgement = QByteArray::fromHex("a0");
 static const inline QByteArray dscResponse = QByteArray::fromHex("b8f129");
-static const inline QByteArray skipFirstResponsse =
-    QByteArray::fromHex("80001595");
 
 bool isResponse(const DS2Message &message) {
   return message.data.startsWith(QByteArray::fromHex("a0")) ||
@@ -79,16 +77,12 @@ int Facade::dscBrakeYawLatgFrequency() const {
 bool Facade::hasLocation() const { return m_hasLocation; }
 
 void Facade::dataReceived(const QByteArray &data) {
-  if (index >= requesters.size())
+  if (index >= requesters.size() || !m_connected)
     return;
 
   buffer += data;
   if (buffer.size() > 255) {
     buffer.clear();
-  }
-
-  if (m_first_response && buffer.startsWith(skipFirstResponsse)) {
-    buffer.remove(0, skipFirstResponsse.size());
   }
 
   do {
@@ -97,7 +91,6 @@ void Facade::dataReceived(const QByteArray &data) {
         qint64 now = QDateTime::currentMSecsSinceEpoch();
         setLatency(now - last_response);
         last_response = now;
-        m_first_response = false;
 
         requesters.at(index).processResponse(message.value());
 
@@ -118,7 +111,7 @@ void Facade::sendRequest() {
 }
 
 void Facade::connected() {
-  m_first_response = true;
+  m_connected = true;
   last_response = QDateTime::currentMSecsSinceEpoch();
   index = -1;
   chooseNextRequester();

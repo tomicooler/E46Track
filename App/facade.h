@@ -91,7 +91,7 @@ private:
 
   std::vector<Requester> requesters;
   Location location;
-  bool m_first_response{true};
+  bool m_connected{false};
   bool m_hasLocation{false};
 };
 
