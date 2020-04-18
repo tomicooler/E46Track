@@ -32,7 +32,7 @@ DashboardForm {
         id: converterThrottle
         converted: model.throttle
         Component.onCompleted: {
-            set(0.75, 3.96, 0.0, 1.0)
+            set(0.75, 3.94, 0.0, 1.0)
         }
     }
 
