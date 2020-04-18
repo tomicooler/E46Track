@@ -154,12 +154,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="62"/>
+        <location filename="replaymodel.cpp" line="63"/>
         <source>Invalid row count &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="114"/>
+        <location filename="replaymodel.cpp" line="138"/>
         <source>No valid data in file=&apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
