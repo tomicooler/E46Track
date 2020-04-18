@@ -47,10 +47,9 @@ Facade::Facade(QObject *parent)
                      std::make_shared<LatG>()},
                     m_model,
                     m_dscBrakeYawLatgFrequency}},
-      location(m_model) {
+      location(m_model), m_hasLocation(location.hasLocation()) {
   logger()->setModel(m_model);
   logger()->setHasLocation(location.hasLocation());
-  qDebug() << "haslocation" << location.hasLocation();
 }
 
 Model *Facade::model() { return m_model.get(); }
@@ -76,6 +75,8 @@ int Facade::dscSteeringAngleFrequency() const {
 int Facade::dscBrakeYawLatgFrequency() const {
   return m_dscBrakeYawLatgFrequency;
 }
+
+bool Facade::hasLocation() const { return m_hasLocation; }
 
 void Facade::dataReceived(const QByteArray &data) {
   if (index >= requesters.size())

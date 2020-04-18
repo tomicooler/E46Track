@@ -15,6 +15,7 @@ class Facade : public QObject {
   Q_PROPERTY(DataLogger *logger READ logger CONSTANT)
   Q_PROPERTY(int delay READ delay WRITE setDelay NOTIFY delayChanged)
   Q_PROPERTY(int latency READ latency WRITE setLatency NOTIFY latencyChanged)
+  Q_PROPERTY(bool hasLocation READ hasLocation CONSTANT)
 
   Q_PROPERTY(
       int throttleAndRPMFrequency READ throttleAndRPMFrequency WRITE
@@ -43,6 +44,7 @@ public:
   int dscOffsetsFrequency() const;
   int dscSteeringAngleFrequency() const;
   int dscBrakeYawLatgFrequency() const;
+  bool hasLocation() const;
 
 signals:
   void sendData(const QByteArray &data);
@@ -90,6 +92,7 @@ private:
   std::vector<Requester> requesters;
   Location location;
   bool m_first_response{true};
+  bool m_hasLocation{false};
 };
 
 #endif // FACADE_H
