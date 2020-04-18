@@ -48,6 +48,8 @@ Facade::Facade(QObject *parent)
       location(m_model), m_hasLocation(location.hasLocation()) {
   logger()->setModel(m_model);
   logger()->setHasLocation(location.hasLocation());
+  responeTimer.setInterval(std::chrono::milliseconds{5000});
+  connect(&responeTimer, &QTimer::timeout, this, &Facade::responseTimeout);
 }
 
 Model *Facade::model() { return m_model.get(); }
@@ -85,6 +87,10 @@ void Facade::dataReceived(const QByteArray &data) {
     buffer.clear();
   }
 
+  if (!buffer.isEmpty()) {
+    responeTimer.start();
+  }
+
   do {
     if (const auto message = parser.parse(buffer); message.has_value()) {
       if (isResponse(message.value())) {
@@ -106,6 +112,8 @@ void Facade::dataReceived(const QByteArray &data) {
 void Facade::sendRequest() {
   if (index >= requesters.size())
     return;
+
+  responeTimer.start();
 
   emit sendData(requesters.at(index).get_message().serialized);
 }
@@ -177,6 +185,12 @@ void Facade::setDscBrakeYawLatgFrequency(int dscBrakeYawLatgFrequency) {
   m_dscBrakeYawLatgFrequency = dscBrakeYawLatgFrequency;
   requesters.at(4).setFrequency(m_dscBrakeYawLatgFrequency);
   emit dscBrakeYawLatgFrequencyChanged(m_dscBrakeYawLatgFrequency);
+}
+
+void Facade::responseTimeout() {
+  qDebug() << "response timeout, clearing buffer, retrying new request";
+  buffer.clear();
+  sendRequest();
 }
 
 void Facade::chooseNextRequester() {
