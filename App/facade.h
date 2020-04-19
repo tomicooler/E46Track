@@ -2,6 +2,7 @@
 #define FACADE_H
 
 #include <QObject>
+#include <QTimer>
 
 #include "datalogger.h"
 #include "ds2message.h"
@@ -70,6 +71,8 @@ public slots:
   void setDscSteeringAngleFrequency(int dscSteeringAngleFrequency);
   void setDscBrakeYawLatgFrequency(int dscBrakeYawLatgFrequency);
 
+  void responseTimeout();
+
 private:
   void chooseNextRequester();
 
@@ -91,8 +94,9 @@ private:
 
   std::vector<Requester> requesters;
   Location location;
-  bool m_first_response{true};
+  bool m_connected{false};
   bool m_hasLocation{false};
+  QTimer responeTimer;
 };
 
 #endif // FACADE_H

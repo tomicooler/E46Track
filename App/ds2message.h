@@ -55,7 +55,7 @@ public:
       quint8 atEcuSize = data.at(ecuSize);
       return ecuSize == quint8{1}
                  ? Length{std::max(atEcuSize, static_cast<quint8>(3)),
-                          static_cast<quint8>(atEcuSize - ecuSize - 1)}
+                          static_cast<quint8>(atEcuSize - ecuSize - 2)}
                  : Length{static_cast<quint8>(ecuSize + atEcuSize + 2),
                           atEcuSize};
     }();

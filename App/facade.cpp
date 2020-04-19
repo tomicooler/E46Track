@@ -8,8 +8,6 @@ namespace {
 
 static const inline QByteArray acknowledgement = QByteArray::fromHex("a0");
 static const inline QByteArray dscResponse = QByteArray::fromHex("b8f129");
-static const inline QByteArray skipFirstResponsse =
-    QByteArray::fromHex("80001595");
 
 bool isResponse(const DS2Message &message) {
   return message.data.startsWith(QByteArray::fromHex("a0")) ||
@@ -25,31 +23,38 @@ Facade::Facade(QObject *parent)
                                QByteArray::fromHex("0b03")},
                     {std::make_shared<Throttle>(), std::make_shared<RPM>()},
                     m_model,
-                    m_throttleAndRPMFrequency},
+                    m_throttleAndRPMFrequency,
+                    quint8{36}},
           Requester{DS2Message{QByteArray::fromHex("12"),
                                QByteArray::fromHex("0b13")},
                     {std::make_shared<Speed>()},
                     m_model,
-                    m_speedFrequency},
+                    m_speedFrequency,
+                    quint8{91}},
           Requester{DS2Message{QByteArray::fromHex("b829f1"),
                                QByteArray::fromHex("2102")},
                     {}, // DSC offsets, must be sent
                     m_model,
-                    m_dscOffsetsFrequency},
+                    m_dscOffsetsFrequency,
+                    quint8{12}},
           Requester{DS2Message{QByteArray::fromHex("b829f1"),
                                QByteArray::fromHex("2201f5")},
                     {std::make_shared<SteeringAngle>()},
                     m_model,
-                    m_dscSteeringAngleFrequency},
+                    m_dscSteeringAngleFrequency,
+                    quint8{12}},
           Requester{DS2Message{QByteArray::fromHex("b829f1"),
                                QByteArray::fromHex("2106")},
                     {std::make_shared<Brake>(), std::make_shared<Yaw>(),
                      std::make_shared<LatG>()},
                     m_model,
-                    m_dscBrakeYawLatgFrequency}},
+                    m_dscBrakeYawLatgFrequency,
+                    quint8{15}}},
       location(m_model), m_hasLocation(location.hasLocation()) {
   logger()->setModel(m_model);
   logger()->setHasLocation(location.hasLocation());
+  responeTimer.setInterval(std::chrono::milliseconds{5000});
+  connect(&responeTimer, &QTimer::timeout, this, &Facade::responseTimeout);
 }
 
 Model *Facade::model() { return m_model.get(); }
@@ -79,7 +84,7 @@ int Facade::dscBrakeYawLatgFrequency() const {
 bool Facade::hasLocation() const { return m_hasLocation; }
 
 void Facade::dataReceived(const QByteArray &data) {
-  if (index >= requesters.size())
+  if (index >= requesters.size() || !m_connected)
     return;
 
   buffer += data;
@@ -87,8 +92,8 @@ void Facade::dataReceived(const QByteArray &data) {
     buffer.clear();
   }
 
-  if (m_first_response && buffer.startsWith(skipFirstResponsse)) {
-    buffer.remove(0, skipFirstResponsse.size());
+  if (!buffer.isEmpty()) {
+    responeTimer.start();
   }
 
   do {
@@ -97,7 +102,6 @@ void Facade::dataReceived(const QByteArray &data) {
         qint64 now = QDateTime::currentMSecsSinceEpoch();
         setLatency(now - last_response);
         last_response = now;
-        m_first_response = false;
 
         requesters.at(index).processResponse(message.value());
 
@@ -114,12 +118,15 @@ void Facade::sendRequest() {
   if (index >= requesters.size())
     return;
 
+  responeTimer.start();
+
   emit sendData(requesters.at(index).get_message().serialized);
 }
 
 void Facade::connected() {
-  m_first_response = true;
+  m_connected = true;
   last_response = QDateTime::currentMSecsSinceEpoch();
+  index = -1;
   chooseNextRequester();
   QTimer::singleShot(100, this, &Facade::sendRequest);
 }
@@ -183,6 +190,12 @@ void Facade::setDscBrakeYawLatgFrequency(int dscBrakeYawLatgFrequency) {
   m_dscBrakeYawLatgFrequency = dscBrakeYawLatgFrequency;
   requesters.at(4).setFrequency(m_dscBrakeYawLatgFrequency);
   emit dscBrakeYawLatgFrequencyChanged(m_dscBrakeYawLatgFrequency);
+}
+
+void Facade::responseTimeout() {
+  qDebug() << "response timeout, clearing buffer, retrying new request";
+  buffer.clear();
+  sendRequest();
 }
 
 void Facade::chooseNextRequester() {
