@@ -113,3 +113,8 @@ $ su root
 $ ln -sf /usr/share/zoneinfo/Europe/Budapest /etc/localtime
 $ systemctl enable ntpd.service
 ```
+
+If your default wifi interface (wlan0) can't see wifi network on channel 13 for example, set WiFi Regulatory Domain:
+```
+/etc/conf.d/wireless-regdom
+```
