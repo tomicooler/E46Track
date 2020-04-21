@@ -9,6 +9,8 @@
 #include <QTextStream>
 #include <QTimer>
 
+#include <cmath>
+
 ReplayModel::ReplayModel(QObject *parent) : QObject(parent) {}
 
 QUrl ReplayModel::directory() {
@@ -85,13 +87,13 @@ void ReplayModel::loadUrl(const QUrl &url) {
 
     if (!m_sequence.isEmpty()) { // interpolate to 60 fps
       Model::Data prev_data = m_sequence.last();
-      qint64 diff_timestamp = data.timestamp - prev_data.timestamp;
-      static const qint64 frame_rate = 1000 / 60;
-      int additional_frame_count = (diff_timestamp / frame_rate) - 2;
-      double divider = additional_frame_count;
+      double diff_timestamp = data.timestamp - prev_data.timestamp;
+      static const double frame_rate = 1000.0 / 60.0;
+      double divider = diff_timestamp / frame_rate;
+      int additional_frame_count = std::round(divider) - 1;
 
       if (additional_frame_count > 0) {
-        diff_timestamp = static_cast<double>(diff_timestamp) / divider;
+        diff_timestamp /= divider;
 
         // When location updates are slower than the other data upate rate, the
         // interpolation won't be accurate for the location data. E.g: my phone
@@ -112,7 +114,7 @@ void ReplayModel::loadUrl(const QUrl &url) {
         double diff_yaw = (data.yaw - prev_data.yaw) / divider;
         double diff_latg = (data.latg - prev_data.latg) / divider;
 
-        for (int i = 0; i < additional_frame_count - 1; ++i) {
+        for (int i = 0; i < additional_frame_count; ++i) {
           prev_data.timestamp += diff_timestamp;
           prev_data.latitude += diff_latitude;
           prev_data.longitude += diff_longitude;
@@ -129,7 +131,6 @@ void ReplayModel::loadUrl(const QUrl &url) {
         }
       }
     }
-
     m_sequence << data;
   }
 

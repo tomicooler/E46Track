@@ -149,17 +149,17 @@
 <context>
     <name>ReplayModel</name>
     <message>
-        <location filename="replaymodel.cpp" line="39"/>
+        <location filename="replaymodel.cpp" line="41"/>
         <source>Could not open file. &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="63"/>
+        <location filename="replaymodel.cpp" line="65"/>
         <source>Invalid row count &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="137"/>
+        <location filename="replaymodel.cpp" line="138"/>
         <source>No valid data in file=&apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
