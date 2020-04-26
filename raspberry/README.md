@@ -18,6 +18,8 @@ Most importantly, if you can't find a WiFi OBD K+DCAN adapter, then you can use 
 5. Start the E46Track App from the launcher.
 6. Connect to WiFi OBD or Cable. NOTE: before connecting to the OBD interface (WiFi or Cable) turn the key to ignition, or start your engine.
 
+![alt text](../doc/raspberry_arch.png?raw=true "Raspberry Architecture")
+
 ## Known issues
 
 1. E46Track/WiFi: can't type ip address from phone. (Workaround use a computer for this or edit the config manually ~/.config/E46Track/App.conf)
