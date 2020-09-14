@@ -25,6 +25,8 @@ public:
   Q_INVOKABLE void next();
   Q_INVOKABLE void prev();
   Q_INVOKABLE void playPause();
+  Q_INVOKABLE void writeFFmpegHelper();
+  Q_INVOKABLE void currentFrameExported(const QString &frameFilename);
 
   Model *model();
   int index() const;
@@ -47,8 +49,9 @@ private:
   int m_index{};
   int m_size{};
   bool m_playing{false};
-  QString exportDir;
+  QString m_exportDir;
   bool m_hasSpeed{false};
+  std::optional<QFile> m_FFmpegConcat;
 };
 
 #endif // REPLAYMODEL_H

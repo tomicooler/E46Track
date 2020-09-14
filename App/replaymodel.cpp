@@ -20,11 +20,11 @@ QUrl ReplayModel::directory() {
 }
 
 QString ReplayModel::exportDirectory() {
-  if (!exportDir.isEmpty()) {
+  if (!m_exportDir.isEmpty()) {
     QDir dir;
-    dir.mkdir(exportDir);
+    dir.mkdir(m_exportDir);
   }
-  return exportDir;
+  return m_exportDir;
 }
 
 void ReplayModel::loadUrl(const QUrl &url) {
@@ -33,7 +33,7 @@ void ReplayModel::loadUrl(const QUrl &url) {
   m_playing = false;
   emit indexChanged(m_index);
   emit sizeChanged(m_size);
-  exportDir.clear();
+  m_exportDir.clear();
   m_sequence.clear();
 
   QFile file(QQmlFile::urlToLocalFileOrQrc(url));
@@ -42,11 +42,11 @@ void ReplayModel::loadUrl(const QUrl &url) {
     return;
   }
 
-  exportDir = QString("%1/e46track_export_%2")
-                  .arg(directory().toLocalFile())
-                  .arg(QDateTime::fromMSecsSinceEpoch(
-                           QDateTime::currentMSecsSinceEpoch())
-                           .toString("yyyy-MM-dd_hh:mm:ss"));
+  m_exportDir = QString("%1/e46track_export_%2")
+                    .arg(directory().toLocalFile())
+                    .arg(QDateTime::fromMSecsSinceEpoch(
+                             QDateTime::currentMSecsSinceEpoch())
+                             .toString("yyyy-MM-dd_hh:mm:ss"));
 
   QTextStream stream(&file);
   stream.setCodec("utf-8");
@@ -88,9 +88,8 @@ void ReplayModel::loadUrl(const QUrl &url) {
     if (!m_sequence.isEmpty()) { // interpolate to 60 fps
       Model::Data prev_data = m_sequence.last();
       double diff_timestamp = data.timestamp - prev_data.timestamp;
-      static const double frame_rate = 1000.0 / 60.0;
-      double divider = diff_timestamp / frame_rate;
-      int additional_frame_count = std::round(divider) - 1;
+      double divider = diff_timestamp * 60.0 / 1000.0;
+      int additional_frame_count = divider;
 
       if (additional_frame_count > 0) {
         diff_timestamp /= divider;
@@ -178,6 +177,34 @@ void ReplayModel::playPause() {
   if (m_playing) {
     next();
   }
+}
+
+void ReplayModel::writeFFmpegHelper() {
+  QFile helper{QString{"%1/ffmpeg.sh"}.arg(m_exportDir)};
+  helper.open(QFile::WriteOnly);
+  helper.write("#!/bin/bash\n");
+  helper.write("ffmpeg -f concat -i input.txt output.mp4\n");
+  helper.setPermissions(helper.permissions() | QFile::Permission::ExeUser);
+  m_FFmpegConcat.reset();
+}
+
+void ReplayModel::currentFrameExported(const QString &frameFilename) {
+  if (!m_FFmpegConcat) {
+    m_FFmpegConcat.emplace(QString{"%1/input.txt"}.arg(m_exportDir));
+    m_FFmpegConcat.value().open(QFile::WriteOnly);
+  } else {
+    m_FFmpegConcat.value().write(
+        QString{"duration %1\n"}
+            .arg(QString::number(
+                static_cast<double>(m_sequence.at(index()).timestamp -
+                                    m_sequence.at(index() - 1).timestamp) /
+                    1000.0,
+                'f', 3))
+            .toUtf8());
+  }
+  m_FFmpegConcat.value().write(
+      QString{"file '%1'\n"}.arg(frameFilename).toUtf8());
+  m_FFmpegConcat->flush();
 }
 
 Model *ReplayModel::model() { return &m_model; }
