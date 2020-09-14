@@ -33,7 +33,9 @@ ReplayForm {
         onModelChanged: {
             if (exportButton.checked) {
                 dashboard.grabToImage(function(result) {
-                    result.saveToFile(exportPath + "/%1.png".arg(String(frameIndex).padStart(10, '0')));
+                    let filename = "%1.png".arg(String(frameIndex).padStart(10, '0'));
+                    result.saveToFile(exportPath + "/" + filename);
+                    replaymodel.currentFrameExported(filename);
                     frameIndex++;
                     replaymodel.next();
                 });
@@ -67,6 +69,7 @@ ReplayForm {
 
     exportButton.onClicked: {
         replaymodel.exportPath = replaymodel.exportDirectory();
+        replaymodel.writeFFmpegHelper();
         frameIndex = 0;
         replaymodel.index = replaymodel.index > 1 ? replaymodel.index - 1 : 0;
         replaymodel.next();

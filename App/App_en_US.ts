@@ -93,7 +93,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Replay.qml" line="51"/>
+        <location filename="Replay.qml" line="53"/>
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -159,7 +159,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="replaymodel.cpp" line="138"/>
+        <location filename="replaymodel.cpp" line="137"/>
         <source>No valid data in file=&apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
