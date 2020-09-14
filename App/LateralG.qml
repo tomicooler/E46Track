@@ -15,7 +15,7 @@ LateralGForm {
             plusMultiplier = 0.0;
         } else if (g > 0) {
             minusMultiplier = 1.0;
-            plusMultiplier = g;
+            plusMultiplier = Math.min(g, 1.0);
         } else {
             minusMultiplier = 1.0;
             plusMultiplier = 0.0;
