@@ -15,7 +15,7 @@ ReplayForm {
         id: dialog
         title: qsTr("Please choose a CSV file")
         folder: replaymodel.directory()
-        //nameFilters: ["CSV files (*.csv)"] not working with Qt 5.15.2 + Android target SDK 30
+        nameFilters: ["CSV files (*.csv)"]
 
         onAccepted: {
             replaymodel.loadUrl(dialog.fileUrl);
