@@ -86,6 +86,6 @@ endif()
 target_compile_definitions(App
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(App
-  PRIVATE Qt5::Core Qt5::Quick Qt5::Network Qt5::QuickControls2 Qt5::Svg Qt5::Location)
+  PRIVATE Qt5::Core Qt5::Quick Qt5::Network Qt5::QuickControls2 Qt5::Svg Qt5::Positioning)
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

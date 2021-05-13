@@ -1,6 +1,7 @@
 #include "location.h"
 
 #include <QGuiApplication>
+#include <QDebug>
 
 Location::Location(const std::shared_ptr<Model> &model, QObject *parent)
     : QObject(parent), model(model),

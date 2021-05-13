@@ -2,7 +2,7 @@
 #define LOCATION_H
 
 #include <QObject>
-#include <QtLocation>
+#include <QGeoPositionInfoSource>
 
 #include <model.h>
 
