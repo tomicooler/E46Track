@@ -1,5 +1,7 @@
 #include "location.h"
 
+#include <QGuiApplication>
+
 Location::Location(const std::shared_ptr<Model> &model, QObject *parent)
     : QObject(parent), model(model),
       source(QGeoPositionInfoSource::createDefaultSource(nullptr)) {
@@ -10,9 +12,20 @@ Location::Location(const std::shared_ptr<Model> &model, QObject *parent)
     source->setPreferredPositioningMethods(
         QGeoPositionInfoSource::AllPositioningMethods); // satelite as soon as
                                                         // available
-    qDebug() << "starting location updates" << source->updateInterval()
-             << source->sourceName() << source->error();
     source->startUpdates();
+    if (const auto *const gui =
+            qobject_cast<const QGuiApplication *const>(qApp)) {
+      connect(gui, &QGuiApplication::applicationStateChanged, this,
+              [&](Qt::ApplicationState state) {
+                switch (state) {
+                case Qt::ApplicationState::ApplicationActive:
+                  source->startUpdates();
+                  break;
+                default:
+                  source->stopUpdates();
+                }
+              });
+    }
   } else {
     qDebug() << "no location service was available";
   }
@@ -23,7 +36,6 @@ bool Location::hasLocation() const {
 }
 
 void Location::positionUpdated(const QGeoPositionInfo &pos) {
-  qDebug() << "location update" << pos;
   model->setLatitude(pos.coordinate().latitude());
   model->setLongitude(pos.coordinate().longitude());
   model->setAltitude(pos.coordinate().altitude());
