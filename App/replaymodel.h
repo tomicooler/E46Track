@@ -6,6 +6,8 @@
 #include <QUrl>
 #include <QVector>
 
+#include <optional>
+
 #include "model.h"
 
 class ReplayModel : public QObject {

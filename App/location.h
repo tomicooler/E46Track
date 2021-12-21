@@ -5,6 +5,7 @@
 #include <QGeoPositionInfoSource>
 
 #include <model.h>
+#include <memory>
 
 class Location : public QObject {
   Q_OBJECT
