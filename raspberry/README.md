@@ -54,6 +54,7 @@ Build E46Track:
 
 cd E46Track
 mkdir build-App
+cd build-App
 cmake ../App
 make
 ```
