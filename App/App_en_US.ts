@@ -42,7 +42,7 @@
 <context>
     <name>Dashboard</name>
     <message>
-        <location filename="Dashboard.qml" line="43"/>
+        <location filename="Dashboard.qml" line="65"/>
         <source>%1 km/h</source>
         <translation type="unfinished"></translation>
     </message>
@@ -50,7 +50,17 @@
 <context>
     <name>DashboardForm.ui</name>
     <message>
-        <location filename="DashboardForm.ui.qml" line="46"/>
+        <location filename="DashboardForm.ui.qml" line="24"/>
+        <source>▲</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="DashboardForm.ui.qml" line="29"/>
+        <source>▼</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="DashboardForm.ui.qml" line="74"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>

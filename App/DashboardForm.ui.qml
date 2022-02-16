@@ -9,8 +9,36 @@ Rectangle {
     property alias throttle: throttle
     property alias rpm: rpm
     property alias latg: latg
+    property alias mouseLeftIndicator: mouseLeftIndicator
+    property alias mouseRightIndicator: mouseRightIndicator
+    property alias mouseMoveIndicator: mouseMoveIndicator
     property int minSize: width > height ? height : width
     color: "transparent"
+
+    Column {
+        anchors.top: parent.top
+        anchors.right: parent.right
+        Row {
+            Button {
+                id: mouseLeftIndicator
+                text: qsTr("▲")
+                checkable: true
+            }
+            Button {
+                id: mouseRightIndicator
+                text: qsTr("▼")
+                checkable: true
+            }
+        }
+        Slider {
+            id: mouseMoveIndicator
+            live: false
+            stepSize: 1
+            value: 0
+            from: -850
+            to: 850
+        }
+    }
 
     Yaw {
         id: yaw

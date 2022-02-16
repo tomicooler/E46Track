@@ -11,6 +11,7 @@
 #include "facade.h"
 #include "model.h"
 #include "replaymodel.h"
+#include "virtualcontrol.h"
 
 #if defined(Q_OS_ANDROID)
 #include <QtAndroid>
@@ -57,6 +58,7 @@ int main(int argc, char *argv[]) {
   qmlRegisterType<Converter>("com.tomicooler.e46track", 1, 0, "Converter");
   qmlRegisterType<DataLogger>("com.tomicooler.e46track", 1, 0, "DataLogger");
   qmlRegisterType<ReplayModel>("com.tomicooler.e46track", 1, 0, "ReplayModel");
+  qmlRegisterType<VirtualControl>("com.tomicooler.e46track", 1, 0, "VirtualControl");
 
   app.setOrganizationName("E46Track");
   app.setOrganizationDomain("com.tomicooler.bmw");

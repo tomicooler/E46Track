@@ -74,6 +74,8 @@ else()
       replaymodel.h
       location.cpp
       location.h
+      virtualcontrol.h
+      virtualcontrol.cpp
       ${TS_FILES}
     )
 

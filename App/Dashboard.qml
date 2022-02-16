@@ -1,5 +1,6 @@
 import QtQuick 2.4
 import QtQuick.Controls.Material 2.12
+import QtQuick.Window 2.12
 import com.tomicooler.e46track 1.0
 
 DashboardForm {
@@ -35,6 +36,27 @@ DashboardForm {
             set(0.75, 3.94, 0.0, 1.0)
         }
     }
+
+    Converter {
+        id: converterSteeringAngle
+        converted: model.steeringAngle > 0 ? Math.min(model.steeringAngle, 120) : Math.max(model.steeringAngle, -120)
+        Component.onCompleted: {
+            set(-120, 120, mouseMoveIndicator.from, mouseMoveIndicator.to)
+        }
+    }
+
+    VirtualControl {
+        id: control
+    }
+
+    mouseLeftIndicator.checked: converterThrottle.converted > 0.1
+    mouseLeftIndicator.onCheckedChanged: mouseLeftIndicator.checked ? control.pressUp() : control.releaseUp()
+
+    mouseRightIndicator.checked: converterBrake.converted > 0.1
+    mouseRightIndicator.onCheckedChanged: mouseRightIndicator.checked ? control.pressDown() : control.releaseDown()
+
+    mouseMoveIndicator.value: -1 * converterSteeringAngle.converted
+    mouseMoveIndicator.onValueChanged: control.mouseMove((Screen.width / 2) + mouseMoveIndicator.value, Screen.height / 2)
 
     yaw.yaw: -1 * model.yaw
     steeringWheel.angle: -1 * model.steeringAngle
