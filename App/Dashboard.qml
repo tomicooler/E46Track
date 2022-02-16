@@ -1,6 +1,5 @@
 import QtQuick 2.4
 import QtQuick.Controls.Material 2.12
-import QtQuick.Window 2.12
 import com.tomicooler.e46track 1.0
 
 DashboardForm {
@@ -49,14 +48,23 @@ DashboardForm {
         id: control
     }
 
+    property bool firstBrake: false
+
     mouseLeftIndicator.checked: converterThrottle.converted > 0.1
     mouseLeftIndicator.onCheckedChanged: mouseLeftIndicator.checked ? control.pressUp() : control.releaseUp()
 
     mouseRightIndicator.checked: converterBrake.converted > 0.1
-    mouseRightIndicator.onCheckedChanged: mouseRightIndicator.checked ? control.pressDown() : control.releaseDown()
+    mouseRightIndicator.onCheckedChanged: {
+        if (!firstBrake) {
+            firstBrake = true;
+            control.requestMousePos();
+        }
+
+        mouseRightIndicator.checked ? control.pressDown() : control.releaseDown();
+    }
 
     mouseMoveIndicator.value: -1 * converterSteeringAngle.converted
-    mouseMoveIndicator.onValueChanged: control.mouseMove((Screen.width / 2) + mouseMoveIndicator.value, Screen.height / 2)
+    mouseMoveIndicator.onValueChanged: control.mouseMove(control.mouseX + mouseMoveIndicator.value, control.mouseY)
 
     yaw.yaw: -1 * model.yaw
     steeringWheel.angle: -1 * model.steeringAngle

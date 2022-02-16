@@ -42,7 +42,7 @@
 <context>
     <name>Dashboard</name>
     <message>
-        <location filename="Dashboard.qml" line="65"/>
+        <location filename="Dashboard.qml" line="73"/>
         <source>%1 km/h</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,10 +1,10 @@
 package virtualcontrol;
 
+import java.awt.*;
 import java.awt.event.InputEvent;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.LinkedList;
-import java.awt.Robot;
 
 public class App {
 
@@ -78,6 +78,7 @@ public class App {
                     case "r_up": mouseRelease(InputEvent.BUTTON1_DOWN_MASK); break;
                     case "p_down": mousePress(InputEvent.BUTTON3_DOWN_MASK); break;
                     case "r_down": mouseRelease(InputEvent.BUTTON3_DOWN_MASK); break;
+                    case "g_pos": System.out.println("pos " + MouseInfo.getPointerInfo().getLocation().x + " " + MouseInfo.getPointerInfo().getLocation().y); break;
                 }
                 if (str.startsWith("m_move")) {
                     String[] split = str.split(" ");

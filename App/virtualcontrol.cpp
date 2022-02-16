@@ -22,6 +22,8 @@ VirtualControl::~VirtualControl() {
   m_process.waitForFinished();
 }
 
+void VirtualControl::requestMousePos() { writeCommand("g_pos"); }
+
 void VirtualControl::pressUp() { writeCommand("p_up"); }
 
 void VirtualControl::pressDown() { writeCommand("p_down"); }
@@ -35,7 +37,17 @@ void VirtualControl::mouseMove(int x, int y) {
 }
 
 void VirtualControl::readyRead() {
-  qDebug() << qPrintable(m_process.readAll());
+  while (m_process.canReadLine()) {
+    QByteArray line = m_process.readLine();
+    qDebug() << line;
+    if (line.startsWith(QByteArray{"pos"})) {
+      QList<QByteArray> split = line.split(' ');
+      if (split.size() == 3) {
+        setMouseX(split.at(1).toInt());
+        setMouseY(split.at(2).toInt());
+      }
+    }
+  }
 }
 
 void VirtualControl::writeCommand(const QByteArray &command) {
@@ -43,4 +55,22 @@ void VirtualControl::writeCommand(const QByteArray &command) {
   m_process.write(command);
   m_process.write("\n");
   m_process.waitForBytesWritten();
+}
+
+int VirtualControl::mouseX() const { return m_mouseX; }
+
+void VirtualControl::setMouseX(int newMouseX) {
+  if (m_mouseX == newMouseX)
+    return;
+  m_mouseX = newMouseX;
+  emit mouseXChanged();
+}
+
+int VirtualControl::mouseY() const { return m_mouseY; }
+
+void VirtualControl::setMouseY(int newMouseY) {
+  if (m_mouseY == newMouseY)
+    return;
+  m_mouseY = newMouseY;
+  emit mouseYChanged();
 }
